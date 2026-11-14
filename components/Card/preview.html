@@ -1,4 +1,4 @@
-<!-- @dsCard group="Layout" height=1370 width=960 subtitle="Eleven card patterns, with live buttons: try Book, Reserve, Save" -->
+<!-- @dsCard group="Layout" height=1400 width=960 subtitle="Eleven card patterns, with live buttons: try Book, Reserve, Save" -->
 <!doctype html>
 <html>
 <head><meta charset="utf-8"><title>Card</title>
@@ -47,7 +47,7 @@
   .notice p { margin: 0 0 6px; color: var(--ink-muted); font-size: 14px; line-height: 20px; }
   .notice .when { font-size: 12px; color: var(--ink-muted); }
   .notice .x { margin-left: auto; }
-  .cta { display: inline-flex; align-items: center; gap: var(--space-1); font-weight: 700; color: var(--ink); }
+  .cta { margin-top: var(--space-2); display: inline-flex; align-items: center; gap: var(--space-1); font-weight: 700; color: var(--ink); }
   a.wt-card:hover .cta { text-decoration: underline; text-underline-offset: 3px; }
   a.wt-card:hover .cta .wt-icon, a.wt-card:focus-visible .cta .wt-icon { animation: wt-nudge 520ms ease; }
   @media (prefers-reduced-motion: reduce) { .num, .seats i.mine, .cta .wt-icon { animation: none !important; } }
@@ -120,7 +120,7 @@
           h('div', { className: 'meta' }, M('clock', 'Tue · 6:00–7:30 pm'), M('user', 'Ms. Anitha · Online'))))));
 
   var progress = h(Fig, { kind: 'Progress', why: 'how far along; hover Resume and the arrow nudges' },
-    h(W.Card, { eyebrow: 'Continue learning', title: 'Organic Chemistry', footer: h(W.Button, { size: 'sm', iconEnd: 'arrow-right', effect: 'nudge' }, 'Resume lesson 13') },
+    h(W.Card, { eyebrow: 'Continue learning', title: 'Organic Chemistry', divider: false, footer: h(W.Button, { size: 'sm', iconEnd: 'arrow-right', effect: 'nudge' }, 'Resume lesson 13') },
       h('div', { className: 'meter', role: 'progressbar', 'aria-valuenow': 50, 'aria-valuemin': 0, 'aria-valuemax': 100, 'aria-label': 'Course progress' }, h('i', { style: { width: '50%' } })),
       h('p', null, '12 of 24 lessons · Next: Alkenes')));
 
@@ -160,7 +160,7 @@
       spark()));
 
   var person = h(Fig, { kind: 'Person', why: 'initials avatar, role, and what they cover' },
-    h(W.Card, { footer: h(F, null, h(W.Button, { size: 'sm' }, 'Message'), h(W.Button, { variant: 'ghost', size: 'sm', icon: 'calendar' }, 'Book a slot')) },
+    h(W.Card, { divider: false, footer: h(F, null, h(W.Button, { size: 'sm' }, 'Message'), h(W.Button, { variant: 'ghost', size: 'sm', icon: 'calendar' }, 'Book a slot')) },
       h('div', { className: 'person' },
         h('span', { className: 'avatar', 'aria-hidden': 'true' }, 'AR'),
         h('div', null, h('h4', null, 'Anitha Rao'), 'Physics teacher')),

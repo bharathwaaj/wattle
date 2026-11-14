@@ -57,6 +57,8 @@ export interface CardProps extends React.HTMLAttributes<HTMLElement> {
   media?: React.ReactNode;
   /** empty: dashed border on a transparent ground, centred; for empty states. */
   variant?: 'default' | 'empty';
+  /** Set false to drop the hairline above the footer and separate it with space instead. */
+  divider?: boolean;
   /** Ink border for a chosen card in a selectable list. */
   selected?: boolean;
   /** Icon shown in a 40px circle above the eyebrow. */

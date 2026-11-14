@@ -72,7 +72,7 @@
 
   function Card(props) {
     var Tag = props.as || "section";
-    var rest = omit(props, ["as", "eyebrow", "title", "footer", "selected", "className", "children", "icon", "media", "variant"]);
+    var rest = omit(props, ["as", "eyebrow", "title", "footer", "selected", "className", "children", "icon", "media", "variant", "divider"]);
     rest.className = cx("wt-card", props.selected && "wt-card-selected", props.variant === "empty" && "wt-card-empty", props.media && "wt-card-has-media", props.className);
     return h(Tag, rest,
       props.media ? h("div", { className: "wt-card-media" }, props.media) : null,
@@ -80,7 +80,7 @@
       props.eyebrow ? h("span", { className: "wt-card-eyebrow" }, props.eyebrow) : null,
       props.title ? h("h3", { className: "wt-card-title" }, props.title) : null,
       props.children ? h("div", { className: "wt-card-body" }, props.children) : null,
-      props.footer ? h("div", { className: "wt-card-footer" }, props.footer) : null
+      props.footer ? h("div", { className: cx("wt-card-footer", props.divider === false && "wt-card-footer-plain") }, props.footer) : null
     );
   }
 

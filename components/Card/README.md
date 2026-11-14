@@ -13,11 +13,11 @@ Card is one frame. What changes from card to card is what goes inside it. The pr
 | **Booking** | Can I join, and when? | `strong` and neutral Badges in the eyebrow, a one-line pitch, a meta list (day, time, places left) with icons, then Book (primary) and Details (ghost). Book is an `ActionButton` (morph) that becomes "Booked", and its `onAction` lowers the places-left count, so the card updates with the button. |
 | **Media** | What does it look like? | The `media` prop: a full-bleed image or illustration across the top, then the title. Read, plus a bookmark `ReactionButton` to save it. |
 | **Availability** | How much is left? | A big number with its unit, and a seat map of filled `earth` dots and empty `border-strong` rings. "Reserve a seat" is an `ActionButton` (morph, secondary). When it's done, the count drops and your seat pops in `wattle` with an `ink` ring. |
-| **Progress** | How far along am I? | An `earth` progress bar, "12 of 24", and a secondary button with `iconEnd` and `effect="nudge"` to resume. |
+| **Progress** | How far along am I? | An `earth` progress bar, "12 of 24", and a secondary button with `iconEnd` and `effect="nudge"` to resume, separated by space with `divider={false}`. |
 | **Metric** | How are we doing? | One Fraunces number, a one-line trend in words, and a sparkline in `earth`. |
 | **Checklist** | What's left to do? | Tick boxes that fill with `ink` when done. The eyebrow counts what's done. |
-| **Person** | Who is this? | An initials avatar on `taupe`, the name in Fraunces, the role, and a row of neutral Badges. |
-| **Link** | Where can I see more? | `as="a"`: a title, one sentence, and an `ink` "Open …" line with an arrow. The whole card is the link. |
+| **Person** | Who is this? | An initials avatar on `taupe`, the name in Fraunces, the role, and a row of neutral Badges. Uses `divider={false}`. |
+| **Link** | Where can I see more? | `as="a"`: a title, one sentence, then an `ink` "Open …" line with an arrow, set `space-4` below the text so it doesn't read as part of the sentence. The whole card is the link. |
 | **Empty state** | What do I do first? | `variant="empty"`: a dashed border, an icon, one sentence, and one action. |
 
 Clickable cards come in two kinds:
@@ -34,6 +34,7 @@ Clickable cards come in two kinds:
 - `media`: an optional image or illustration, shown full-bleed across the top. Give images real alt text.
 - `variant`: `"empty"` for empty states, with a dashed border, a transparent ground and centred content.
 - `footer`: optional actions, usually Buttons, under a hairline. The footer is pushed to the bottom, so footers line up across a row.
+- `divider`: set it to `false` to drop the footer's hairline and separate the footer with space instead. Use this when the card is short, or when its content already ends cleanly, like a progress bar or a badge row. A card with fewer lines reads calmer.
 - `selected`: optional. It gives the card an `ink` border.
 - `as`: the element to render, `section` by default. Cards rendered as `a` or `button` get a hover border and the standard focus ring.
 
