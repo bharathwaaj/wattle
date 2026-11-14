@@ -43,6 +43,8 @@ export declare function Input(props: InputProps): React.ReactElement;
 export interface CardProps extends React.HTMLAttributes<HTMLElement> {
   /** Element to render, default section. */
   as?: keyof JSX.IntrinsicElements;
+  /** Link target when as="a" (shortcut cards). */
+  href?: string;
   /** Small uppercase overline above the title. */
   eyebrow?: React.ReactNode;
   /** Card title, set in Fraunces. */
