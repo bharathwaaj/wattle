@@ -9,11 +9,11 @@ Card is one frame. What changes from card to card is what goes inside it. The pr
 | Pattern | Answers | Built from |
 | --- | --- | --- |
 | **Announcement** | What do I need to know? | A `wing` icon disc, a bold line, a sentence, a timestamp and an icon-only dismiss button. Use it full width. |
-| **Event** | When and where? | A date block (month in `label`, day in Fraunces) beside the title, plus time and host rows with 16px icons. |
-| **Booking** | Can I join, and when? | `strong` and neutral Badges in the eyebrow, a one-line pitch, a meta list (day, time, places left) with icons, then Book (primary) and Details (ghost). |
-| **Media** | What does it look like? | The `media` prop: a full-bleed image or illustration across the top, then the title. |
-| **Availability** | How much is left? | A big number with its unit, and a seat map of filled `earth` dots and empty `border-strong` rings. |
-| **Progress** | How far along am I? | An `earth` progress bar, "12 of 24", and a secondary button with `iconEnd` to resume. |
+| **Event** | When and where? | A date block (month in `label`, day in Fraunces) beside the title, plus time and host rows with 16px icons. Its action is an `ActionButton` (flip): "Add to calendar" → "Added to calendar". |
+| **Booking** | Can I join, and when? | `strong` and neutral Badges in the eyebrow, a one-line pitch, a meta list (day, time, places left) with icons, then Book (primary) and Details (ghost). Book is an `ActionButton` (morph) that becomes "Booked", and its `onAction` lowers the places-left count, so the card updates with the button. |
+| **Media** | What does it look like? | The `media` prop: a full-bleed image or illustration across the top, then the title. Read, plus a bookmark `ReactionButton` to save it. |
+| **Availability** | How much is left? | A big number with its unit, and a seat map of filled `earth` dots and empty `border-strong` rings. "Reserve a seat" is an `ActionButton` (morph, secondary). When it's done, the count drops and your seat pops in `wattle` with an `ink` ring. |
+| **Progress** | How far along am I? | An `earth` progress bar, "12 of 24", and a secondary button with `iconEnd` and `effect="nudge"` to resume. |
 | **Metric** | How are we doing? | One Fraunces number, a one-line trend in words, and a sparkline in `earth`. |
 | **Checklist** | What's left to do? | Tick boxes that fill with `ink` when done. The eyebrow counts what's done. |
 | **Person** | Who is this? | An initials avatar on `taupe`, the name in Fraunces, the role, and a row of neutral Badges. |
@@ -43,6 +43,7 @@ Clickable cards come in two kinds:
 - Don't start a footer with a ghost button. Its padding makes the label look indented, so use a secondary button.
 - Do mark the selected choice in words too ("Selected" in the eyebrow), not just with the border.
 - Don't put buttons inside a shortcut card. The card itself is the link.
+- Use motion buttons where an action changes the card: Book, Reserve, Add to calendar, Save. Let the card react as well, by updating the count or filling the seat, so the result shows in the content and not only on the button.
 - Keep to one primary (wattle) button across a whole screen of cards. Every other card action is secondary or ghost.
 - Don't add shadows. Wattle uses borders, not shadows.
 - Don't fill cards with wattle or add a coloured left border.

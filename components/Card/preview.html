@@ -1,4 +1,4 @@
-<!-- @dsCard group="Layout" height=1370 width=960 subtitle="Eleven card patterns built from one Card" -->
+<!-- @dsCard group="Layout" height=1370 width=960 subtitle="Eleven card patterns, with live buttons: try Book, Reserve, Save" -->
 <!doctype html>
 <html>
 <head><meta charset="utf-8"><title>Card</title>
@@ -26,6 +26,8 @@
   .meter > i { display: block; height: 100%; background: var(--earth); }
   .seats { display: grid; grid-template-columns: repeat(10, 1fr); gap: 4px; }
   .seats i { aspect-ratio: 1; border-radius: var(--radius-pill); background: var(--earth); }
+  .seats i.mine { background: var(--wattle); box-shadow: 0 0 0 1.5px var(--ink); animation: wt-pop 420ms cubic-bezier(.3,1.6,.5,1) both; }
+  .num { display: inline-block; animation: wt-roll-up 260ms ease both; }
   .seats i.free { background: transparent; border: 1.5px solid var(--border-strong); }
   .trend { display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 600; color: var(--ink); }
   .spark { width: 100%; height: 56px; display: block; }
@@ -47,6 +49,8 @@
   .notice .x { margin-left: auto; }
   .cta { display: inline-flex; align-items: center; gap: var(--space-1); font-weight: 700; color: var(--ink); }
   a.wt-card:hover .cta { text-decoration: underline; text-underline-offset: 3px; }
+  a.wt-card:hover .cta .wt-icon, a.wt-card:focus-visible .cta .wt-icon { animation: wt-nudge 520ms ease; }
+  @media (prefers-reduced-motion: reduce) { .num, .seats i.mine, .cta .wt-icon { animation: none !important; } }
   .rating { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--ink-muted); }
 </style>
 </head>
@@ -79,10 +83,12 @@
       h('circle', { cx: 284, cy: 60 - (86 - 55) * 1.6, r: 4, style: { fill: 'var(--ink)' } }));
   }
 
-  function Seats() {
-    var cells = []; for (var i = 0; i < 40; i++) cells.push(h('i', { key: i, className: i >= 36 ? 'free' : '' }));
-    return h('div', { className: 'seats', role: 'img', 'aria-label': '36 of 40 seats taken' }, cells);
+  function Seats(props) {
+    var taken = props.taken, cells = [];
+    for (var i = 0; i < 40; i++) cells.push(h('i', { key: i, className: i >= taken ? 'free' : (i === taken - 1 && taken > 36 ? 'mine' : '') }));
+    return h('div', { className: 'seats', role: 'img', 'aria-label': taken + ' of 40 seats taken' }, cells);
   }
+  function later(ms) { return function () { return new Promise(function (r) { setTimeout(r, ms); }); }; }
 
   function Checklist() {
     var s = React.useState([true, true, true, false, false]), done = s[0], set = s[1];
@@ -106,37 +112,46 @@
           h('span', { className: 'when' }, '2 hours ago · Admin office')),
         h(W.Button, { variant: 'ghost', size: 'sm', icon: 'x', 'aria-label': 'Dismiss', className: 'x' }))));
 
-  var event = h(Fig, { kind: 'Event', why: 'a date block beside the title, time and host below' },
-    h(W.Card, { footer: h(W.Button, { size: 'sm', icon: 'calendar' }, 'Add to calendar') },
+  var event = h(Fig, { kind: 'Event', why: 'date block, time and host; Add to calendar flips to Added' },
+    h(W.Card, { footer: h(W.ActionButton, { animation: 'flip', variant: 'secondary', size: 'sm', icon: 'calendar', label: 'Add to calendar', doneLabel: 'Added to calendar', onAction: later(300) }) },
       h('div', { className: 'event' },
         h('div', { className: 'date' }, h('div', { className: 'm' }, 'NOV'), h('div', { className: 'd' }, '18')),
         h('div', null, h('h4', { className: 'event-title' }, 'Live class: Wave optics'),
           h('div', { className: 'meta' }, M('clock', 'Tue · 6:00–7:30 pm'), M('user', 'Ms. Anitha · Online'))))));
 
-  var progress = h(Fig, { kind: 'Progress', why: 'how far along, and where to pick up' },
-    h(W.Card, { eyebrow: 'Continue learning', title: 'Organic Chemistry', footer: h(W.Button, { size: 'sm', iconEnd: 'arrow-right' }, 'Resume lesson 13') },
+  var progress = h(Fig, { kind: 'Progress', why: 'how far along; hover Resume and the arrow nudges' },
+    h(W.Card, { eyebrow: 'Continue learning', title: 'Organic Chemistry', footer: h(W.Button, { size: 'sm', iconEnd: 'arrow-right', effect: 'nudge' }, 'Resume lesson 13') },
       h('div', { className: 'meter', role: 'progressbar', 'aria-valuenow': 50, 'aria-valuemin': 0, 'aria-valuemax': 100, 'aria-label': 'Course progress' }, h('i', { style: { width: '50%' } })),
       h('p', null, '12 of 24 lessons · Next: Alkenes')));
 
-  var media = h(Fig, { kind: 'Media', why: 'a full-bleed cover via the media prop' },
+  var media = h(Fig, { kind: 'Media', why: 'a full-bleed cover; the bookmark drops in when saved' },
     h(W.Card, { media: cover(), eyebrow: 'Field guide', title: 'Birds of the Deccan',
-      footer: h(F, null, h(W.Button, { size: 'sm', icon: 'book-open' }, 'Read'), h(W.Button, { variant: 'ghost', size: 'sm', icon: 'download', 'aria-label': 'Download' })) },
+      footer: h(F, null, h(W.Button, { size: 'sm', icon: 'book-open' }, 'Read'), h(W.ReactionButton, { kind: 'bookmark', label: 'Save to my library' })) },
       h('p', null, 'A plain guide to the ground birds of dry fields, from lapwings to larks.'),
       h('div', { className: 'rating' }, '214 pages · 12 chapters')));
 
-  var booking = h(Fig, { kind: 'Booking', why: 'badges, a short pitch, the when and how many, then book' },
-    h(W.Card, { eyebrow: h(F, null, h(W.Badge, { tone: 'strong' }, 'New'), h(W.Badge, null, 'Beginner')), title: 'Saturday doubt-clearing hour',
-      footer: h(F, null, h(W.Button, { variant: 'primary', size: 'sm', icon: 'plus' }, 'Book'), h(W.Button, { variant: 'ghost', size: 'sm' }, 'Details')) },
+  function Booking() {
+    var st = React.useState(8), places = st[0], setPlaces = st[1];
+    return h(W.Card, { eyebrow: h(F, null, h(W.Badge, { tone: 'strong' }, 'New'), h(W.Badge, null, 'Beginner')), title: 'Saturday doubt-clearing hour',
+      footer: h(F, null,
+        h(W.ActionButton, { size: 'sm', icon: 'plus', label: 'Book', doneLabel: 'Booked', onAction: function () { return later(900)().then(function () { setPlaces(7); }); } }),
+        h(W.Button, { variant: 'ghost', size: 'sm' }, 'Details')) },
       h('p', null, 'A relaxed hour for Class 11 students, with time for any question at the end.'),
       h('ul', { className: 'meta meta-list' },
         h('li', null, M('calendar', 'Every Saturday')),
         h('li', null, M('clock', '9:30 to 10:30 am')),
-        h('li', null, M('user', '8 places left')))));
+        h('li', null, M('user', h('span', { className: 'num', key: places }, places + ' places left')))));
+  }
+  var booking = h(Fig, { kind: 'Booking', why: 'Book morphs to Booked, and the places left count drops' }, h(Booking));
 
-  var availability = h(Fig, { kind: 'Availability', why: 'a seat map shows how much is left at a glance' },
-    h(W.Card, { eyebrow: 'Weekend batch · starts 1 Dec', title: 'JEE crash course', footer: h(W.Button, { size: 'sm' }, 'Reserve a seat') },
-      h('div', { className: 'big' }, '4', h('small', null, 'seats left')),
-      h(Seats)));
+  function Availability() {
+    var st = React.useState(36), taken = st[0], setTaken = st[1];
+    return h(W.Card, { eyebrow: 'Weekend batch · starts 1 Dec', title: 'JEE crash course',
+      footer: h(W.ActionButton, { variant: 'secondary', size: 'sm', label: 'Reserve a seat', doneLabel: 'Seat reserved', onAction: function () { return later(800)().then(function () { setTaken(37); }); } }) },
+      h('div', { className: 'big' }, h('span', { className: 'num', key: taken }, 40 - taken), h('small', null, 'seats left')),
+      h(Seats, { taken: taken }));
+  }
+  var availability = h(Fig, { kind: 'Availability', why: 'reserve, and your seat fills in on the map' }, h(Availability));
 
   var metric = h(Fig, { kind: 'Metric', why: 'one number, its trend, and the shape over time' },
     h(W.Card, { eyebrow: 'Average test score · 8 weeks' },
