@@ -63,6 +63,19 @@ Components are React 18 components, published as `window.Wattle` from `component
 - **Badge**: a small pill for status or category, in neutral, strong or danger. Never wattle.
 - **Icon**: draws any of the starter icons inline in `currentColor`. Button, Input and Card accept an `icon` prop that takes an icon name, like `icon="search"`.
 
+### Motion
+
+Buttons move only to confirm that something happened or to prevent a mistake.
+
+- **ActionButton**: the button becomes its own result, like Book → Booked, Add to calendar → Added, or Copy link → Copied.
+- **ProgressButton**: a fill sweeps across while slow work runs. It ends on success, or on an error with a retry.
+- **HoldButton**: press and hold to delete, as the danger outline draws itself around the button.
+- **UndoButton**: deletes at once, with 5 seconds to undo.
+- **ReactionButton**: star, like and save toggles that pop and burst on.
+- **Button `effect`**: `nudge` and `sweep` hover hints.
+
+Keep motion between 150 and 500ms, and announce every result to screen readers. Everything goes still when the OS setting "reduce motion" is on.
+
 Every focus state is the same: a 2px `ink` ring with a 2px offset.
 
 ## Iconography

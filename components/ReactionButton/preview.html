@@ -1,0 +1,19 @@
+<!-- @dsCard group="Motion" height=130 subtitle="Star burst, heart with count, bookmark drop" -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>ReactionButton</title><style>body{margin:0;background:var(--surface-100);color:var(--ink);font-family:var(--font-sans)}.demo{display:flex;flex-direction:column;gap:var(--space-2);padding:var(--space-4)}.row{display:flex;flex-wrap:wrap;gap:var(--space-6);align-items:flex-start}.item{display:flex;flex-direction:column;gap:6px;align-items:flex-start}.cap{font-size:12px;line-height:16px;color:var(--ink-muted)}.replay{align-self:flex-start;margin-top:var(--space-2)}</style></head>
+<body>
+<div id="root"></div>
+<script>
+  var W = window.Wattle, h = React.createElement;
+  function Demo(props) { var s = React.useState(0), k = s[0], set = s[1]; return h("div", { className: "demo" }, h("div", { className: "row", key: k }, props.children), h(W.Button, { variant: "ghost", size: "sm", icon: "rotate-ccw", className: "replay", onClick: function () { set(k + 1); } }, "Replay")); }
+  function Item(cap, el) { return h("div", { className: "item" }, el, h("span", { className: "cap" }, cap)); }
+  function later(ms) { return function () { return new Promise(function (r) { setTimeout(r, ms); }); }; }
+  ReactDOM.createRoot(document.getElementById('root')).render(h(Demo, null,
+    Item("Star", h(W.ReactionButton, { kind: "star", label: "Star" })),
+    Item("Heart with count", h(W.ReactionButton, { kind: "heart", label: "Like", count: 24 })),
+    Item("Bookmark", h(W.ReactionButton, { kind: "bookmark", label: "Save" })),
+    Item("Star with count", h(W.ReactionButton, { kind: "star", label: "Star", count: 128, defaultPressed: true }))));
+</script>
+</body>
+</html>

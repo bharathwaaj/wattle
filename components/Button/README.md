@@ -18,6 +18,15 @@ Triggers an action. Pill-shaped, 40px tall (32px with `size="sm"`).
 - `iconEnd`: an optional icon after the label. Use it for direction, like `"arrow-right"` or `"chevron-down"`.
 - **Icon-only**: pass `icon` with no children, and always pass `aria-label`. The button then becomes a 40px circle (32px for `sm`).
 
+## Hover effects
+
+Set `effect` for a small hint on hover and keyboard focus:
+
+- **`nudge`**: the trailing icon slides out and back in. Use it with `iconEnd: "arrow-right"` for buttons that move you forward.
+- **`sweep`**: `ink` fills the button from the left, and the text turns to `surface-200`. Use it on secondary buttons that lead somewhere bigger, like "View all courses".
+
+Both turn off when the OS setting "reduce motion" is on.
+
 ## Do and don't
 
 - Do put the primary button last in a row of actions.

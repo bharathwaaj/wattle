@@ -1,7 +1,7 @@
 import type * as React from 'react';
 
-/** The 25 starter icons (Lucide v0.460.0). */
-export type IconName = 'search' | 'plus' | 'x' | 'check' | 'chevron-down' | 'chevron-right' | 'arrow-left' | 'arrow-right' | 'menu' | 'settings' | 'user' | 'bell' | 'house' | 'book-open' | 'calendar' | 'trash-2' | 'pencil' | 'upload' | 'download' | 'info' | 'triangle-alert' | 'eye' | 'log-out' | 'filter' | 'clock';
+/** The 30 starter icons (Lucide v0.460.0). */
+export type IconName = 'search' | 'plus' | 'x' | 'check' | 'chevron-down' | 'chevron-right' | 'arrow-left' | 'arrow-right' | 'menu' | 'settings' | 'user' | 'bell' | 'house' | 'book-open' | 'calendar' | 'trash-2' | 'pencil' | 'upload' | 'download' | 'info' | 'triangle-alert' | 'eye' | 'log-out' | 'filter' | 'clock' | 'star' | 'heart' | 'bookmark' | 'link' | 'rotate-ccw';
 
 export interface IconProps extends React.SVGAttributes<SVGSVGElement> {
   /** Which icon to draw. */
@@ -19,6 +19,8 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   variant?: 'primary' | 'secondary' | 'ghost' | 'danger';
   /** md is 40px tall (default), sm is 32px. */
   size?: 'md' | 'sm';
+  /** Hover/focus effect: nudge slides the trailing icon, sweep fills with ink from the left. */
+  effect?: 'nudge' | 'sweep';
   /** Icon before the label: a Lucide name or a React node. With no children it makes an icon-only button; pass aria-label. */
   icon?: IconName | React.ReactNode;
   /** Icon after the label, e.g. 'arrow-right'. */
@@ -70,4 +72,51 @@ export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
 }
 export declare function Badge(props: BadgeProps): React.ReactElement;
 
-declare global { interface Window { Wattle: { Button: typeof Button; Input: typeof Input; Card: typeof Card; Icon: typeof Icon; Badge: typeof Badge } } }
+export interface ActionButtonProps {
+  label: React.ReactNode; icon?: IconName | React.ReactNode;
+  doneLabel: React.ReactNode; doneIcon?: IconName | React.ReactNode;
+  /** morph (default): shrink to spinner and grow back; flip: icon turns over; swap: in-place swap. */
+  animation?: 'morph' | 'flip' | 'swap';
+  variant?: 'primary' | 'secondary' | 'ghost'; doneVariant?: 'primary' | 'secondary' | 'ghost';
+  size?: 'md' | 'sm';
+  /** The work; return a Promise. Rejecting returns the button to idle. */
+  onAction?: (e: React.MouseEvent) => unknown;
+  /** Return to idle after this many ms (e.g. Copy link). */
+  resetAfter?: number; loadingLabel?: string; className?: string;
+}
+export declare function ActionButton(props: ActionButtonProps): React.ReactElement;
+
+export interface ProgressButtonProps {
+  label: React.ReactNode; icon?: IconName | React.ReactNode;
+  runningLabel?: string; doneLabel?: React.ReactNode; errorLabel?: React.ReactNode;
+  /** Call setProgress(0-100) as work goes; resolve or reject when finished. */
+  onAction?: (setProgress: (p: number) => void) => Promise<unknown>;
+  variant?: 'primary' | 'secondary' | 'ghost'; size?: 'md' | 'sm'; className?: string;
+}
+export declare function ProgressButton(props: ProgressButtonProps): React.ReactElement;
+
+export interface HoldButtonProps {
+  label?: React.ReactNode; doneLabel?: React.ReactNode;
+  /** Hold time in ms, default 1000. */
+  duration?: number; onConfirm?: () => void; size?: 'md' | 'sm'; hintId?: string; className?: string;
+}
+export declare function HoldButton(props: HoldButtonProps): React.ReactElement;
+
+export interface UndoButtonProps {
+  label?: React.ReactNode; doneLabel?: React.ReactNode; undoLabel?: React.ReactNode;
+  /** Undo window in ms, default 5000. */
+  duration?: number;
+  onDelete?: () => void; onUndo?: () => void; onCommit?: () => void;
+  size?: 'md' | 'sm'; className?: string;
+}
+export declare function UndoButton(props: UndoButtonProps): React.ReactElement;
+
+export interface ReactionButtonProps {
+  kind?: 'star' | 'heart' | 'bookmark';
+  /** Accessible name; the count is appended. */
+  label: string;
+  count?: number; defaultPressed?: boolean; onChange?: (pressed: boolean) => void; className?: string;
+}
+export declare function ReactionButton(props: ReactionButtonProps): React.ReactElement;
+
+declare global { interface Window { Wattle: { Button: typeof Button; Input: typeof Input; Card: typeof Card; Icon: typeof Icon; Badge: typeof Badge; ActionButton: typeof ActionButton; ProgressButton: typeof ProgressButton; HoldButton: typeof HoldButton; UndoButton: typeof UndoButton; ReactionButton: typeof ReactionButton } } }
