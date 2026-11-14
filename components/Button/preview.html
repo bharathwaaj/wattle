@@ -1,0 +1,21 @@
+<!-- @dsCard group="Actions" height=136 subtitle="Primary, secondary, ghost, danger; two sizes" -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Button</title><style>body{margin:0;background:var(--surface-100);color:var(--ink);font-family:var(--font-sans)}.row{display:flex;flex-wrap:wrap;gap:var(--space-4);align-items:center;padding:var(--space-4)}</style></head>
+<body>
+<div id="root"></div>
+<script>
+  var W = window.Wattle, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h(React.Fragment, null,
+    h('div', { className: 'row' },
+      h(W.Button, { variant: 'primary' }, 'Create course'),
+      h(W.Button, null, 'Preview'),
+      h(W.Button, { variant: 'ghost' }, 'Cancel'),
+      h(W.Button, { variant: 'danger' }, 'Delete course')),
+    h('div', { className: 'row' },
+      h(W.Button, { variant: 'primary', size: 'sm' }, 'Save'),
+      h(W.Button, { size: 'sm' }, 'Edit'),
+      h(W.Button, { variant: 'primary', disabled: true }, 'Publishing…'))));
+</script>
+</body>
+</html>

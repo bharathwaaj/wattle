@@ -52,6 +52,16 @@ The palette comes from the bird's plumage.
 - **Spacing** follows `space-1` (4px), `space-2` (8px), `space-4` (16px), `space-6` (24px) and `space-10` (40px). Cards use `space-4` padding, the gap between cards is `space-6`, and sections are separated by `space-10`.
 - **Radius**: `radius-sm` for inputs and tags, `radius-md` for cards, and `radius-pill` for buttons and chips. The pill shape echoes the round eye ring.
 
+## Components
+
+Components are React 18 components, published as `window.Wattle` from `components/bundle.js`. Load the stylesheet first (`components/bundle.css`, which also loads both fonts).
+
+- **Button**: the primary variant is the wattle action, one per view. Use secondary, ghost and danger for everything else.
+- **Input**: always give it a visible label. Errors show as text, not just colour.
+- **Card**: a `surface-200` panel with a hairline border. Use `selected` to mark the chosen card in a list.
+
+Every focus state is the same: a 2px `ink` ring with a 2px offset.
+
 ## Iconography
 
 No icon set has been chosen yet. Until one is, use a 1.5px outline set drawn on a 24px grid, in `ink` or `ink-muted`. Don't use filled or multi-colour icons, and never put yellow in an icon.
