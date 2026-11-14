@@ -33,6 +33,7 @@ The palette comes from the bird's plumage.
 - **Wattle is a fill, not a line.** On light surfaces it reaches only 1.4:1 contrast, so never use it for text, thin borders or focus rings. Text on wattle is always `on-wattle`. In the dark theme, wattle *can* be used as text (11.8:1).
 - **Neutrals carry the page.** Use `surface-100`, `surface-200`, `ink` and `ink-muted` for most of the interface. Keep `earth` and `taupe` for fills and illustration. Use `earth` as text only at 24px and above.
 - **Borders, not shadows.** Separate raised `surface-200` from the page with a `hairline` border. Controls use `border-strong` (3:1 or better).
+- **Shadows only for things that float.** Use `shadow-overlay` for dropdowns, popovers, tooltips and toasts, and `shadow-dialog` for modals and sheets. Use both together with `surface-200` and a `hairline` border. Never put a shadow on a card or an input.
 - **Focus rings** are 2px `ink` with a 2px offset.
 - **`danger`** is only for errors and destructive actions. Keep it small.
 
