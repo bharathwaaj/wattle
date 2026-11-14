@@ -15,6 +15,7 @@ A button that shows its own result. Click "Book" and it changes to "Booked" in p
 - `onAction`: the work to do. Return a Promise, and the button waits for it. If it rejects, the button goes back to idle.
 - `variant`: `primary` by default. `doneVariant` defaults to secondary when the variant is primary, because a finished action is no longer the main call to action.
 - `resetAfter`: optional. The number of ms to wait before going back to idle.
+- `undoable`: optional. It makes the button **latch**: clicking "Booked" again goes back to "Book" and calls `onUndo`. The button reports `aria-pressed`, and `undoHint` (a tooltip) says what clicking again does.
 - `size`, `className`: optional.
 
 ## Behaviour
@@ -22,7 +23,7 @@ A button that shows its own result. Click "Book" and it changes to "Booked" in p
 - A loading state lasts at least 700ms for morph and 250ms otherwise, so the change can be seen.
 - The result is announced in a polite live region, so screen readers hear "Booked".
 - When the OS setting "reduce motion" is on, states change instantly and the spinner slows down.
-- Once done, the button is `aria-disabled` unless `resetAfter` is set.
+- Once done, the button is `aria-disabled` unless `resetAfter` or `undoable` is set.
 
 ## Do and don't
 

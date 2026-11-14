@@ -1,0 +1,18 @@
+<!-- @dsCard group="Status" height=72 subtitle="Counts that roll when they change" -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>CountBadge</title><style>body{margin:0;background:var(--surface-100);color:var(--ink);font-family:var(--font-sans)}.row{display:flex;flex-wrap:wrap;gap:var(--space-6);align-items:center;padding:var(--space-4)}.item{display:flex;flex-direction:column;gap:6px;align-items:flex-start}.cap{font-size:12px;line-height:16px;color:var(--ink-muted)}</style></head>
+<body>
+<div id="root"></div>
+<script>
+  var W = window.Wattle, h = React.createElement, F = React.Fragment;
+  function Item(cap, el) { return h("div", { className: "item" }, el, h("span", { className: "cap" }, cap)); }
+  function D() { var s = React.useState(3), n = s[0], set = s[1];
+    return h("div", { className: "row" },
+      h("span", { style: { display: "inline-flex", alignItems: "center", gap: 8, fontWeight: 600 } }, "Messages", h(W.CountBadge, { count: n, label: "unread" })),
+      h("span", { style: { display: "inline-flex", alignItems: "center", gap: 8, fontWeight: 600 } }, "Submissions", h(W.CountBadge, { count: 128, label: "new" })),
+      h(W.Button, { size: "sm", icon: "plus", onClick: function () { set(n + 1); } }, "Add one")); }
+  ReactDOM.createRoot(document.getElementById("root")).render(h(D));
+</script>
+</body>
+</html>

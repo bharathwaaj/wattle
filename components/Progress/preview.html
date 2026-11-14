@@ -1,0 +1,17 @@
+<!-- @dsCard group="Building blocks" height=146 subtitle="A thin bar, with or without a value" -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Progress</title><style>body{margin:0;background:var(--surface-100);color:var(--ink);font-family:var(--font-sans)}.row{display:flex;flex-wrap:wrap;gap:var(--space-6);align-items:center;padding:var(--space-4)}.item{display:flex;flex-direction:column;gap:6px;align-items:flex-start}.cap{font-size:12px;line-height:16px;color:var(--ink-muted)}</style></head>
+<body>
+<div id="root"></div>
+<script>
+  var W = window.Wattle, h = React.createElement, F = React.Fragment;
+  function Item(cap, el) { return h("div", { className: "item" }, el, h("span", { className: "cap" }, cap)); }
+  function P() { var s = React.useState(50), v = s[0], set = s[1];
+    return h("div", { className: "row", style: { flexDirection: "column", alignItems: "stretch", maxWidth: 360 } },
+      h(W.Progress, { value: v, label: "Course progress" }), h(W.Progress, { value: 72, label: "Upload", showValue: true }),
+      h(W.Button, { size: "sm", style: { alignSelf: "flex-start" }, onClick: function () { set(v >= 100 ? 0 : v + 25); } }, "Add 25%")); }
+  ReactDOM.createRoot(document.getElementById("root")).render(h(P));
+</script>
+</body>
+</html>

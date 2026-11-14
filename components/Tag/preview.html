@@ -1,0 +1,19 @@
+<!-- @dsCard group="Status" height=108 subtitle="Removable chips and filter toggles" -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Tag</title><style>body{margin:0;background:var(--surface-100);color:var(--ink);font-family:var(--font-sans)}.row{display:flex;flex-wrap:wrap;gap:var(--space-6);align-items:center;padding:var(--space-4)}.item{display:flex;flex-direction:column;gap:6px;align-items:flex-start}.cap{font-size:12px;line-height:16px;color:var(--ink-muted)}</style></head>
+<body>
+<div id="root"></div>
+<script>
+  var W = window.Wattle, h = React.createElement, F = React.Fragment;
+  function Item(cap, el) { return h("div", { className: "item" }, el, h("span", { className: "cap" }, cap)); }
+  function T() { var s = React.useState(["Physics", "Class 12", "Batch A"]), tags = s[0], set = s[1];
+    var f = React.useState({ Live: true, Recorded: false, Tests: false }), on = f[0], setOn = f[1];
+    return h("div", { className: "row", style: { flexDirection: "column", alignItems: "flex-start", gap: 12 } },
+      h("div", { style: { display: "flex", gap: 8, flexWrap: "wrap" } }, tags.map(function (t) { return h(W.Tag, { key: t, onRemove: function () { set(tags.filter(function (x) { return x !== t; })); } }, t); }),
+        tags.length ? null : h(W.Button, { size: "sm", variant: "ghost", icon: "rotate-ccw", onClick: function () { set(["Physics", "Class 12", "Batch A"]); } }, "Reset")),
+      h("div", { style: { display: "flex", gap: 8 } }, Object.keys(on).map(function (k) { return h(W.Tag, { key: k, selected: on[k], onClick: function () { var n = Object.assign({}, on); n[k] = !n[k]; setOn(n); } }, k); }))); }
+  ReactDOM.createRoot(document.getElementById("root")).render(h(T));
+</script>
+</body>
+</html>

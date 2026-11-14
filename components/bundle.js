@@ -1,4 +1,4 @@
-/* @ds-bundle: {"format":4,"namespace":"Wattle","components":[{"name":"Button"},{"name":"Input"},{"name":"Card"},{"name":"Icon"},{"name":"Badge"},{"name":"ActionButton"},{"name":"ProgressButton"},{"name":"HoldButton"},{"name":"UndoButton"},{"name":"ReactionButton"}]} */
+/* @ds-bundle: {"format":4,"namespace":"Wattle","components":[{"name":"Button"},{"name":"Input"},{"name":"Card"},{"name":"Icon"},{"name":"Badge"},{"name":"ActionButton"},{"name":"ProgressButton"},{"name":"HoldButton"},{"name":"UndoButton"},{"name":"ReactionButton"},{"name":"IconDisc"},{"name":"DateBlock"},{"name":"MetaList"},{"name":"Progress"},{"name":"Checklist"},{"name":"Avatar"},{"name":"Stat"},{"name":"Sparkline"},{"name":"SeatMap"},{"name":"CountBadge"},{"name":"Status"},{"name":"Tag"}]} */
 (function () {
   var React = window.React;
   var h = React.createElement;
@@ -110,6 +110,12 @@
     var circle = size === "sm" ? 32 : 40;
 
     function click(e) {
+      if (state === "done" && props.undoable) {
+        if (anim === "morph") { var el0 = ref.current; el0.style.width = el0.offsetWidth + "px"; void el0.offsetWidth; set("idle"); requestAnimationFrame(function () { el0.style.width = ""; }); }
+        else set("idle");
+        if (props.onUndo) props.onUndo(e);
+        return;
+      }
       if (state !== "idle") return;
       var el = ref.current;
       if (anim === "morph") {
@@ -154,8 +160,10 @@
     return h(F, null,
       h("button", {
         ref: ref, type: "button", onClick: click,
-        "aria-disabled": state === "idle" ? undefined : "true",
-        className: cx("wt-btn", "wt-btn-" + (state === "done" ? doneVariant : variant), size === "sm" && "wt-btn-sm",
+        "aria-disabled": state === "idle" || (state === "done" && props.undoable) ? undefined : "true",
+        "aria-pressed": props.undoable ? state === "done" : undefined,
+        title: state === "done" && props.undoable ? (props.undoHint || "Click to undo") : undefined,
+        className: cx("wt-btn", "wt-btn-" + (state === "done" ? doneVariant : variant), state === "done" && props.undoable && "is-undoable", size === "sm" && "wt-btn-sm",
           "wt-action", "is-" + state, "anim-" + anim, props.className)
       }, h("span", { className: "wt-action-face", key: state }, face)),
       h(Live, null, state === "done" ? props.doneLabel : state === "loading" ? (props.loadingLabel || "Working") : ""));
@@ -289,5 +297,112 @@
       hasCount ? h("span", { className: "wt-count", "aria-hidden": "true" }, h("span", { key: count, className: "wt-count-n wt-roll-" + dir.current }, count)) : null);
   }
 
-  window.Wattle = Object.assign(window.Wattle || {}, { Button: Button, Input: Input, Card: Card, Icon: Icon, Badge: Badge, ActionButton: ActionButton, ProgressButton: ProgressButton, HoldButton: HoldButton, UndoButton: UndoButton, ReactionButton: ReactionButton });
+
+  /* ---------- Building blocks ---------- */
+  function IconDisc(props) {
+    var size = props.size || 40;
+    return h("span", { className: cx("wt-disc", "wt-disc-" + (props.tone || "neutral"), props.className), style: { width: size, height: size }, "aria-hidden": props.label ? undefined : "true", role: props.label ? "img" : undefined, "aria-label": props.label },
+      iconNode(props.icon, Math.round(size / 2)));
+  }
+
+  var MONTHS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+  function DateBlock(props) {
+    var month = props.month, day = props.day;
+    if (props.date) { var d = new Date(props.date); month = MONTHS[d.getMonth()]; day = d.getDate(); }
+    return h("span", { className: cx("wt-date", props.className), role: "img", "aria-label": props.label || (day + " " + month) },
+      h("span", { className: "wt-date-m", "aria-hidden": "true" }, month), h("span", { className: "wt-date-d", "aria-hidden": "true" }, day));
+  }
+
+  function MetaList(props) {
+    return h("ul", { className: cx("wt-meta", props.className) }, (props.items || []).map(function (it, i) {
+      return h("li", { key: i }, it.icon ? iconNode(it.icon, 16) : null, h("span", null, it.text));
+    }));
+  }
+
+  function Progress(props) {
+    var max = props.max || 100, v = Math.max(0, Math.min(max, props.value || 0)), pct = (v / max) * 100;
+    return h("div", { className: cx("wt-progressbar-wrap", props.className) },
+      h("div", { className: "wt-progressbar", role: "progressbar", "aria-valuemin": 0, "aria-valuemax": max, "aria-valuenow": v, "aria-label": props.label || "Progress" },
+        h("i", { style: { width: pct + "%" } })),
+      props.showValue ? h("span", { className: "wt-progressbar-value" }, Math.round(pct) + "%") : null);
+  }
+
+  function Checklist(props) {
+    var controlled = Array.isArray(props.done);
+    var st = React.useState((props.items || []).map(function (it) { return !!it.done; })), own = st[0], setOwn = st[1];
+    var done = controlled ? props.done : own;
+    var baseId = React.useId();
+    function toggle(i) {
+      var next = done.slice(); next[i] = !next[i];
+      if (!controlled) setOwn(next);
+      if (props.onChange) props.onChange(next);
+    }
+    return h("ul", { className: cx("wt-checklist", props.className), "aria-label": props.label }, (props.items || []).map(function (it, i) {
+      var id = baseId + "-" + i;
+      return h("li", { key: i, className: done[i] ? "is-done" : "" },
+        h("input", { type: "checkbox", id: id, className: "wt-check-input", checked: !!done[i], onChange: function () { toggle(i); } }),
+        h("label", { htmlFor: id }, h("span", { className: "wt-check-box", "aria-hidden": "true" }, h(Icon, { name: "check", size: 14 })), h("span", { className: "wt-check-text" }, it.label)));
+    }));
+  }
+  Checklist.count = function (done) { return done.filter(Boolean).length; };
+
+  function initials(name) {
+    var parts = String(name || "").trim().split(/\s+/);
+    return ((parts[0] || "")[0] || "").toUpperCase() + ((parts.length > 1 ? parts[parts.length - 1][0] : "") || "").toUpperCase();
+  }
+  function Avatar(props) {
+    var size = props.size || 48;
+    return h("span", { className: cx("wt-avatar", props.className), style: { width: size, height: size, fontSize: Math.round(size * 0.4) }, role: "img", "aria-label": props.name },
+      h("span", { "aria-hidden": "true" }, props.initials || initials(props.name)));
+  }
+
+  function Stat(props) {
+    var dir = props.trendDirection || "up";
+    return h("div", { className: cx("wt-stat", props.className) },
+      props.label ? h("span", { className: "wt-stat-label" }, props.label) : null,
+      h("span", { className: "wt-stat-value" }, h("span", { className: "wt-stat-num", key: String(props.value) }, props.value), props.unit ? h("small", null, props.unit) : null),
+      props.trend ? h("span", { className: "wt-stat-trend" },
+        dir === "flat" ? null : h(Icon, { name: "arrow-right", size: 14, style: { transform: dir === "down" ? "rotate(45deg)" : "rotate(-45deg)" } }), props.trend) : null);
+  }
+
+  function Sparkline(props) {
+    var data = props.data || [], w = 290, hgt = props.height || 56, pad = 5;
+    if (data.length < 2) return null;
+    var min = Math.min.apply(null, data), max = Math.max.apply(null, data), span = (max - min) || 1;
+    var pts = data.map(function (v, i) { return [pad + i * (w - 2 * pad) / (data.length - 1), hgt - pad - (v - min) / span * (hgt - 2 * pad)]; });
+    var last = pts[pts.length - 1];
+    return h("svg", { className: cx("wt-spark", props.className), viewBox: "0 0 " + w + " " + hgt, preserveAspectRatio: "none", style: { height: hgt }, role: "img", "aria-label": props.label || ("Trend from " + data[0] + " to " + data[data.length - 1]) },
+      h("polyline", { points: pts.map(function (p) { return p.join(","); }).join(" "), vectorEffect: "non-scaling-stroke" }),
+      h("circle", { cx: last[0], cy: last[1], r: 4 }));
+  }
+
+  function SeatMap(props) {
+    var total = props.total || 40, taken = Math.min(total, props.taken || 0), cols = props.columns || 10, cells = [];
+    for (var i = 0; i < total; i++) cells.push(h("i", { key: i, className: i >= taken ? "free" : (props.mine && i === taken - 1 ? "mine" : "") }));
+    return h("div", { className: cx("wt-seats", props.className), style: { gridTemplateColumns: "repeat(" + cols + ", 1fr)" }, role: "img", "aria-label": props.label || (taken + " of " + total + " places taken, " + (total - taken) + " left") }, cells);
+  }
+
+  /* ---------- Status pieces ---------- */
+  function CountBadge(props) {
+    var max = props.max || 99, n = props.count || 0;
+    if (!n && !props.showZero) return null;
+    return h("span", { className: cx("wt-count-badge", props.className), "aria-label": props.label ? (n + " " + props.label) : undefined },
+      h("span", { key: n, className: "wt-count-badge-n", "aria-hidden": props.label ? "true" : undefined }, n > max ? max + "+" : n));
+  }
+
+  function Status(props) {
+    var tone = props.tone || "neutral";
+    return h("span", { className: cx("wt-status", "wt-status-" + tone, props.className) }, h("span", { className: "wt-status-dot", "aria-hidden": "true" }), props.children);
+  }
+
+  function Tag(props) {
+    if (props.onRemove) {
+      return h("span", { className: cx("wt-tag", props.className) }, h("span", null, props.children),
+        h("button", { type: "button", className: "wt-tag-x", onClick: props.onRemove, "aria-label": "Remove " + (props.label || (typeof props.children === "string" ? props.children : "")) }, h(Icon, { name: "x", size: 14 })));
+    }
+    return h("button", { type: "button", className: cx("wt-tag", "wt-tag-toggle", props.selected && "is-on", props.className), "aria-pressed": !!props.selected, onClick: props.onClick },
+      props.selected ? h(Icon, { name: "check", size: 14 }) : null, h("span", null, props.children));
+  }
+
+  window.Wattle = Object.assign(window.Wattle || {}, { Button: Button, Input: Input, Card: Card, Icon: Icon, Badge: Badge, ActionButton: ActionButton, ProgressButton: ProgressButton, HoldButton: HoldButton, UndoButton: UndoButton, ReactionButton: ReactionButton, IconDisc: IconDisc, DateBlock: DateBlock, MetaList: MetaList, Progress: Progress, Checklist: Checklist, Avatar: Avatar, Stat: Stat, Sparkline: Sparkline, SeatMap: SeatMap, CountBadge: CountBadge, Status: Status, Tag: Tag });
 })();

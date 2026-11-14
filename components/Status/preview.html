@@ -1,0 +1,15 @@
+<!-- @dsCard group="Status" height=60 subtitle="A dot and a word" -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Status</title><style>body{margin:0;background:var(--surface-100);color:var(--ink);font-family:var(--font-sans)}.row{display:flex;flex-wrap:wrap;gap:var(--space-6);align-items:center;padding:var(--space-4)}.item{display:flex;flex-direction:column;gap:6px;align-items:flex-start}.cap{font-size:12px;line-height:16px;color:var(--ink-muted)}</style></head>
+<body>
+<div id="root"></div>
+<script>
+  var W = window.Wattle, h = React.createElement, F = React.Fragment;
+  function Item(cap, el) { return h("div", { className: "item" }, el, h("span", { className: "cap" }, cap)); }
+  ReactDOM.createRoot(document.getElementById("root")).render(h("div", { className: "row" },
+    h(W.Status, { tone: "live" }, "Live now"), h(W.Status, { tone: "active" }, "In progress"), h(W.Status, { tone: "done" }, "Completed"),
+    h(W.Status, null, "Draft"), h(W.Status, { tone: "danger" }, "Overdue")));
+</script>
+</body>
+</html>

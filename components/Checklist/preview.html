@@ -1,0 +1,17 @@
+<!-- @dsCard group="Building blocks" height=200 subtitle="Real checkboxes, styled; click to tick" -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Checklist</title><style>body{margin:0;background:var(--surface-100);color:var(--ink);font-family:var(--font-sans)}.row{display:flex;flex-wrap:wrap;gap:var(--space-6);align-items:center;padding:var(--space-4)}.item{display:flex;flex-direction:column;gap:6px;align-items:flex-start}.cap{font-size:12px;line-height:16px;color:var(--ink-muted)}</style></head>
+<body>
+<div id="root"></div>
+<script>
+  var W = window.Wattle, h = React.createElement, F = React.Fragment;
+  function Item(cap, el) { return h("div", { className: "item" }, el, h("span", { className: "cap" }, cap)); }
+  function C() { var s = React.useState([true, true, false, false]), d = s[0], set = s[1];
+    return h("div", { className: "row", style: { flexDirection: "column", alignItems: "flex-start" } },
+      h("span", { className: "cap" }, d.filter(Boolean).length + " of 4 done"),
+      h(W.Checklist, { label: "Before the exam", items: [{ label: "Revise chapters 1–4" }, { label: "Finish mock test 3" }, { label: "Pack admit card" }, { label: "Sleep by 10 pm" }], done: d, onChange: set })); }
+  ReactDOM.createRoot(document.getElementById("root")).render(h(C));
+</script>
+</body>
+</html>

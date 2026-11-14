@@ -1,0 +1,14 @@
+<!-- @dsCard group="Building blocks" height=100 subtitle="The shape of a number over time" -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Sparkline</title><style>body{margin:0;background:var(--surface-100);color:var(--ink);font-family:var(--font-sans)}.row{display:flex;flex-wrap:wrap;gap:var(--space-6);align-items:center;padding:var(--space-4)}.item{display:flex;flex-direction:column;gap:6px;align-items:flex-start}.cap{font-size:12px;line-height:16px;color:var(--ink-muted)}</style></head>
+<body>
+<div id="root"></div>
+<script>
+  var W = window.Wattle, h = React.createElement, F = React.Fragment;
+  function Item(cap, el) { return h("div", { className: "item" }, el, h("span", { className: "cap" }, cap)); }
+  ReactDOM.createRoot(document.getElementById("root")).render(h("div", { className: "row", style: { display: "block", maxWidth: 320 } },
+    h(W.Sparkline, { data: [62, 70, 66, 74, 71, 79, 82, 86], label: "Average score over 8 weeks, from 62 to 86" })));
+</script>
+</body>
+</html>

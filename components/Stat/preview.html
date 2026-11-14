@@ -1,0 +1,16 @@
+<!-- @dsCard group="Building blocks" height=124 subtitle="One number, unit and trend" -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Stat</title><style>body{margin:0;background:var(--surface-100);color:var(--ink);font-family:var(--font-sans)}.row{display:flex;flex-wrap:wrap;gap:var(--space-6);align-items:center;padding:var(--space-4)}.item{display:flex;flex-direction:column;gap:6px;align-items:flex-start}.cap{font-size:12px;line-height:16px;color:var(--ink-muted)}</style></head>
+<body>
+<div id="root"></div>
+<script>
+  var W = window.Wattle, h = React.createElement, F = React.Fragment;
+  function Item(cap, el) { return h("div", { className: "item" }, el, h("span", { className: "cap" }, cap)); }
+  ReactDOM.createRoot(document.getElementById("root")).render(h("div", { className: "row", style: { gap: "48px" } },
+    h(W.Stat, { label: "Average score", value: "86%", trend: "Up 4 points on last week" }),
+    h(W.Stat, { label: "Seats", value: 4, unit: "left" }),
+    h(W.Stat, { label: "Late submissions", value: 3, trend: "Down 2 on last week", trendDirection: "down" })));
+</script>
+</body>
+</html>

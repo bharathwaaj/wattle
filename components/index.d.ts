@@ -85,6 +85,8 @@ export interface ActionButtonProps {
   onAction?: (e: React.MouseEvent) => unknown;
   /** Return to idle after this many ms (e.g. Copy link). */
   resetAfter?: number; loadingLabel?: string; className?: string;
+  /** Latch: clicking the done state returns to idle and calls onUndo. */
+  undoable?: boolean; onUndo?: (e: React.MouseEvent) => void; undoHint?: string;
 }
 export declare function ActionButton(props: ActionButtonProps): React.ReactElement;
 
@@ -121,4 +123,29 @@ export interface ReactionButtonProps {
 }
 export declare function ReactionButton(props: ReactionButtonProps): React.ReactElement;
 
-declare global { interface Window { Wattle: { Button: typeof Button; Input: typeof Input; Card: typeof Card; Icon: typeof Icon; Badge: typeof Badge; ActionButton: typeof ActionButton; ProgressButton: typeof ProgressButton; HoldButton: typeof HoldButton; UndoButton: typeof UndoButton; ReactionButton: typeof ReactionButton } } }
+export interface IconDiscProps { icon: IconName | React.ReactNode; tone?: 'neutral' | 'strong' | 'danger'; size?: number; label?: string; className?: string; }
+export declare function IconDisc(props: IconDiscProps): React.ReactElement;
+export interface DateBlockProps { date?: string | number | Date; month?: string; day?: number | string; label?: string; className?: string; }
+export declare function DateBlock(props: DateBlockProps): React.ReactElement;
+export interface MetaListProps { items: { icon?: IconName | React.ReactNode; text: React.ReactNode }[]; className?: string; }
+export declare function MetaList(props: MetaListProps): React.ReactElement;
+export interface ProgressProps { value: number; max?: number; label: string; showValue?: boolean; className?: string; }
+export declare function Progress(props: ProgressProps): React.ReactElement;
+export interface ChecklistProps { items: { label: React.ReactNode; done?: boolean }[]; done?: boolean[]; onChange?: (done: boolean[]) => void; label?: string; className?: string; }
+export declare function Checklist(props: ChecklistProps): React.ReactElement;
+export interface AvatarProps { name: string; initials?: string; size?: number; className?: string; }
+export declare function Avatar(props: AvatarProps): React.ReactElement;
+export interface StatProps { value: React.ReactNode; unit?: React.ReactNode; label?: React.ReactNode; trend?: React.ReactNode; trendDirection?: 'up' | 'down' | 'flat'; className?: string; }
+export declare function Stat(props: StatProps): React.ReactElement;
+export interface SparklineProps { data: number[]; height?: number; label?: string; className?: string; }
+export declare function Sparkline(props: SparklineProps): React.ReactElement | null;
+export interface SeatMapProps { total: number; taken: number; columns?: number; mine?: boolean; label?: string; className?: string; }
+export declare function SeatMap(props: SeatMapProps): React.ReactElement;
+export interface CountBadgeProps { count: number; max?: number; label?: string; showZero?: boolean; className?: string; }
+export declare function CountBadge(props: CountBadgeProps): React.ReactElement | null;
+export interface StatusProps { tone?: 'neutral' | 'live' | 'active' | 'done' | 'danger'; children: React.ReactNode; className?: string; }
+export declare function Status(props: StatusProps): React.ReactElement;
+export interface TagProps { children: React.ReactNode; onRemove?: () => void; selected?: boolean; onClick?: () => void; label?: string; className?: string; }
+export declare function Tag(props: TagProps): React.ReactElement;
+
+declare global { interface Window { Wattle: { Button: typeof Button; Input: typeof Input; Card: typeof Card; Icon: typeof Icon; Badge: typeof Badge; ActionButton: typeof ActionButton; ProgressButton: typeof ProgressButton; HoldButton: typeof HoldButton; UndoButton: typeof UndoButton; ReactionButton: typeof ReactionButton; IconDisc: typeof IconDisc; DateBlock: typeof DateBlock; MetaList: typeof MetaList; Progress: typeof Progress; Checklist: typeof Checklist; Avatar: typeof Avatar; Stat: typeof Stat; Sparkline: typeof Sparkline; SeatMap: typeof SeatMap; CountBadge: typeof CountBadge; Status: typeof Status; Tag: typeof Tag } } }

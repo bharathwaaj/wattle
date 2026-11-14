@@ -1,0 +1,14 @@
+<!-- @dsCard group="Building blocks" height=110 subtitle="Small details, each with a 16px icon" -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>MetaList</title><style>body{margin:0;background:var(--surface-100);color:var(--ink);font-family:var(--font-sans)}.row{display:flex;flex-wrap:wrap;gap:var(--space-6);align-items:center;padding:var(--space-4)}.item{display:flex;flex-direction:column;gap:6px;align-items:flex-start}.cap{font-size:12px;line-height:16px;color:var(--ink-muted)}</style></head>
+<body>
+<div id="root"></div>
+<script>
+  var W = window.Wattle, h = React.createElement, F = React.Fragment;
+  function Item(cap, el) { return h("div", { className: "item" }, el, h("span", { className: "cap" }, cap)); }
+  ReactDOM.createRoot(document.getElementById("root")).render(h("div", { className: "row" },
+    h(W.MetaList, { items: [{ icon: "calendar", text: "Every Saturday" }, { icon: "clock", text: "9:30 to 10:30 am" }, { icon: "user", text: "8 places left" }] })));
+</script>
+</body>
+</html>

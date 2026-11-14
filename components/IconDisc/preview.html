@@ -1,0 +1,15 @@
+<!-- @dsCard group="Building blocks" height=110 subtitle="Neutral, strong, danger" -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>IconDisc</title><style>body{margin:0;background:var(--surface-100);color:var(--ink);font-family:var(--font-sans)}.row{display:flex;flex-wrap:wrap;gap:var(--space-6);align-items:center;padding:var(--space-4)}.item{display:flex;flex-direction:column;gap:6px;align-items:flex-start}.cap{font-size:12px;line-height:16px;color:var(--ink-muted)}</style></head>
+<body>
+<div id="root"></div>
+<script>
+  var W = window.Wattle, h = React.createElement, F = React.Fragment;
+  function Item(cap, el) { return h("div", { className: "item" }, el, h("span", { className: "cap" }, cap)); }
+  ReactDOM.createRoot(document.getElementById("root")).render(h("div", { className: "row" },
+    Item("neutral", h(W.IconDisc, { icon: "book-open" })), Item("strong", h(W.IconDisc, { icon: "bell", tone: "strong" })),
+    Item("danger", h(W.IconDisc, { icon: "triangle-alert", tone: "danger" })), Item("48px", h(W.IconDisc, { icon: "plus", size: 48 }))));
+</script>
+</body>
+</html>

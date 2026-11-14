@@ -1,0 +1,18 @@
+<!-- @dsCard group="Building blocks" height=196 subtitle="Taken, free, and yours" -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>SeatMap</title><style>body{margin:0;background:var(--surface-100);color:var(--ink);font-family:var(--font-sans)}.row{display:flex;flex-wrap:wrap;gap:var(--space-6);align-items:center;padding:var(--space-4)}.item{display:flex;flex-direction:column;gap:6px;align-items:flex-start}.cap{font-size:12px;line-height:16px;color:var(--ink-muted)}</style></head>
+<body>
+<div id="root"></div>
+<script>
+  var W = window.Wattle, h = React.createElement, F = React.Fragment;
+  function Item(cap, el) { return h("div", { className: "item" }, el, h("span", { className: "cap" }, cap)); }
+  function S() { var s = React.useState(36), t = s[0], set = s[1];
+    return h("div", { className: "row", style: { flexDirection: "column", alignItems: "flex-start", maxWidth: 280 } },
+      h("div", { style: { width: 260 } }, h(W.SeatMap, { total: 40, taken: t, mine: t > 36 })),
+      h(W.ActionButton, { variant: "secondary", size: "sm", label: "Reserve a seat", doneLabel: "Seat reserved", undoable: true,
+        onAction: function () { return new Promise(function (r) { setTimeout(r, 700); }).then(function () { set(37); }); }, onUndo: function () { set(36); } })); }
+  ReactDOM.createRoot(document.getElementById("root")).render(h(S));
+</script>
+</body>
+</html>
