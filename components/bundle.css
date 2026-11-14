@@ -1,5 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Manrope:wght@400;500;600;700&display=swap");
 
+/* Icon */
+.wt-icon { display: inline-block; flex: none; vertical-align: middle; }
+
 /* Button */
 .wt-btn {
   display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
@@ -8,7 +11,13 @@
   border: 1px solid transparent; cursor: pointer; white-space: nowrap;
   transition: background-color 120ms ease, border-color 120ms ease;
 }
-.wt-btn-sm { height: 32px; padding: 0 14px; font-size: 14px; }
+.wt-btn-sm { height: 32px; padding: 0 14px; font-size: 14px; gap: 6px; }
+.wt-btn:has(> .wt-icon:first-child):not(.wt-btn-icon) { padding-left: 16px; }
+.wt-btn:has(> .wt-icon:last-child):not(.wt-btn-icon) { padding-right: 16px; }
+.wt-btn-sm:has(> .wt-icon:first-child):not(.wt-btn-icon) { padding-left: 11px; }
+.wt-btn-sm:has(> .wt-icon:last-child):not(.wt-btn-icon) { padding-right: 11px; }
+.wt-btn-icon { width: 40px; padding: 0; }
+.wt-btn-icon.wt-btn-sm { width: 32px; }
 .wt-btn-primary { background: var(--wattle); color: var(--on-wattle); }
 .wt-btn-primary:hover { background: color-mix(in srgb, var(--wattle) 88%, var(--on-wattle)); }
 .wt-btn-secondary { background: var(--surface-200); color: var(--ink); border-color: var(--border-strong); }
@@ -32,8 +41,14 @@
 .wt-input:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; border-color: var(--ink); }
 .wt-input[aria-invalid="true"] { border-color: var(--danger); }
 .wt-input:disabled { opacity: .55; cursor: not-allowed; }
+.wt-input-wrap { position: relative; display: flex; align-items: center; }
+.wt-input-wrap .wt-input { width: 100%; }
+.wt-input-wrap.has-icon .wt-input { padding-left: 38px; }
+.wt-input-wrap.has-icon-end .wt-input { padding-right: 38px; }
+.wt-input-icon { position: absolute; left: 12px; display: flex; color: var(--ink-muted); pointer-events: none; }
+.wt-input-icon-end { left: auto; right: 12px; }
 .wt-field-hint { font-size: 13px; line-height: 18px; color: var(--ink-muted); }
-.wt-field-error { font-size: 13px; line-height: 18px; font-weight: 600; color: var(--danger); }
+.wt-field-error { display: flex; gap: 6px; align-items: flex-start; font-size: 13px; line-height: 18px; font-weight: 600; color: var(--danger); }
 
 /* Card */
 .wt-card {
@@ -42,6 +57,7 @@
   background: var(--surface-200); border: 1px solid var(--hairline); color: var(--ink);
   font-family: var(--font-sans);
 }
+.wt-card-icon { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; margin-bottom: var(--space-2); border-radius: var(--radius-pill); background: var(--surface-100); border: 1px solid var(--hairline); color: var(--ink); }
 .wt-card-eyebrow { font-size: 12px; line-height: 16px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-muted); }
 .wt-card-title { margin: 0; font-family: var(--font-display); font-size: 24px; line-height: 30px; font-weight: 600; color: var(--ink); }
 .wt-card-body { font-size: 15px; line-height: 22px; color: var(--ink-muted); }

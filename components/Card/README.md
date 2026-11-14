@@ -5,6 +5,7 @@ A raised `surface-200` panel with a `hairline` border and `radius-md` corners. I
 ## You provide
 
 - `title`: set in Fraunces at heading-2 size.
+- `icon`: an optional icon shown in a 40px circle above the eyebrow, given as a Lucide name or a React node. Use it to tell kinds of item apart at a glance.
 - `eyebrow`: an optional uppercase overline in `ink-muted`, e.g. "Course".
 - `children`: the body text, in `ink-muted`.
 - `footer`: optional actions, usually Buttons, under a hairline.
@@ -17,3 +18,4 @@ A raised `surface-200` panel with a `hairline` border and `radius-md` corners. I
 - Don't add shadows. Wattle uses borders, not shadows.
 - Don't fill cards with wattle or add a coloured left border. Mark a chosen card with `selected`.
 - Don't nest cards inside cards.
+- If you give one card in a grid an icon, give them all one.

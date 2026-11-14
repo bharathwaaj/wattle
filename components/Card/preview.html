@@ -1,7 +1,7 @@
-<!-- @dsCard group="Layout" height=260 subtitle="Default and selected" -->
+<!-- @dsCard group="Layout" height=240 subtitle="Default, with icon, selected" -->
 <!doctype html>
 <html>
-<head><meta charset="utf-8"><title>Card</title><style>body{margin:0;background:var(--surface-100);color:var(--ink);font-family:var(--font-sans)}.row{display:flex;flex-wrap:wrap;gap:var(--space-4);align-items:center;padding:var(--space-4)}</style><style>.row{align-items:stretch}.row>*{width:300px}</style></head>
+<head><meta charset="utf-8"><title>Card</title><style>body{margin:0;background:var(--surface-100);color:var(--ink);font-family:var(--font-sans)}.row{display:flex;flex-wrap:wrap;gap:var(--space-4);align-items:center;padding:var(--space-4)}</style><style>.row{align-items:stretch;flex-wrap:nowrap}.row>*{flex:1 1 0;min-width:0;box-sizing:border-box}</style></head>
 <body>
 <div id="root"></div>
 <script>
@@ -9,9 +9,11 @@
   ReactDOM.createRoot(document.getElementById('root')).render(
     h('div', { className: 'row' },
       h(W.Card, { eyebrow: 'Course', title: 'Physics for Class 12',
-        footer: h(React.Fragment, null, h(W.Button, { variant: 'primary', size: 'sm' }, 'Open'), h(W.Button, { variant: 'ghost', size: 'sm' }, 'Share')) },
+        footer: h(React.Fragment, null, h(W.Button, { variant: 'primary', size: 'sm' }, 'Open'), h(W.Button, { variant: 'ghost', size: 'sm', icon: 'upload' }, 'Share')) },
         '24 lessons and 6 practice tests. Last updated 3 days ago.'),
-      h(W.Card, { eyebrow: 'Plan', title: 'Yearly', selected: true },
+      h(W.Card, { icon: 'book-open', eyebrow: 'Library', title: 'Reading list' },
+        '12 books assigned to this batch. 4 are due this week.'),
+      h(W.Card, { icon: 'calendar', eyebrow: 'Plan', title: 'Yearly', selected: true },
         'Billed once a year. Includes every course in the library.')));
 </script>
 </body>
