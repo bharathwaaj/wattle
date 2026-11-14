@@ -262,7 +262,7 @@
       '<p>The quickest start is the <a href="examples/starter.html">starter app</a>: a complete dashboard in one HTML file. Open it, then copy it.</p>' +
       '<h2>1. Add the tokens</h2><p>Every colour, space, radius and shadow is a CSS custom property in <a href="tokens.css"><code>tokens.css</code></a>, generated from <code>tokens.json</code>. Link it, or copy it:</p>' +
       '<div class="stage"><div class="stage-bar"><span>tokens.css</span><button class="wt-btn wt-btn-ghost wt-btn-sm" type="button" id="copy-tokens">Copy</button></div><pre style="margin:0;border:0;border-radius:0;max-height:260px"><code id="tokens-code">' + esc(tokensCss()) + '</code></pre></div>' +
-      '<h2>2. Load the styles and scripts</h2><p>React 18 comes first, then the Wattle bundle. The stylesheet also loads Fraunces and Manrope from Google Fonts.</p>' +
+      '<h2>2. Load the styles and scripts</h2><p>React 18 comes first, then the Wattle bundle. The stylesheet also loads Newsreader and Manrope from Google Fonts.</p>' +
       code('<link rel="stylesheet" href="' + base + 'tokens.css">\n<link rel="stylesheet" href="' + base + 'components/bundle.css">\n<script src="' + REACT + '"><\/script>\n<script src="' + REACT_DOM + '"><\/script>\n<script src="' + base + 'components/bundle.js"><\/script>') +
       '<h2>3. Use the components</h2><p>Everything is on <code>window.Wattle</code>.</p>' +
       code('const { Button, Card, ActionButton } = window.Wattle;\n\n<Card eyebrow="Course" title="Organic Chemistry">\n  <ActionButton label="Book" icon="plus" doneLabel="Booked" undoable />\n</Card>') +
@@ -299,7 +299,7 @@
 
   function pageType() {
     var T = data.tokens;
-    return head('Foundations', 'Type', 'Fraunces for display, Manrope for everything else.') +
+    return head('Foundations', 'Type', 'Newsreader for display, Manrope for everything else.') +
       T.type.groups.map(function (g) {
         return '<h2 class="sec">' + esc(g.name) + '</h2>' + g.styles.map(function (s) {
           return '<div class="typerow"><div><b>' + esc(s.name) + '</b><div class="spec">' + esc(s.fontSize + ' / ' + s.lineHeight + ' · ' + s.fontWeight) + '</div></div><div><div class="' + esc(s.name) + '">' + esc(s.sample || 'Warm earth, one sharp yellow') + '</div><div class="spec">' + esc(s.usage || '') + '</div></div></div>';
@@ -355,7 +355,18 @@
   }
   function loadFrame() {
     var route = currentRoute(), f = document.getElementById('frame');
-    if (f && route.indexOf('/c/') === 0) f.srcdoc = srcdoc(data.previews[route.slice(3)]);
+    if (f && route.indexOf('/c/') === 0) {
+      f.srcdoc = srcdoc(data.previews[route.slice(3)]);
+      f.onload = function () {
+        // the preview is same-origin (srcdoc), so size the frame to its content as it changes
+        try {
+          var doc = f.contentDocument, min = parseInt(f.dataset.min || f.style.height, 10) || 120;
+          f.dataset.min = min;
+          var fit = function () { f.style.height = Math.max(min, doc.documentElement.scrollHeight) + 'px'; };
+          fit(); new ResizeObserver(fit).observe(doc.body);
+        } catch (e) {}
+      };
+    }
     var cv = document.getElementById('cover');
     if (cv) get('components/Cover/preview.html').then(function (h) { cv.srcdoc = srcdoc(h); fitCover(); });
   }
