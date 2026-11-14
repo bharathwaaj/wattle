@@ -48,6 +48,10 @@
   .radii { display: flex; gap: var(--space-6); flex-wrap: wrap; }
   .radius { width: 120px; text-align: center; font-size: 14px; }
   .radius .shape { width: 120px; height: 80px; background: var(--taupe); margin-bottom: var(--space-2); }
+  .shadows { display: flex; gap: var(--space-10); flex-wrap: wrap; padding: var(--space-4) 0; }
+  .shadow { width: 220px; }
+  .shadow .layer { height: 96px; background: var(--surface-200); border: 1px solid var(--hairline); border-radius: var(--radius-md); margin-bottom: var(--space-4); }
+  .shadow .use { font-size: 13px; line-height: 18px; color: var(--ink-muted); }
   .comp { border: 1px solid var(--hairline); border-radius: var(--radius-md); overflow: hidden; margin-bottom: var(--space-6); background: var(--surface-200); }
   .comp-head { padding: var(--space-4); border-bottom: 1px solid var(--hairline); }
   .comp-head h3 { margin: 0; font-family: var(--font-display); font-size: 24px; line-height: 30px; }
@@ -80,6 +84,7 @@
   <section class="block" id="space"><h2 class="sec">Space &amp; shape</h2>
     <h3 class="muted">Spacing</h3><div class="scale" id="spacing"></div>
     <h3 class="muted" style="margin-top:var(--space-10)">Radius</h3><div class="radii" id="radii"></div>
+    <h3 class="muted" style="margin-top:var(--space-10)">Elevation</h3><p class="muted" id="shadow-note"></p><div class="shadows" id="shadows"></div>
   </section>
   <section class="block" id="components"><h2 class="sec">Components</h2><div id="comps"></div></section>
   <footer>Generated live from <code>tokens.json</code>, <code>README.md</code> and <code>components/</code> in this repository.</footer>
@@ -103,6 +108,7 @@
     themes.forEach(function (th, i) {
       out += (i === 0 ? ':root, ' : '') + '[data-theme="' + th.id + '"] {';
       tokens.color.tokens.forEach(function (t) { out += '--' + t.name + ':' + val(themeValue(t, th.id)) + ';'; });
+      (tokens.shadow ? tokens.shadow.tokens : []).forEach(function (t) { out += '--' + t.name + ':' + themeValue(t, th.id) + ';'; });
       out += '}\n';
     });
     out += ':root {';
@@ -161,6 +167,11 @@
     }).join('');
     document.getElementById('spacing').innerHTML = tokens.spacing.tokens.map(function (t) {
       return '<div class="scalerow"><strong>' + esc(t.name) + '</strong><span class="muted">' + esc(t.value) + '</span><div><div class="bar" style="width:' + esc(t.value) + '"></div></div></div>';
+    }).join('');
+    var sh = tokens.shadow || { tokens: [] };
+    document.getElementById('shadow-note').textContent = sh.note || '';
+    document.getElementById('shadows').innerHTML = sh.tokens.map(function (t) {
+      return '<div class="shadow"><div class="layer" style="box-shadow:var(--' + esc(t.name) + ')"></div><strong>' + esc(t.name) + '</strong><div class="use">' + esc(t.usage || '') + '</div></div>';
     }).join('');
     document.getElementById('radii').innerHTML = tokens.radius.tokens.map(function (t) {
       return '<div class="radius"><div class="shape" style="border-radius:' + esc(t.value) + '"></div><strong>' + esc(t.name) + '</strong><div class="muted">' + esc(t.value) + '</div></div>';
