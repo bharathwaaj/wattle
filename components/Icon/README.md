@@ -1,6 +1,6 @@
 # Icon
 
-Draws one of the 25 starter icons inline as SVG. Icons come from Lucide v0.460.0 (ISC licence) and are drawn with a 1.5px stroke in `currentColor`.
+Draws one of the 30 starter icons inline as SVG. Icons come from Lucide v0.460.0 (ISC licence) and are drawn with a 1.5px stroke in `currentColor`.
 
 ## You provide
 
