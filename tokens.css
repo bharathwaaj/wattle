@@ -1,0 +1,52 @@
+/* Wattle — generated from tokens.json by scripts/build.mjs. Do not edit by hand. */
+:root, [data-theme="light"] {
+  --surface-100: #F7F4EC;
+  --surface-200: #FFFDF8;
+  --ink: #1F1D1B;
+  --ink-muted: #5E5447;
+  --hairline: #D6CEBE;
+  --border-strong: #8F8373;
+  --wattle: #ECD43E;
+  --on-wattle: #1F1D1B;
+  --earth: #85715A;
+  --taupe: #A69A8B;
+  --wing: #43392F;
+  --danger: #B3361F;
+  --shadow-overlay: 0 1px 2px rgba(67, 57, 47, 0.10), 0 8px 24px rgba(67, 57, 47, 0.14);
+  --shadow-dialog: 0 2px 6px rgba(67, 57, 47, 0.12), 0 24px 56px rgba(67, 57, 47, 0.22);
+}
+[data-theme="dark"] {
+  --surface-100: #1A1816;
+  --surface-200: #24211E;
+  --ink: #F3EFE6;
+  --ink-muted: #B8AD9C;
+  --hairline: #3D3730;
+  --border-strong: #7A6F60;
+  --wattle: #ECD43E;
+  --on-wattle: #1F1D1B;
+  --earth: #85715A;
+  --taupe: #A69A8B;
+  --wing: #43392F;
+  --danger: #F08A6E;
+  --shadow-overlay: 0 1px 2px rgba(0, 0, 0, 0.40), 0 8px 24px rgba(0, 0, 0, 0.50);
+  --shadow-dialog: 0 2px 6px rgba(0, 0, 0, 0.45), 0 24px 56px rgba(0, 0, 0, 0.60);
+}
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-10: 40px;
+  --radius-sm: 6px;
+  --radius-md: 14px;
+  --radius-pill: 999px;
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-sans: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+.display { font-family: var(--font-display); font-size: 56px; line-height: 60px; font-weight: 600; letter-spacing: -0.02em; }
+.heading-1 { font-family: var(--font-display); font-size: 36px; line-height: 42px; font-weight: 600; letter-spacing: -0.01em; }
+.heading-2 { font-family: var(--font-display); font-size: 24px; line-height: 30px; font-weight: 600; }
+.body { font-family: var(--font-sans); font-size: 16px; line-height: 24px; font-weight: 400; }
+.body-sm { font-family: var(--font-sans); font-size: 14px; line-height: 20px; font-weight: 400; }
+.label { font-family: var(--font-sans); font-size: 12px; line-height: 16px; font-weight: 700; letter-spacing: 0.06em; }
+.caption { font-family: var(--font-sans); font-size: 13px; line-height: 18px; font-weight: 500; }

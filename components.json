@@ -1,0 +1,347 @@
+{
+  "name": "Wattle",
+  "namespace": "Wattle",
+  "site": "https://bharathwaaj.github.io/wattle/",
+  "load": {
+    "css": [
+      "tokens.css",
+      "components/bundle.css"
+    ],
+    "scripts": [
+      "https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.production.min.js",
+      "https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.production.min.js",
+      "components/bundle.js"
+    ],
+    "global": "window.Wattle"
+  },
+  "icons": [
+    "search",
+    "plus",
+    "x",
+    "check",
+    "chevron-down",
+    "chevron-right",
+    "arrow-left",
+    "arrow-right",
+    "menu",
+    "settings",
+    "user",
+    "bell",
+    "house",
+    "book-open",
+    "calendar",
+    "trash-2",
+    "pencil",
+    "upload",
+    "download",
+    "info",
+    "triangle-alert",
+    "eye",
+    "log-out",
+    "filter",
+    "clock",
+    "star",
+    "heart",
+    "bookmark",
+    "link",
+    "rotate-ccw",
+    "ellipsis"
+  ],
+  "components": [
+    {
+      "name": "Button",
+      "group": "Actions",
+      "summary": "Triggers an action. Pill-shaped, 40px tall (32px with `size=\"sm\"`).",
+      "props": "export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {\n  /** primary: the one wattle action per view. secondary (default): everything else. ghost: low-emphasis, toolbars. danger: destructive. */\n  variant?: 'primary' | 'secondary' | 'ghost' | 'danger';\n  /** md is 40px tall (default), sm is 32px. */\n  size?: 'md' | 'sm';\n  /** Hover/focus effect: nudge slides the trailing icon, sweep fills with ink from the left. */\n  effect?: 'nudge' | 'sweep';\n  /** Icon before the label: a Lucide name or a React node. With no children it makes an icon-only button; pass aria-label. */\n  icon?: IconName | React.ReactNode;\n  /** Icon after the label, e.g. 'arrow-right'. */\n  iconEnd?: IconName | React.ReactNode;\n}",
+      "guide": "components/Button/README.md",
+      "preview": "components/Button/preview.html",
+      "docs": "https://bharathwaaj.github.io/wattle/#/c/Button"
+    },
+    {
+      "name": "ActionButton",
+      "group": "Motion",
+      "summary": "A button that shows its own result. Click \"Book\" and it changes to \"Booked\" in place, with no toast or page change.",
+      "props": "export interface ActionButtonProps {\n  label: React.ReactNode; icon?: IconName | React.ReactNode;\n  doneLabel: React.ReactNode; doneIcon?: IconName | React.ReactNode;\n  /** morph (default): shrink to spinner and grow back; flip: icon turns over; swap: in-place swap. */\n  animation?: 'morph' | 'flip' | 'swap';\n  variant?: 'primary' | 'secondary' | 'ghost'; doneVariant?: 'primary' | 'secondary' | 'ghost';\n  size?: 'md' | 'sm';\n  /** The work; return a Promise. Rejecting returns the button to idle. */\n  onAction?: (e: React.MouseEvent) => unknown;\n  /** Return to idle after this many ms (e.g. Copy link). */\n  resetAfter?: number; loadingLabel?: string; className?: string;\n  /** Latch: clicking the done state returns to idle and calls onUndo. */\n  undoable?: boolean; onUndo?: (e: React.MouseEvent) => void; undoHint?: string;\n}",
+      "guide": "components/ActionButton/README.md",
+      "preview": "components/ActionButton/preview.html",
+      "docs": "https://bharathwaaj.github.io/wattle/#/c/ActionButton"
+    },
+    {
+      "name": "ProgressButton",
+      "group": "Motion",
+      "summary": "A button for slower work, like a submission or an upload. A darker fill sweeps across it as the work runs, with the percentage in the label. It ends on a success or an error.",
+      "props": "export interface ProgressButtonProps {\n  label: React.ReactNode; icon?: IconName | React.ReactNode;\n  runningLabel?: string; doneLabel?: React.ReactNode; errorLabel?: React.ReactNode;\n  /** Call setProgress(0-100) as work goes; resolve or reject when finished. */\n  onAction?: (setProgress: (p: number) => void) => Promise<unknown>;\n  variant?: 'primary' | 'secondary' | 'ghost'; size?: 'md' | 'sm'; className?: string;\n}",
+      "guide": "components/ProgressButton/README.md",
+      "preview": "components/ProgressButton/preview.html",
+      "docs": "https://bharathwaaj.github.io/wattle/#/c/ProgressButton"
+    },
+    {
+      "name": "HoldButton",
+      "group": "Motion",
+      "summary": "A destructive action that needs a press and hold instead of a confirmation dialog. A `danger` outline draws itself around the pill while it's held. Let go early and nothing happens. Hold for the full time and the trash lid pops, the label changes to \"Deleted\", and the button fades.",
+      "props": "export interface HoldButtonProps {\n  label?: React.ReactNode; doneLabel?: React.ReactNode;\n  /** Hold time in ms, default 1000. */\n  duration?: number; onConfirm?: () => void; size?: 'md' | 'sm'; hintId?: string; className?: string;\n}",
+      "guide": "components/HoldButton/README.md",
+      "preview": "components/HoldButton/preview.html",
+      "docs": "https://bharathwaaj.github.io/wattle/#/c/HoldButton"
+    },
+    {
+      "name": "UndoButton",
+      "group": "Motion",
+      "summary": "Deletes at once, then gives people a few seconds to change their mind. The button turns into \"Deleted · Undo\", with a line shrinking along the bottom. If the line runs out, the delete is final.",
+      "props": "export interface UndoButtonProps {\n  label?: React.ReactNode; doneLabel?: React.ReactNode; undoLabel?: React.ReactNode;\n  /** Undo window in ms, default 5000. */\n  duration?: number;\n  onDelete?: () => void; onUndo?: () => void; onCommit?: () => void;\n  size?: 'md' | 'sm'; className?: string;\n}",
+      "guide": "components/UndoButton/README.md",
+      "preview": "components/UndoButton/preview.html",
+      "docs": "https://bharathwaaj.github.io/wattle/#/c/UndoButton"
+    },
+    {
+      "name": "ReactionButton",
+      "group": "Motion",
+      "summary": "A toggle for small, personal reactions: star, like or save. Turning it on pops the icon and bursts a ring of dots. Turning it off is quiet.",
+      "props": "export interface ReactionButtonProps {\n  kind?: 'star' | 'heart' | 'bookmark';\n  /** Accessible name; the count is appended. */\n  label: string;\n  count?: number; defaultPressed?: boolean; onChange?: (pressed: boolean) => void; className?: string;\n}",
+      "guide": "components/ReactionButton/README.md",
+      "preview": "components/ReactionButton/preview.html",
+      "docs": "https://bharathwaaj.github.io/wattle/#/c/ReactionButton"
+    },
+    {
+      "name": "Input",
+      "group": "Forms",
+      "summary": "A single-line text field with a visible label, an optional hint and an optional error message.",
+      "props": "export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {\n  /** Visible label, always provide one. */\n  label?: React.ReactNode;\n  /** Helper text under the field, in ink-muted. */\n  hint?: React.ReactNode;\n  /** Error message; sets aria-invalid and a danger border. */\n  error?: React.ReactNode;\n  /** Decorative icon at the start of the field, e.g. 'search'. */\n  icon?: IconName | React.ReactNode;\n  /** Decorative icon at the end of the field, e.g. 'calendar'. */\n  iconEnd?: IconName | React.ReactNode;\n}",
+      "guide": "components/Input/README.md",
+      "preview": "components/Input/preview.html",
+      "docs": "https://bharathwaaj.github.io/wattle/#/c/Input"
+    },
+    {
+      "name": "Checkbox",
+      "group": "Forms",
+      "summary": "A single on/off choice with a visible label. It's a native checkbox underneath, styled with an `ink` fill when checked.",
+      "props": "export interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElement> { label: React.ReactNode; hint?: React.ReactNode; indeterminate?: boolean; }",
+      "guide": "components/Checkbox/README.md",
+      "preview": "components/Checkbox/preview.html",
+      "docs": "https://bharathwaaj.github.io/wattle/#/c/Checkbox"
+    },
+    {
+      "name": "RadioGroup",
+      "group": "Forms",
+      "summary": "One choice from a short list, in a fieldset with a legend. The chosen option shows an `ink` ring and dot. Arrow keys move between options, as with native radios.",
+      "props": "export interface RadioGroupProps { legend: React.ReactNode; options: { value: string; label: React.ReactNode; hint?: React.ReactNode; disabled?: boolean }[]; value?: string; defaultValue?: string; onChange?: (value: string) => void; name?: string; hint?: React.ReactNode; inline?: boolean; className?: string; }",
+      "guide": "components/RadioGroup/README.md",
+      "preview": "components/RadioGroup/preview.html",
+      "docs": "https://bharathwaaj.github.io/wattle/#/c/RadioGroup"
+    },
+    {
+      "name": "Switch",
+      "group": "Forms",
+      "summary": "An on/off setting that applies straight away. When it's on, the track fills `ink` and the `surface-200` knob slides across with a check. This matches how Checkbox and Radio show \"on\", and keeps `wattle` for actions. It uses `role=\"switch\"` and `aria-checked`.",
+      "props": "export interface SwitchProps { label: React.ReactNode; hint?: React.ReactNode; checked?: boolean; defaultChecked?: boolean; onChange?: (on: boolean) => void; disabled?: boolean; id?: string; className?: string; }",
+      "guide": "components/Switch/README.md",
+      "preview": "components/Switch/preview.html",
+      "docs": "https://bharathwaaj.github.io/wattle/#/c/Switch"
+    },
+    {
+      "name": "Select",
+      "group": "Forms",
+      "summary": "A native dropdown, styled to match Input: a `border-strong` outline, a chevron, and the same label, hint and error. Because it's native, keyboards, screen readers and phone pickers all work as expected.",
+      "props": "export interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> { label?: React.ReactNode; hint?: React.ReactNode; error?: React.ReactNode; options: (string | { value: string; label: React.ReactNode })[]; placeholder?: string; }",
+      "guide": "components/Select/README.md",
+      "preview": "components/Select/preview.html",
+      "docs": "https://bharathwaaj.github.io/wattle/#/c/Select"
+    },
+    {
+      "name": "Textarea",
+      "group": "Forms",
+      "summary": "Multi-line text, styled like Input. It starts 96px tall, and people can drag it taller.",
+      "props": "export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> { label?: React.ReactNode; hint?: React.ReactNode; error?: React.ReactNode; }",
+      "guide": "components/Textarea/README.md",
+      "preview": "components/Textarea/preview.html",
+      "docs": "https://bharathwaaj.github.io/wattle/#/c/Textarea"
+    },
+    {
+      "name": "Tabs",
+      "group": "Navigation",
+      "summary": "Switches between views of the same thing, like a course's lessons, tests and notes. The active tab is `ink` with a 2px `ink` underline that grows in. The others are `ink-muted`.",
+      "props": "export interface TabsProps { tabs: { id: string; label: React.ReactNode; content: React.ReactNode; icon?: IconName | React.ReactNode; count?: number }[]; label?: string; defaultTab?: string; onChange?: (id: string) => void; className?: string; }",
+      "guide": "components/Tabs/README.md",
+      "preview": "components/Tabs/preview.html",
+      "docs": "https://bharathwaaj.github.io/wattle/#/c/Tabs"
+    },
+    {
+      "name": "Dialog",
+      "group": "Overlays",
+      "summary": "A modal that asks one question or holds one short task. It's built on the native `<dialog>`, so focus stays inside, Esc closes it, and the page behind becomes inert. It uses `surface-200`, a hairline, `radius-md` and `shadow-dialog` over a dimmed backdrop.",
+      "props": "export interface DialogProps { open: boolean; onClose?: () => void; title: React.ReactNode; children?: React.ReactNode; footer?: React.ReactNode; dismissable?: boolean; className?: string; }",
+      "guide": "components/Dialog/README.md",
+      "preview": "components/Dialog/preview.html",
+      "docs": "https://bharathwaaj.github.io/wattle/#/c/Dialog"
+    },
+    {
+      "name": "Toaster",
+      "group": "Overlays",
+      "summary": "Short messages that confirm something happened elsewhere on the page. They rise in at the bottom centre on an `ink` pill (cream in the dark theme) with `shadow-overlay`, then leave on their own.",
+      "props": null,
+      "guide": "components/Toaster/README.md",
+      "preview": "components/Toaster/preview.html",
+      "docs": "https://bharathwaaj.github.io/wattle/#/c/Toaster"
+    },
+    {
+      "name": "Tooltip",
+      "group": "Overlays",
+      "summary": "A short `ink` label that appears on hover or keyboard focus, after 250ms. It names what an icon-only control does. Esc hides it.",
+      "props": "export interface TooltipProps { label: React.ReactNode; children: React.ReactElement; side?: 'top' | 'bottom'; delay?: number; }",
+      "guide": "components/Tooltip/README.md",
+      "preview": "components/Tooltip/preview.html",
+      "docs": "https://bharathwaaj.github.io/wattle/#/c/Tooltip"
+    },
+    {
+      "name": "DropdownMenu",
+      "group": "Overlays",
+      "summary": "A button that opens a short list of actions, such as an item's \"…\" overflow menu or \"Sort by\". The menu sits on `surface-200` with a hairline and `shadow-overlay`.",
+      "props": "export interface DropdownMenuProps { items: DropdownMenuItem[]; label?: React.ReactNode; ariaLabel?: string; icon?: IconName | React.ReactNode; variant?: 'primary' | 'secondary' | 'ghost'; size?: 'md' | 'sm'; align?: 'start' | 'end'; }",
+      "guide": "components/DropdownMenu/README.md",
+      "preview": "components/DropdownMenu/preview.html",
+      "docs": "https://bharathwaaj.github.io/wattle/#/c/DropdownMenu"
+    },
+    {
+      "name": "Card",
+      "group": "Layout",
+      "summary": "A raised `surface-200` panel with a `hairline` border and `radius-md` corners. Each card holds one thing: an event, a booking, a person, a result.",
+      "props": "export interface CardProps extends React.HTMLAttributes<HTMLElement> {\n  /** Element to render, default section. */\n  as?: keyof JSX.IntrinsicElements;\n  /** Link target when as=\"a\" (shortcut cards). */\n  href?: string;\n  /** Small uppercase overline above the title. */\n  eyebrow?: React.ReactNode;\n  /** Card title, set in Fraunces. */\n  title?: React.ReactNode;\n  /** Actions row under a hairline, usually Buttons. */\n  footer?: React.ReactNode;\n  /** Full-bleed image or illustration across the top of the card. */\n  media?: React.ReactNode;\n  /** empty: dashed border on a transparent ground, centred; for empty states. */\n  variant?: 'default' | 'empty';\n  /** Set false to drop the hairline above the footer and separate it with space instead. */\n  divider?: boolean;\n  /** Ink border for a chosen card in a selectable list. */\n  selected?: boolean;\n  /** Icon shown in a 40px circle above the eyebrow. */\n  icon?: IconName | React.ReactNode;\n}",
+      "guide": "components/Card/README.md",
+      "preview": "components/Card/preview.html",
+      "docs": "https://bharathwaaj.github.io/wattle/#/c/Card"
+    },
+    {
+      "name": "Badge",
+      "group": "Status",
+      "summary": "A small pill label for status or category, like \"New\", \"Beginner\" or \"Batch A\". It is not clickable.",
+      "props": "export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {\n  /** neutral (default) for categories, strong for the one important thing, danger for problems. */\n  tone?: 'neutral' | 'strong' | 'danger';\n  /** Optional 12px icon before the text. */\n  icon?: IconName | React.ReactNode;\n}",
+      "guide": "components/Badge/README.md",
+      "preview": "components/Badge/preview.html",
+      "docs": "https://bharathwaaj.github.io/wattle/#/c/Badge"
+    },
+    {
+      "name": "CountBadge",
+      "group": "Status",
+      "summary": "A small `ink` pill with a number, like unread messages or new submissions. The number rolls when it changes, and anything over `max` shows as \"99+\".",
+      "props": "export interface CountBadgeProps { count: number; max?: number; label?: string; showZero?: boolean; className?: string; }",
+      "guide": "components/CountBadge/README.md",
+      "preview": "components/CountBadge/preview.html",
+      "docs": "https://bharathwaaj.github.io/wattle/#/c/CountBadge"
+    },
+    {
+      "name": "Status",
+      "group": "Status",
+      "summary": "A coloured dot and a word that say what state something is in. It's lighter than a Badge, so use it in lists and tables.",
+      "props": "export interface StatusProps { tone?: 'neutral' | 'live' | 'active' | 'done' | 'danger'; children: React.ReactNode; className?: string; }",
+      "guide": "components/Status/README.md",
+      "preview": "components/Status/preview.html",
+      "docs": "https://bharathwaaj.github.io/wattle/#/c/Status"
+    },
+    {
+      "name": "Tag",
+      "group": "Status",
+      "summary": "A chip for things people choose and can take away again, like subjects, batches and filters.",
+      "props": "export interface TagProps { children: React.ReactNode; onRemove?: () => void; selected?: boolean; onClick?: () => void; label?: string; className?: string; }",
+      "guide": "components/Tag/README.md",
+      "preview": "components/Tag/preview.html",
+      "docs": "https://bharathwaaj.github.io/wattle/#/c/Tag"
+    },
+    {
+      "name": "IconDisc",
+      "group": "Building blocks",
+      "summary": "A single icon in a round disc. It anchors an announcement, an empty state or a shortcut card.",
+      "props": "export interface IconDiscProps { icon: IconName | React.ReactNode; tone?: 'neutral' | 'strong' | 'danger'; size?: number; label?: string; className?: string; }",
+      "guide": "components/IconDisc/README.md",
+      "preview": "components/IconDisc/preview.html",
+      "docs": "https://bharathwaaj.github.io/wattle/#/c/IconDisc"
+    },
+    {
+      "name": "DateBlock",
+      "group": "Building blocks",
+      "summary": "A calendar-page date: the month in small caps above the day in large Fraunces. Put it beside an event's title.",
+      "props": "export interface DateBlockProps { date?: string | number | Date; month?: string; day?: number | string; label?: string; className?: string; }",
+      "guide": "components/DateBlock/README.md",
+      "preview": "components/DateBlock/preview.html",
+      "docs": "https://bharathwaaj.github.io/wattle/#/c/DateBlock"
+    },
+    {
+      "name": "MetaList",
+      "group": "Building blocks",
+      "summary": "Rows of small details (dates, times, places, people), each with a 16px icon, in `ink-muted`.",
+      "props": "export interface MetaListProps { items: { icon?: IconName | React.ReactNode; text: React.ReactNode }[]; className?: string; }",
+      "guide": "components/MetaList/README.md",
+      "preview": "components/MetaList/preview.html",
+      "docs": "https://bharathwaaj.github.io/wattle/#/c/MetaList"
+    },
+    {
+      "name": "Progress",
+      "group": "Building blocks",
+      "summary": "A thin `earth` bar that shows how far along something is. It animates when the value changes.",
+      "props": "export interface ProgressProps { value: number; max?: number; label: string; showValue?: boolean; className?: string; }",
+      "guide": "components/Progress/README.md",
+      "preview": "components/Progress/preview.html",
+      "docs": "https://bharathwaaj.github.io/wattle/#/c/Progress"
+    },
+    {
+      "name": "Checklist",
+      "group": "Building blocks",
+      "summary": "A short list of tick boxes. They're real checkboxes under the styling, so keyboards and screen readers work as usual. Done items are struck through in `ink-muted`.",
+      "props": "export interface ChecklistProps { items: { label: React.ReactNode; done?: boolean }[]; done?: boolean[]; onChange?: (done: boolean[]) => void; label?: string; className?: string; }",
+      "guide": "components/Checklist/README.md",
+      "preview": "components/Checklist/preview.html",
+      "docs": "https://bharathwaaj.github.io/wattle/#/c/Checklist"
+    },
+    {
+      "name": "Avatar",
+      "group": "Building blocks",
+      "summary": "A round initials badge for a person: `ink` on `taupe` (6:1), in Fraunces.",
+      "props": "export interface AvatarProps { name: string; initials?: string; size?: number; className?: string; }",
+      "guide": "components/Avatar/README.md",
+      "preview": "components/Avatar/preview.html",
+      "docs": "https://bharathwaaj.github.io/wattle/#/c/Avatar"
+    },
+    {
+      "name": "Stat",
+      "group": "Building blocks",
+      "summary": "One big number in Fraunces, with an optional unit and a one-line trend. The number rolls in when it changes.",
+      "props": "export interface StatProps { value: React.ReactNode; unit?: React.ReactNode; label?: React.ReactNode; trend?: React.ReactNode; trendDirection?: 'up' | 'down' | 'flat'; className?: string; }",
+      "guide": "components/Stat/README.md",
+      "preview": "components/Stat/preview.html",
+      "docs": "https://bharathwaaj.github.io/wattle/#/c/Stat"
+    },
+    {
+      "name": "Sparkline",
+      "group": "Building blocks",
+      "summary": "A small `earth` line chart with an `ink` dot on the latest value. It shows the shape, not exact values.",
+      "props": "export interface SparklineProps { data: number[]; height?: number; label?: string; className?: string; }",
+      "guide": "components/Sparkline/README.md",
+      "preview": "components/Sparkline/preview.html",
+      "docs": "https://bharathwaaj.github.io/wattle/#/c/Sparkline"
+    },
+    {
+      "name": "SeatMap",
+      "group": "Building blocks",
+      "summary": "A grid of dots that shows how many places are taken and how many are left. Taken places are filled `earth`, free ones are `border-strong` rings, and the person's own place pops in `wattle` with an `ink` ring.",
+      "props": "export interface SeatMapProps { total: number; taken: number; columns?: number; mine?: boolean; label?: string; className?: string; }",
+      "guide": "components/SeatMap/README.md",
+      "preview": "components/SeatMap/preview.html",
+      "docs": "https://bharathwaaj.github.io/wattle/#/c/SeatMap"
+    },
+    {
+      "name": "Icon",
+      "group": "Media",
+      "summary": "Draws one of the 31 starter icons inline as SVG. Icons come from Lucide v0.460.0 (ISC licence) and are drawn with a 1.5px stroke in `currentColor`.",
+      "props": "export interface IconProps extends React.SVGAttributes<SVGSVGElement> {\n  /** Which icon to draw. */\n  name: IconName;\n  /** Size in px, default 24. */\n  size?: number;\n  /** Accessible name; only for icons that stand alone. Without it the icon is aria-hidden. */\n  label?: string;\n}",
+      "guide": "components/Icon/README.md",
+      "preview": "components/Icon/preview.html",
+      "docs": "https://bharathwaaj.github.io/wattle/#/c/Icon"
+    },
+    {
+      "name": "toast",
+      "group": "Overlays",
+      "summary": "Wattle.toast(message, { tone, actionLabel, onAction, duration }) shows a toast; render <Toaster /> once.",
+      "props": "export interface ToastOptions { tone?: 'neutral' | 'success' | 'danger'; actionLabel?: string; onAction?: () => void; duration?: number; }",
+      "guide": "components/Toaster/README.md"
+    }
+  ]
+}

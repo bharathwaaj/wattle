@@ -1,0 +1,74 @@
+# Wattle
+
+> **Warm earth, one sharp yellow.** Wattle is a design system based on the Yellow-wattled Lapwing (*Vanellus malabaricus*), a ground bird of dry fields in India. Its colours are mostly sandy brown and taupe, with one bright yellow patch on its face.
+
+Wattle is a design system for web apps: CSS tokens, one React 18 bundle exposed as window.Wattle, a brand book, and assets. Read AGENTS.md before building with it.
+
+## Start here
+
+- [AGENTS.md](https://bharathwaaj.github.io/wattle/AGENTS.md): how to build an app with Wattle, and the rules
+- [Brand book](https://bharathwaaj.github.io/wattle/README.md): voice, colour rules, type, space, motion
+- [components.json](https://bharathwaaj.github.io/wattle/components.json): every component with group, summary and props
+- [tokens.css](https://bharathwaaj.github.io/wattle/tokens.css): all tokens as CSS custom properties
+- [Starter app](https://bharathwaaj.github.io/wattle/examples/starter.html): a complete page to copy
+- [llms-full.txt](https://bharathwaaj.github.io/wattle/llms-full.txt): everything above in one file
+
+## Actions
+
+- [Button](https://bharathwaaj.github.io/wattle/components/Button/README.md): Triggers an action. Pill-shaped, 40px tall (32px with `size="sm"`).
+
+## Motion
+
+- [ActionButton](https://bharathwaaj.github.io/wattle/components/ActionButton/README.md): A button that shows its own result. Click "Book" and it changes to "Booked" in place, with no toast or page change.
+- [ProgressButton](https://bharathwaaj.github.io/wattle/components/ProgressButton/README.md): A button for slower work, like a submission or an upload. A darker fill sweeps across it as the work runs, with the percentage in the label. It ends on a success or an error.
+- [HoldButton](https://bharathwaaj.github.io/wattle/components/HoldButton/README.md): A destructive action that needs a press and hold instead of a confirmation dialog. A `danger` outline draws itself around the pill while it's held. Let go early and nothing happens. Hold for the full time and the trash lid pops, the label changes to "Deleted", and the button fades.
+- [UndoButton](https://bharathwaaj.github.io/wattle/components/UndoButton/README.md): Deletes at once, then gives people a few seconds to change their mind. The button turns into "Deleted · Undo", with a line shrinking along the bottom. If the line runs out, the delete is final.
+- [ReactionButton](https://bharathwaaj.github.io/wattle/components/ReactionButton/README.md): A toggle for small, personal reactions: star, like or save. Turning it on pops the icon and bursts a ring of dots. Turning it off is quiet.
+
+## Forms
+
+- [Input](https://bharathwaaj.github.io/wattle/components/Input/README.md): A single-line text field with a visible label, an optional hint and an optional error message.
+- [Checkbox](https://bharathwaaj.github.io/wattle/components/Checkbox/README.md): A single on/off choice with a visible label. It's a native checkbox underneath, styled with an `ink` fill when checked.
+- [RadioGroup](https://bharathwaaj.github.io/wattle/components/RadioGroup/README.md): One choice from a short list, in a fieldset with a legend. The chosen option shows an `ink` ring and dot. Arrow keys move between options, as with native radios.
+- [Switch](https://bharathwaaj.github.io/wattle/components/Switch/README.md): An on/off setting that applies straight away. When it's on, the track fills `ink` and the `surface-200` knob slides across with a check. This matches how Checkbox and Radio show "on", and keeps `wattle` for actions. It uses `role="switch"` and `aria-checked`.
+- [Select](https://bharathwaaj.github.io/wattle/components/Select/README.md): A native dropdown, styled to match Input: a `border-strong` outline, a chevron, and the same label, hint and error. Because it's native, keyboards, screen readers and phone pickers all work as expected.
+- [Textarea](https://bharathwaaj.github.io/wattle/components/Textarea/README.md): Multi-line text, styled like Input. It starts 96px tall, and people can drag it taller.
+
+## Navigation
+
+- [Tabs](https://bharathwaaj.github.io/wattle/components/Tabs/README.md): Switches between views of the same thing, like a course's lessons, tests and notes. The active tab is `ink` with a 2px `ink` underline that grows in. The others are `ink-muted`.
+
+## Overlays
+
+- [Dialog](https://bharathwaaj.github.io/wattle/components/Dialog/README.md): A modal that asks one question or holds one short task. It's built on the native `<dialog>`, so focus stays inside, Esc closes it, and the page behind becomes inert. It uses `surface-200`, a hairline, `radius-md` and `shadow-dialog` over a dimmed backdrop.
+- [Toaster](https://bharathwaaj.github.io/wattle/components/Toaster/README.md): Short messages that confirm something happened elsewhere on the page. They rise in at the bottom centre on an `ink` pill (cream in the dark theme) with `shadow-overlay`, then leave on their own.
+- [Tooltip](https://bharathwaaj.github.io/wattle/components/Tooltip/README.md): A short `ink` label that appears on hover or keyboard focus, after 250ms. It names what an icon-only control does. Esc hides it.
+- [DropdownMenu](https://bharathwaaj.github.io/wattle/components/DropdownMenu/README.md): A button that opens a short list of actions, such as an item's "…" overflow menu or "Sort by". The menu sits on `surface-200` with a hairline and `shadow-overlay`.
+
+## Layout
+
+- [Card](https://bharathwaaj.github.io/wattle/components/Card/README.md): A raised `surface-200` panel with a `hairline` border and `radius-md` corners. Each card holds one thing: an event, a booking, a person, a result.
+
+## Status
+
+- [Badge](https://bharathwaaj.github.io/wattle/components/Badge/README.md): A small pill label for status or category, like "New", "Beginner" or "Batch A". It is not clickable.
+- [CountBadge](https://bharathwaaj.github.io/wattle/components/CountBadge/README.md): A small `ink` pill with a number, like unread messages or new submissions. The number rolls when it changes, and anything over `max` shows as "99+".
+- [Status](https://bharathwaaj.github.io/wattle/components/Status/README.md): A coloured dot and a word that say what state something is in. It's lighter than a Badge, so use it in lists and tables.
+- [Tag](https://bharathwaaj.github.io/wattle/components/Tag/README.md): A chip for things people choose and can take away again, like subjects, batches and filters.
+
+## Building blocks
+
+- [IconDisc](https://bharathwaaj.github.io/wattle/components/IconDisc/README.md): A single icon in a round disc. It anchors an announcement, an empty state or a shortcut card.
+- [DateBlock](https://bharathwaaj.github.io/wattle/components/DateBlock/README.md): A calendar-page date: the month in small caps above the day in large Fraunces. Put it beside an event's title.
+- [MetaList](https://bharathwaaj.github.io/wattle/components/MetaList/README.md): Rows of small details (dates, times, places, people), each with a 16px icon, in `ink-muted`.
+- [Progress](https://bharathwaaj.github.io/wattle/components/Progress/README.md): A thin `earth` bar that shows how far along something is. It animates when the value changes.
+- [Checklist](https://bharathwaaj.github.io/wattle/components/Checklist/README.md): A short list of tick boxes. They're real checkboxes under the styling, so keyboards and screen readers work as usual. Done items are struck through in `ink-muted`.
+- [Avatar](https://bharathwaaj.github.io/wattle/components/Avatar/README.md): A round initials badge for a person: `ink` on `taupe` (6:1), in Fraunces.
+- [Stat](https://bharathwaaj.github.io/wattle/components/Stat/README.md): One big number in Fraunces, with an optional unit and a one-line trend. The number rolls in when it changes.
+- [Sparkline](https://bharathwaaj.github.io/wattle/components/Sparkline/README.md): A small `earth` line chart with an `ink` dot on the latest value. It shows the shape, not exact values.
+- [SeatMap](https://bharathwaaj.github.io/wattle/components/SeatMap/README.md): A grid of dots that shows how many places are taken and how many are left. Taken places are filled `earth`, free ones are `border-strong` rings, and the person's own place pops in `wattle` with an `ink` ring.
+
+## Media
+
+- [Icon](https://bharathwaaj.github.io/wattle/components/Icon/README.md): Draws one of the 31 starter icons inline as SVG. Icons come from Lucide v0.460.0 (ISC licence) and are drawn with a 1.5px stroke in `currentColor`.
+
