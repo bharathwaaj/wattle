@@ -1,6 +1,6 @@
 # Switch
 
-An on/off setting that applies straight away. When it's on, the track fills `wattle`, because the switch marks a current selection, and the `ink` knob slides across with a check. It uses `role="switch"` and `aria-checked`.
+An on/off setting that applies straight away. When it's on, the track fills `ink` and the `surface-200` knob slides across with a check. This matches how Checkbox and Radio show "on", and keeps `wattle` for actions. It uses `role="switch"` and `aria-checked`.
 
 ## You provide
 
