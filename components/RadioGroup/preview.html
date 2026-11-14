@@ -1,0 +1,15 @@
+<!-- @dsCard group="Forms" height=226 subtitle="One choice from a few, with hints" -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>RadioGroup</title><style>body{margin:0;background:var(--surface-100);color:var(--ink);font-family:var(--font-sans)}.pad{padding:var(--space-4)}.stack{display:flex;flex-direction:column;gap:var(--space-4);max-width:360px}.row{display:flex;flex-wrap:wrap;gap:var(--space-6);align-items:flex-start}</style></head>
+<body>
+<div id="root"></div>
+<script>
+  var W = window.Wattle, h = React.createElement, F = React.Fragment;
+  ReactDOM.createRoot(document.getElementById("root")).render(h("div", { className: "pad row" },
+    h(W.RadioGroup, { legend: "Batch timing", hint: "You can switch once a month.", defaultValue: "evening", options: [
+      { value: "morning", label: "Mornings", hint: "7:00 to 8:30 am" }, { value: "evening", label: "Evenings", hint: "6:00 to 7:30 pm" }, { value: "weekend", label: "Weekends", hint: "Saturday and Sunday" }] }),
+    h(W.RadioGroup, { legend: "Medium", inline: true, defaultValue: "en", options: [{ value: "en", label: "English" }, { value: "ta", label: "Tamil" }] })));
+</script>
+</body>
+</html>

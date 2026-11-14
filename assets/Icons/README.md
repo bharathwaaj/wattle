@@ -16,4 +16,4 @@ To match the brand book, they're adjusted from Lucide's defaults:
 
 ## The set
 
-search, plus, x, check, chevron-down, chevron-right, arrow-left, arrow-right, menu, settings, user, bell, house, book-open, calendar, trash-2, pencil, upload, download, info, triangle-alert, eye, log-out, filter, clock, star, heart, bookmark, link, rotate-ccw.
+search, plus, x, check, chevron-down, chevron-right, arrow-left, arrow-right, menu, settings, user, bell, house, book-open, calendar, trash-2, pencil, upload, download, info, triangle-alert, eye, log-out, filter, clock, star, heart, bookmark, link, rotate-ccw, ellipsis.

@@ -1,0 +1,16 @@
+<!-- @dsCard group="Overlays" height=130 subtitle="Hover or focus an icon button" -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Tooltip</title><style>body{margin:0;background:var(--surface-100);color:var(--ink);font-family:var(--font-sans)}.pad{padding:var(--space-4)}.stack{display:flex;flex-direction:column;gap:var(--space-4);max-width:360px}.row{display:flex;flex-wrap:wrap;gap:var(--space-6);align-items:flex-start}</style></head>
+<body>
+<div id="root"></div>
+<script>
+  var W = window.Wattle, h = React.createElement, F = React.Fragment;
+  ReactDOM.createRoot(document.getElementById("root")).render(h("div", { className: "pad row", style: { paddingTop: 56 } },
+    h(W.Tooltip, { label: "Search" }, h(W.Button, { variant: "ghost", icon: "search", "aria-label": "Search" })),
+    h(W.Tooltip, { label: "Notifications" }, h(W.Button, { variant: "ghost", icon: "bell", "aria-label": "Notifications" })),
+    h(W.Tooltip, { label: "Settings" }, h(W.Button, { variant: "ghost", icon: "settings", "aria-label": "Settings" })),
+    h(W.Tooltip, { label: "Shown below", side: "bottom" }, h(W.Button, { size: "sm" }, "Bottom"))));
+</script>
+</body>
+</html>

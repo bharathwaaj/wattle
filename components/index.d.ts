@@ -1,7 +1,7 @@
 import type * as React from 'react';
 
-/** The 30 starter icons (Lucide v0.460.0). */
-export type IconName = 'search' | 'plus' | 'x' | 'check' | 'chevron-down' | 'chevron-right' | 'arrow-left' | 'arrow-right' | 'menu' | 'settings' | 'user' | 'bell' | 'house' | 'book-open' | 'calendar' | 'trash-2' | 'pencil' | 'upload' | 'download' | 'info' | 'triangle-alert' | 'eye' | 'log-out' | 'filter' | 'clock' | 'star' | 'heart' | 'bookmark' | 'link' | 'rotate-ccw';
+/** The 31 starter icons (Lucide v0.460.0). */
+export type IconName = 'search' | 'plus' | 'x' | 'check' | 'chevron-down' | 'chevron-right' | 'arrow-left' | 'arrow-right' | 'menu' | 'settings' | 'user' | 'bell' | 'house' | 'book-open' | 'calendar' | 'trash-2' | 'pencil' | 'upload' | 'download' | 'info' | 'triangle-alert' | 'eye' | 'log-out' | 'filter' | 'clock' | 'star' | 'heart' | 'bookmark' | 'link' | 'rotate-ccw' | 'ellipsis';
 
 export interface IconProps extends React.SVGAttributes<SVGSVGElement> {
   /** Which icon to draw. */
@@ -148,4 +148,27 @@ export declare function Status(props: StatusProps): React.ReactElement;
 export interface TagProps { children: React.ReactNode; onRemove?: () => void; selected?: boolean; onClick?: () => void; label?: string; className?: string; }
 export declare function Tag(props: TagProps): React.ReactElement;
 
-declare global { interface Window { Wattle: { Button: typeof Button; Input: typeof Input; Card: typeof Card; Icon: typeof Icon; Badge: typeof Badge; ActionButton: typeof ActionButton; ProgressButton: typeof ProgressButton; HoldButton: typeof HoldButton; UndoButton: typeof UndoButton; ReactionButton: typeof ReactionButton; IconDisc: typeof IconDisc; DateBlock: typeof DateBlock; MetaList: typeof MetaList; Progress: typeof Progress; Checklist: typeof Checklist; Avatar: typeof Avatar; Stat: typeof Stat; Sparkline: typeof Sparkline; SeatMap: typeof SeatMap; CountBadge: typeof CountBadge; Status: typeof Status; Tag: typeof Tag } } }
+export interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElement> { label: React.ReactNode; hint?: React.ReactNode; indeterminate?: boolean; }
+export declare function Checkbox(props: CheckboxProps): React.ReactElement;
+export interface RadioGroupProps { legend: React.ReactNode; options: { value: string; label: React.ReactNode; hint?: React.ReactNode; disabled?: boolean }[]; value?: string; defaultValue?: string; onChange?: (value: string) => void; name?: string; hint?: React.ReactNode; inline?: boolean; className?: string; }
+export declare function RadioGroup(props: RadioGroupProps): React.ReactElement;
+export interface SwitchProps { label: React.ReactNode; hint?: React.ReactNode; checked?: boolean; defaultChecked?: boolean; onChange?: (on: boolean) => void; disabled?: boolean; id?: string; className?: string; }
+export declare function Switch(props: SwitchProps): React.ReactElement;
+export interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> { label?: React.ReactNode; hint?: React.ReactNode; error?: React.ReactNode; options: (string | { value: string; label: React.ReactNode })[]; placeholder?: string; }
+export declare function Select(props: SelectProps): React.ReactElement;
+export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> { label?: React.ReactNode; hint?: React.ReactNode; error?: React.ReactNode; }
+export declare function Textarea(props: TextareaProps): React.ReactElement;
+export interface TabsProps { tabs: { id: string; label: React.ReactNode; content: React.ReactNode; icon?: IconName | React.ReactNode; count?: number }[]; label?: string; defaultTab?: string; onChange?: (id: string) => void; className?: string; }
+export declare function Tabs(props: TabsProps): React.ReactElement;
+export interface DialogProps { open: boolean; onClose?: () => void; title: React.ReactNode; children?: React.ReactNode; footer?: React.ReactNode; dismissable?: boolean; className?: string; }
+export declare function Dialog(props: DialogProps): React.ReactElement;
+export interface ToastOptions { tone?: 'neutral' | 'success' | 'danger'; actionLabel?: string; onAction?: () => void; duration?: number; }
+export declare function toast(message: React.ReactNode, options?: ToastOptions): number;
+export declare function Toaster(props: { max?: number }): React.ReactElement;
+export interface TooltipProps { label: React.ReactNode; children: React.ReactElement; side?: 'top' | 'bottom'; delay?: number; }
+export declare function Tooltip(props: TooltipProps): React.ReactElement;
+export interface DropdownMenuItem { label?: React.ReactNode; icon?: IconName | React.ReactNode; onSelect?: () => void; danger?: boolean; disabled?: boolean; shortcut?: string; divider?: boolean; }
+export interface DropdownMenuProps { items: DropdownMenuItem[]; label?: React.ReactNode; ariaLabel?: string; icon?: IconName | React.ReactNode; variant?: 'primary' | 'secondary' | 'ghost'; size?: 'md' | 'sm'; align?: 'start' | 'end'; }
+export declare function DropdownMenu(props: DropdownMenuProps): React.ReactElement;
+
+declare global { interface Window { Wattle: { Button: typeof Button; Input: typeof Input; Card: typeof Card; Icon: typeof Icon; Badge: typeof Badge; ActionButton: typeof ActionButton; ProgressButton: typeof ProgressButton; HoldButton: typeof HoldButton; UndoButton: typeof UndoButton; ReactionButton: typeof ReactionButton; IconDisc: typeof IconDisc; DateBlock: typeof DateBlock; MetaList: typeof MetaList; Progress: typeof Progress; Checklist: typeof Checklist; Avatar: typeof Avatar; Stat: typeof Stat; Sparkline: typeof Sparkline; SeatMap: typeof SeatMap; CountBadge: typeof CountBadge; Status: typeof Status; Tag: typeof Tag; Checkbox: typeof Checkbox; RadioGroup: typeof RadioGroup; Switch: typeof Switch; Select: typeof Select; Textarea: typeof Textarea; Tabs: typeof Tabs; Dialog: typeof Dialog; Toaster: typeof Toaster; toast: typeof toast; Tooltip: typeof Tooltip; DropdownMenu: typeof DropdownMenu } } }

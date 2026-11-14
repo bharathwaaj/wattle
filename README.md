@@ -62,6 +62,9 @@ Components are React 18 components, published as `window.Wattle` from `component
 - **Card**: a `surface-200` panel with a hairline border. One frame, many patterns, from events and deadlines to media, metrics and empty states. The Card guide lists them.
 - **Badge**: a small pill for status or category, in neutral, strong or danger. Never wattle.
 - **Status, CountBadge, Tag**: a dot and a word for state, a number pill for counts, and chips for filters and choices.
+- **Forms**: Checkbox, RadioGroup, Switch, Select and Textarea share Input's label, hint and error. Checked controls fill `ink`. Only Switch turns `wattle` when on, because it marks a live selection.
+- **Navigation**: Tabs, with an `ink` underline that grows in under the active tab.
+- **Overlays**: Dialog (native `<dialog>`, `shadow-dialog`), Toaster and `Wattle.toast()`, Tooltip and DropdownMenu (`shadow-overlay`). These are the only places shadows appear.
 - **Building blocks**: IconDisc, DateBlock, MetaList, Progress, Checklist, Avatar, Stat, Sparkline and SeatMap. These are the parts the card patterns are made from, so reuse them and don't restyle by hand.
 - **Icon**: draws any of the starter icons inline in `currentColor`. Button, Input and Card accept an `icon` prop that takes an icon name, like `icon="search"`.
 

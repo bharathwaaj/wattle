@@ -1,0 +1,20 @@
+<!-- @dsCard group="Forms" height=212 subtitle="Checked, with a hint, select-all with mixed state" -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Checkbox</title><style>body{margin:0;background:var(--surface-100);color:var(--ink);font-family:var(--font-sans)}.pad{padding:var(--space-4)}.stack{display:flex;flex-direction:column;gap:var(--space-4);max-width:360px}.row{display:flex;flex-wrap:wrap;gap:var(--space-6);align-items:flex-start}</style></head>
+<body>
+<div id="root"></div>
+<script>
+  var W = window.Wattle, h = React.createElement, F = React.Fragment;
+  function D() { var s = React.useState([true, false, false]), v = s[0], set = s[1];
+    var all = v.every(Boolean), some = v.some(Boolean) && !all;
+    function flip(i) { var n = v.slice(); n[i] = !n[i]; set(n); }
+    return h("div", { className: "pad stack" },
+      h(W.Checkbox, { label: "All batches", checked: all, indeterminate: some, onChange: function () { set([!all, !all, !all]); } }),
+      h("div", { className: "stack", style: { paddingLeft: 28, gap: 10 } },
+        ["Batch A · Mornings", "Batch B · Evenings", "Batch C · Weekends"].map(function (l, i) { return h(W.Checkbox, { key: i, label: l, checked: v[i], onChange: function () { flip(i); } }); })),
+      h(W.Checkbox, { label: "Email me a weekly summary", hint: "Sent every Monday at 8 am.", defaultChecked: true })); }
+  ReactDOM.createRoot(document.getElementById("root")).render(h(D));
+</script>
+</body>
+</html>

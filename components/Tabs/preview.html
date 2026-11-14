@@ -1,0 +1,16 @@
+<!-- @dsCard group="Navigation" height=150 subtitle="Arrow keys move between tabs" -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Tabs</title><style>body{margin:0;background:var(--surface-100);color:var(--ink);font-family:var(--font-sans)}.pad{padding:var(--space-4)}.stack{display:flex;flex-direction:column;gap:var(--space-4);max-width:360px}.row{display:flex;flex-wrap:wrap;gap:var(--space-6);align-items:flex-start}</style></head>
+<body>
+<div id="root"></div>
+<script>
+  var W = window.Wattle, h = React.createElement, F = React.Fragment;
+  ReactDOM.createRoot(document.getElementById("root")).render(h("div", { className: "pad", style: { maxWidth: 560 } },
+    h(W.Tabs, { label: "Course sections", tabs: [
+      { id: "lessons", label: "Lessons", count: 24, content: h("p", { style: { margin: 0 } }, "24 lessons, from motion in a straight line to wave optics.") },
+      { id: "tests", label: "Tests", count: 6, content: h("p", { style: { margin: 0 } }, "6 practice tests with answer keys and timing.") },
+      { id: "notes", label: "Notes", icon: "book-open", content: h("p", { style: { margin: 0 } }, "Your own notes, saved as you watch.") }] })));
+</script>
+</body>
+</html>

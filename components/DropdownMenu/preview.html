@@ -1,0 +1,16 @@
+<!-- @dsCard group="Overlays" height=300 subtitle="Overflow menu with keyboard support" -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>DropdownMenu</title><style>body{margin:0;background:var(--surface-100);color:var(--ink);font-family:var(--font-sans)}.pad{padding:var(--space-4)}.stack{display:flex;flex-direction:column;gap:var(--space-4);max-width:360px}.row{display:flex;flex-wrap:wrap;gap:var(--space-6);align-items:flex-start}</style></head>
+<body>
+<div id="root"></div>
+<script>
+  var W = window.Wattle, h = React.createElement, F = React.Fragment;
+  ReactDOM.createRoot(document.getElementById("root")).render(h("div", { className: "pad row" },
+    h(W.DropdownMenu, { ariaLabel: "Lesson actions", items: [
+      { label: "Edit lesson", icon: "pencil", onSelect: function () {} }, { label: "Copy link", icon: "link" }, { label: "Download", icon: "download" },
+      { divider: true }, { label: "Delete lesson", icon: "trash-2", danger: true }] }),
+    h(W.DropdownMenu, { label: "Sort by", variant: "secondary", items: [{ label: "Newest first" }, { label: "Oldest first" }, { label: "A to Z" }] })));
+</script>
+</body>
+</html>

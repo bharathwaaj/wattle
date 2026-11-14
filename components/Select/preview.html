@@ -1,0 +1,14 @@
+<!-- @dsCard group="Forms" height=150 subtitle="Native select, styled like Input" -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Select</title><style>body{margin:0;background:var(--surface-100);color:var(--ink);font-family:var(--font-sans)}.pad{padding:var(--space-4)}.stack{display:flex;flex-direction:column;gap:var(--space-4);max-width:360px}.row{display:flex;flex-wrap:wrap;gap:var(--space-6);align-items:flex-start}</style></head>
+<body>
+<div id="root"></div>
+<script>
+  var W = window.Wattle, h = React.createElement, F = React.Fragment;
+  ReactDOM.createRoot(document.getElementById("root")).render(h("div", { className: "pad row" },
+    h("div", { style: { width: 240 } }, h(W.Select, { label: "Class", placeholder: "Choose a class", options: ["Class 9", "Class 10", "Class 11", "Class 12"], hint: "Pick the class you're in now." })),
+    h("div", { style: { width: 240 } }, h(W.Select, { label: "Subject", defaultValue: "", placeholder: "Choose a subject", options: ["Physics", "Chemistry", "Maths"], error: "Choose a subject to see its batches." }))));
+</script>
+</body>
+</html>
