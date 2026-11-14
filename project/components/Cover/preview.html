@@ -1,0 +1,55 @@
+<!-- @dsCard height=300 -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Manrope:wght@500&display=swap">
+<style>
+  html, body { margin: 0; background: var(--surface-100); }
+  .cover { position: relative; width: 960px; height: 300px; overflow: hidden; background: var(--surface-100); }
+  .art { position: absolute; inset: 0; }
+  .earth { fill: var(--earth); }
+  .ink { fill: var(--ink); }
+  .wattle { fill: var(--wattle); }
+  .taupe { fill: var(--taupe); }
+  .wing { fill: var(--wing); }
+  .ring-wattle { fill: none; stroke: var(--wattle); }
+  .ring-ink { fill: none; stroke: var(--ink); }
+  .name {
+    position: absolute; left: 40px; bottom: 40px; max-width: 440px; margin: 0;
+    font-family: var(--font-display); font-weight: 600; font-size: 120px; line-height: .92;
+    letter-spacing: -0.02em; color: var(--ink);
+  }
+  .tagline {
+    position: absolute; left: 44px; bottom: 16px; max-width: 440px; margin: 0;
+    font-family: var(--font-sans); font-weight: 500; font-size: 14px; line-height: 18px; color: var(--ink-muted);
+  }
+</style>
+</head>
+<body>
+<div class="cover">
+  <svg class="art" width="960" height="300" viewBox="0 0 960 300" aria-hidden="true">
+    <!--
+      blocks: earth 136x300 slab, ink 192x184, wattle 104x184 (bleeds right), taupe 312x100 band (bleeds right/bottom) — space-4 (16px) gutters
+      arrangement: one tall earth slab with satellites, blocks bleeding off top and right — the bird's brown back with black cap and yellow face beside it
+      pattern: literal motif, the eye ring — one large wattle ring on the ink block, six small ink rings on the taupe band at space-10 (40px) pitch; chosen because the yellow eye ring is the brand's namesake mark
+      scales: space-4 16px gutters, space-10 40px ring pitch, space-2 8px ring stroke; radius-md 14px on the slab corner; rings are radius-pill circles
+    -->
+    <rect class="earth" x="496" y="-14" width="136" height="314" rx="14"/>
+    <rect class="ink" x="648" y="0" width="192" height="184"/>
+    <rect class="wattle" x="856" y="0" width="104" height="184"/>
+    <rect class="taupe" x="648" y="200" width="312" height="100"/>
+    <circle class="ring-wattle" cx="744" cy="92" r="44" stroke-width="16"/>
+    <circle class="wattle" cx="744" cy="92" r="14"/>
+    <circle class="ring-ink" cx="688" cy="250" r="12" stroke-width="8"/>
+    <circle class="ring-ink" cx="728" cy="250" r="12" stroke-width="8"/>
+    <circle class="ring-ink" cx="768" cy="250" r="12" stroke-width="8"/>
+    <circle class="ring-ink" cx="808" cy="250" r="12" stroke-width="8"/>
+    <circle class="ring-ink" cx="848" cy="250" r="12" stroke-width="8"/>
+    <circle class="ring-ink" cx="888" cy="250" r="12" stroke-width="8"/>
+  </svg>
+  <h1 class="name">Wattle</h1>
+  <p class="tagline">Warm earth, one sharp yellow.</p>
+</div>
+</body>
+</html>
