@@ -1,17 +1,16 @@
-<!-- @dsCard group="Layout" height=1440 width=960 subtitle="Ten card patterns built from one Card" -->
+<!-- @dsCard group="Layout" height=1370 width=960 subtitle="Eleven card patterns built from one Card" -->
 <!doctype html>
 <html>
 <head><meta charset="utf-8"><title>Card</title>
 <style>
   body { margin: 0; background: var(--surface-100); color: var(--ink); font-family: var(--font-sans); }
-  .bento { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-6) var(--space-4); padding: var(--space-6); align-items: stretch; }
+  .bento { display: flex; flex-direction: column; gap: var(--space-6); padding: var(--space-6); }
+  .cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-4); align-items: start; }
+  .col { display: flex; flex-direction: column; gap: var(--space-6); }
   figure { margin: 0; display: flex; flex-direction: column; gap: var(--space-2); }
-  figure > .wt-card { flex: 1; }
-  .span-3 .wt-card-empty { padding: var(--space-6); }
+  .wide .wt-card-empty { padding: var(--space-6); }
   figcaption { font-size: 12px; line-height: 16px; color: var(--ink-muted); }
   figcaption b { color: var(--ink); font-weight: 700; }
-  .span-3 { grid-column: 1 / -1; }
-  .tall { grid-row: span 2; }
 
   /* pattern pieces, all from tokens */
   .meta { display: flex; flex-direction: column; gap: 6px; font-size: 14px; line-height: 20px; color: var(--ink-muted); }
@@ -28,17 +27,13 @@
   .seats { display: grid; grid-template-columns: repeat(10, 1fr); gap: 4px; }
   .seats i { aspect-ratio: 1; border-radius: var(--radius-pill); background: var(--earth); }
   .seats i.free { background: transparent; border: 1.5px solid var(--border-strong); }
-  .countdown { display: flex; gap: var(--space-2); }
-  .countdown div { flex: 1; text-align: center; padding: var(--space-2) 0; border-radius: var(--radius-sm); background: var(--wing); color: #F3EFE6; }
-  .countdown b { display: block; font-family: var(--font-display); font-size: 26px; line-height: 30px; font-weight: 600; }
-  .countdown span { font-size: 11px; line-height: 14px; letter-spacing: .06em; text-transform: uppercase; opacity: .85; }
   .trend { display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 600; color: var(--ink); }
   .spark { width: 100%; height: 56px; display: block; }
+  .meta-list { list-style: none; margin: 0; padding: 0; }
   .person { display: flex; gap: var(--space-4); align-items: center; }
   .avatar { flex: none; width: 56px; height: 56px; border-radius: var(--radius-pill); background: var(--taupe); color: #1F1D1B; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 22px; font-weight: 600; }
   .person h4 { margin: 0; font-family: var(--font-display); font-size: 20px; line-height: 26px; color: var(--ink); }
-  .tags { display: flex; gap: 6px; flex-wrap: wrap; }
-  .tag { font-size: 12px; line-height: 16px; font-weight: 600; padding: 2px 8px; border-radius: var(--radius-pill); border: 1px solid var(--hairline); color: var(--ink); background: var(--surface-100); }
+  .badges { display: flex; gap: 6px; flex-wrap: wrap; }
   .checklist { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--space-2); font-size: 14px; line-height: 20px; color: var(--ink); }
   .checklist li { display: flex; gap: var(--space-2); align-items: center; }
   .box { flex: none; width: 20px; height: 20px; border-radius: 6px; border: 1.5px solid var(--border-strong); display: flex; align-items: center; justify-content: center; }
@@ -50,6 +45,8 @@
   .notice p { margin: 0 0 6px; color: var(--ink-muted); font-size: 14px; line-height: 20px; }
   .notice .when { font-size: 12px; color: var(--ink-muted); }
   .notice .x { margin-left: auto; }
+  .cta { display: inline-flex; align-items: center; gap: var(--space-1); font-weight: 700; color: var(--ink); }
+  a.wt-card:hover .cta { text-decoration: underline; text-underline-offset: 3px; }
   .rating { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--ink-muted); }
 </style>
 </head>
@@ -65,13 +62,13 @@
   function M(icon, text) { return h('span', null, h(W.Icon, { name: icon, size: 16 }), text); }
 
   function cover() {
-    return h('svg', { viewBox: '0 0 300 200', role: 'img', 'aria-label': 'Cover: a lapwing eye ring over a dry field' },
-      h('rect', { width: 300, height: 200, style: { fill: 'var(--earth)' } }),
-      h('path', { d: 'M0 150 C60 120 120 160 180 135 S270 120 300 140 V200 H0Z', style: { fill: 'var(--taupe)' } }),
-      h('path', { d: 'M0 172 C80 150 160 185 300 165 V200 H0Z', style: { fill: 'var(--wing)' } }),
-      h('circle', { cx: 210, cy: 70, r: 38, style: { fill: '#1F1D1B' } }),
-      h('circle', { cx: 210, cy: 70, r: 20, style: { fill: 'none', stroke: 'var(--wattle)', strokeWidth: 8 } }),
-      h('circle', { cx: 210, cy: 70, r: 6, style: { fill: 'var(--wattle)' } }));
+    return h('svg', { viewBox: '0 0 300 160', role: 'img', 'aria-label': 'Cover: a lapwing eye ring over a dry field' },
+      h('rect', { width: 300, height: 160, style: { fill: 'var(--earth)' } }),
+      h('path', { d: 'M0 112 C60 86 120 122 180 100 S270 86 300 104 V160 H0Z', style: { fill: 'var(--taupe)' } }),
+      h('path', { d: 'M0 134 C80 114 160 146 300 128 V160 H0Z', style: { fill: 'var(--wing)' } }),
+      h('circle', { cx: 210, cy: 60, r: 34, style: { fill: '#1F1D1B' } }),
+      h('circle', { cx: 210, cy: 60, r: 18, style: { fill: 'none', stroke: 'var(--wattle)', strokeWidth: 8 } }),
+      h('circle', { cx: 210, cy: 60, r: 6, style: { fill: 'var(--wattle)' } }));
   }
 
   function spark() {
@@ -99,69 +96,80 @@
       })));
   }
 
+  var announcement = h(Fig, { kind: 'Announcement', why: 'icon, message and time; dismissible', className: 'wide' },
+    h(W.Card, null,
+      h('div', { className: 'notice' },
+        h('span', { className: 'ic' }, h(W.Icon, { name: 'bell', size: 20 })),
+        h('div', null,
+          h('h4', null, 'No classes on Monday, 24 November'),
+          h('p', null, 'The campus is closed for the state holiday. Recorded lessons stay open, and Tuesday’s live classes run as usual.'),
+          h('span', { className: 'when' }, '2 hours ago · Admin office')),
+        h(W.Button, { variant: 'ghost', size: 'sm', icon: 'x', 'aria-label': 'Dismiss', className: 'x' }))));
+
+  var event = h(Fig, { kind: 'Event', why: 'a date block beside the title, time and host below' },
+    h(W.Card, { footer: h(W.Button, { size: 'sm', icon: 'calendar' }, 'Add to calendar') },
+      h('div', { className: 'event' },
+        h('div', { className: 'date' }, h('div', { className: 'm' }, 'NOV'), h('div', { className: 'd' }, '18')),
+        h('div', null, h('h4', { className: 'event-title' }, 'Live class: Wave optics'),
+          h('div', { className: 'meta' }, M('clock', 'Tue · 6:00–7:30 pm'), M('user', 'Ms. Anitha · Online'))))));
+
+  var progress = h(Fig, { kind: 'Progress', why: 'how far along, and where to pick up' },
+    h(W.Card, { eyebrow: 'Continue learning', title: 'Organic Chemistry', footer: h(W.Button, { size: 'sm', iconEnd: 'arrow-right' }, 'Resume lesson 13') },
+      h('div', { className: 'meter', role: 'progressbar', 'aria-valuenow': 50, 'aria-valuemin': 0, 'aria-valuemax': 100, 'aria-label': 'Course progress' }, h('i', { style: { width: '50%' } })),
+      h('p', null, '12 of 24 lessons · Next: Alkenes')));
+
+  var media = h(Fig, { kind: 'Media', why: 'a full-bleed cover via the media prop' },
+    h(W.Card, { media: cover(), eyebrow: 'Field guide', title: 'Birds of the Deccan',
+      footer: h(F, null, h(W.Button, { size: 'sm', icon: 'book-open' }, 'Read'), h(W.Button, { variant: 'ghost', size: 'sm', icon: 'download', 'aria-label': 'Download' })) },
+      h('p', null, 'A plain guide to the ground birds of dry fields, from lapwings to larks.'),
+      h('div', { className: 'rating' }, '214 pages · 12 chapters')));
+
+  var booking = h(Fig, { kind: 'Booking', why: 'badges, a short pitch, the when and how many, then book' },
+    h(W.Card, { eyebrow: h(F, null, h(W.Badge, { tone: 'strong' }, 'New'), h(W.Badge, null, 'Beginner')), title: 'Saturday doubt-clearing hour',
+      footer: h(F, null, h(W.Button, { variant: 'primary', size: 'sm', icon: 'plus' }, 'Book'), h(W.Button, { variant: 'ghost', size: 'sm' }, 'Details')) },
+      h('p', null, 'A relaxed hour for Class 11 students, with time for any question at the end.'),
+      h('ul', { className: 'meta meta-list' },
+        h('li', null, M('calendar', 'Every Saturday')),
+        h('li', null, M('clock', '9:30 to 10:30 am')),
+        h('li', null, M('user', '8 places left')))));
+
+  var availability = h(Fig, { kind: 'Availability', why: 'a seat map shows how much is left at a glance' },
+    h(W.Card, { eyebrow: 'Weekend batch · starts 1 Dec', title: 'JEE crash course', footer: h(W.Button, { size: 'sm' }, 'Reserve a seat') },
+      h('div', { className: 'big' }, '4', h('small', null, 'seats left')),
+      h(Seats)));
+
+  var metric = h(Fig, { kind: 'Metric', why: 'one number, its trend, and the shape over time' },
+    h(W.Card, { eyebrow: 'Average test score · 8 weeks' },
+      h('div', { className: 'big' }, '86%'),
+      h('span', { className: 'trend' }, h(W.Icon, { name: 'arrow-right', size: 14, style: { transform: 'rotate(-45deg)' } }), 'Up 4 points on last week'),
+      spark()));
+
+  var person = h(Fig, { kind: 'Person', why: 'initials avatar, role, and what they cover' },
+    h(W.Card, { footer: h(F, null, h(W.Button, { size: 'sm' }, 'Message'), h(W.Button, { variant: 'ghost', size: 'sm', icon: 'calendar' }, 'Book a slot')) },
+      h('div', { className: 'person' },
+        h('span', { className: 'avatar', 'aria-hidden': 'true' }, 'AR'),
+        h('div', null, h('h4', null, 'Anitha Rao'), 'Physics teacher')),
+      h('div', { className: 'badges' }, h(W.Badge, null, 'Batch A'), h(W.Badge, null, 'Batch C'), h(W.Badge, null, 'Doubt clearing'))));
+
+  var checklist = h(Fig, { kind: 'Checklist', why: 'tick items off; the count updates' }, h(Checklist));
+
+  var link = h(Fig, { kind: 'Link', why: 'the whole card is the link; no buttons inside' },
+    h(W.Card, { as: 'a', href: '#', title: 'See the full timetable' },
+      h('p', null, 'Every class for the next four weeks, with the places still open.'),
+      h('span', { className: 'cta' }, 'Open timetable', h(W.Icon, { name: 'arrow-right', size: 16 }))));
+
+  var empty = h(Fig, { kind: 'Empty state', why: 'the dashed empty variant invites the first step', className: 'wide' },
+    h(W.Card, { variant: 'empty', icon: 'plus', title: 'No tests yet', footer: h(W.Button, { size: 'sm', icon: 'plus' }, 'Create a test') },
+      'Tests you create for this batch will show up here.'));
+
   ReactDOM.createRoot(document.getElementById('root')).render(
     h('div', { className: 'bento' },
-
-      h(Fig, { kind: 'Announcement', why: 'icon, message and time; dismissible', className: 'span-3' },
-        h(W.Card, null,
-          h('div', { className: 'notice' },
-            h('span', { className: 'ic' }, h(W.Icon, { name: 'bell', size: 20 })),
-            h('div', null,
-              h('h4', null, 'No classes on Monday, 24 November'),
-              h('p', null, 'The campus is closed for the state holiday. Recorded lessons stay open, and Tuesday’s live classes run as usual.'),
-              h('span', { className: 'when' }, '2 hours ago · Admin office')),
-            h(W.Button, { variant: 'ghost', size: 'sm', icon: 'x', 'aria-label': 'Dismiss', className: 'x' })))),
-
-      h(Fig, { kind: 'Event', why: 'a date block, time and place, one clear action' },
-        h(W.Card, { footer: h(W.Button, { variant: 'primary', size: 'sm', icon: 'arrow-right' }, 'Join class') },
-          h('div', { className: 'event' },
-            h('div', { className: 'date' }, h('div', { className: 'm' }, 'NOV'), h('div', { className: 'd' }, '18')),
-            h('div', null, h('h4', { className: 'event-title' }, 'Live class: Wave optics'),
-              h('div', { className: 'meta' }, M('calendar', 'Tue · 6:00–7:30 pm'), M('user', 'Ms. Anitha · Online')))))),
-
-      h(Fig, { kind: 'Media', why: 'a full-bleed cover via the media prop', className: 'tall' },
-        h(W.Card, { media: cover(), eyebrow: 'Field guide', title: 'Birds of the Deccan',
-          footer: h(F, null, h(W.Button, { size: 'sm', icon: 'book-open' }, 'Read'), h(W.Button, { variant: 'ghost', size: 'sm', icon: 'download', 'aria-label': 'Download' })) },
-          h('div', { className: 'rating' }, '214 pages · 12 chapters'),
-          'A plain guide to the ground birds of dry fields, from lapwings to larks.')),
-
-      h(Fig, { kind: 'Availability', why: 'a seat map shows how much is left at a glance' },
-        h(W.Card, { eyebrow: 'Weekend batch · starts 1 Dec', title: 'JEE crash course', footer: h(W.Button, { size: 'sm' }, 'Reserve a seat') },
-          h('div', { className: 'big' }, '4', h('small', null, 'seats left')),
-          h(Seats))),
-
-      h(Fig, { kind: 'Progress', why: 'how far along, and where to pick up' },
-        h(W.Card, { eyebrow: 'Continue learning', title: 'Organic Chemistry', footer: h(W.Button, { variant: 'ghost', size: 'sm', iconEnd: 'arrow-right' }, 'Resume lesson 13') },
-          h('div', { className: 'meter', role: 'progressbar', 'aria-valuenow': 50, 'aria-valuemin': 0, 'aria-valuemax': 100 }, h('i', { style: { width: '50%' } })),
-          '12 of 24 lessons · Next: Alkenes')),
-
-      h(Fig, { kind: 'Metric', why: 'one number, its trend, and the shape over time' },
-        h(W.Card, { eyebrow: 'Average test score · 8 weeks' },
-          h('div', { className: 'big' }, '86%'),
-          h('span', { className: 'trend' }, h(W.Icon, { name: 'arrow-right', size: 14, style: { transform: 'rotate(-45deg)' } }), 'Up 4 points on last week'),
-          spark())),
-
-      h(Fig, { kind: 'Deadline', why: 'a countdown on wing brown, with who has finished' },
-        h(W.Card, { eyebrow: 'Assignment due', title: 'Thermodynamics worksheet', footer: h(W.Button, { size: 'sm', icon: 'upload' }, 'Submit') },
-          h('div', { className: 'countdown', role: 'timer', 'aria-label': '2 days 6 hours 15 minutes left' },
-            h('div', null, h('b', null, '02'), h('span', null, 'days')),
-            h('div', null, h('b', null, '06'), h('span', null, 'hours')),
-            h('div', null, h('b', null, '15'), h('span', null, 'mins'))),
-          h('div', { className: 'meta' }, M('calendar', 'Fri, 21 Nov · 11:59 pm'), M('check', '28 of 40 submitted')))),
-
-      h(Fig, { kind: 'Checklist', why: 'tick items off; the count updates' }, h(Checklist)),
-
-      h(Fig, { kind: 'Person', why: 'initials avatar, role, and what they cover' },
-        h(W.Card, { footer: h(F, null, h(W.Button, { size: 'sm' }, 'Message'), h(W.Button, { variant: 'ghost', size: 'sm', icon: 'calendar' }, 'Book a slot')) },
-          h('div', { className: 'person' },
-            h('span', { className: 'avatar', 'aria-hidden': 'true' }, 'AR'),
-            h('div', null, h('h4', null, 'Anitha Rao'), 'Physics teacher')),
-          h('div', { className: 'tags' }, h('span', { className: 'tag' }, 'Batch A'), h('span', { className: 'tag' }, 'Batch C'), h('span', { className: 'tag' }, 'Doubt clearing')))),
-
-      h(Fig, { kind: 'Empty state', why: 'the dashed empty variant invites the first step', className: 'span-3' },
-        h(W.Card, { variant: 'empty', icon: 'plus', title: 'No tests yet', footer: h(W.Button, { size: 'sm', icon: 'plus' }, 'Create a test') },
-          'Tests you create for this batch will show up here.'))
-    ));
+      announcement,
+      h('div', { className: 'cols' },
+        h('div', { className: 'col' }, event, booking, progress),
+        h('div', { className: 'col' }, media, checklist, link),
+        h('div', { className: 'col' }, availability, metric, person)),
+      empty));
 </script>
 </body>
 </html>

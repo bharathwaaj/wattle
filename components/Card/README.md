@@ -4,19 +4,20 @@ A raised `surface-200` panel with a `hairline` border and `radius-md` corners. E
 
 ## Patterns
 
-Card is one frame. What changes from card to card is what goes inside it. The preview shows ten patterns, and each one answers a different question.
+Card is one frame. What changes from card to card is what goes inside it. The preview shows eleven patterns, and each one answers a different question.
 
 | Pattern | Answers | Built from |
 | --- | --- | --- |
 | **Announcement** | What do I need to know? | A `wing` icon disc, a bold line, a sentence, a timestamp and an icon-only dismiss button. Use it full width. |
-| **Event** | When and where? | A date block (month in `label`, day in Fraunces) beside the title, plus time and place rows with icons. It has one primary action. |
+| **Event** | When and where? | A date block (month in `label`, day in Fraunces) beside the title, plus time and host rows with 16px icons. |
+| **Booking** | Can I join, and when? | `strong` and neutral Badges in the eyebrow, a one-line pitch, a meta list (day, time, places left) with icons, then Book (primary) and Details (ghost). |
 | **Media** | What does it look like? | The `media` prop: a full-bleed image or illustration across the top, then the title. |
 | **Availability** | How much is left? | A big number with its unit, and a seat map of filled `earth` dots and empty `border-strong` rings. |
-| **Progress** | How far along am I? | An `earth` progress bar, "12 of 24", and a ghost button with `iconEnd` to resume. |
+| **Progress** | How far along am I? | An `earth` progress bar, "12 of 24", and a secondary button with `iconEnd` to resume. |
 | **Metric** | How are we doing? | One Fraunces number, a one-line trend in words, and a sparkline in `earth`. |
-| **Deadline** | How long do I have? | Countdown tiles on `wing` with cream text, the due date, and who has finished. |
 | **Checklist** | What's left to do? | Tick boxes that fill with `ink` when done. The eyebrow counts what's done. |
-| **Person** | Who is this? | An initials avatar on `taupe`, the name in Fraunces, the role, and tags. |
+| **Person** | Who is this? | An initials avatar on `taupe`, the name in Fraunces, the role, and a row of neutral Badges. |
+| **Link** | Where can I see more? | `as="a"`: a title, one sentence, and an `ink` "Open …" line with an arrow. The whole card is the link. |
 | **Empty state** | What do I do first? | `variant="empty"`: a dashed border, an icon, one sentence, and one action. |
 
 Clickable cards come in two kinds:
@@ -38,7 +39,8 @@ Clickable cards come in two kinds:
 
 ## Do and don't
 
-- Do lay cards out in a grid with `space-4` or `space-6` gaps, so cards in a row share the same height.
+- Do size each card to its content. In a dashboard, stack cards in columns rather than stretching them to match a row, because stretched cards end up with empty space inside.
+- Don't start a footer with a ghost button. Its padding makes the label look indented, so use a secondary button.
 - Do mark the selected choice in words too ("Selected" in the eyebrow), not just with the border.
 - Don't put buttons inside a shortcut card. The card itself is the link.
 - Keep to one primary (wattle) button across a whole screen of cards. Every other card action is secondary or ghost.
