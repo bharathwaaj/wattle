@@ -49,7 +49,7 @@
   .prose h2 { font-family: var(--font-display); font-weight: 600; font-size: 26px; line-height: 32px; margin: var(--space-10) 0 var(--space-2); scroll-margin-top: 80px; }
   .prose h3 { font-family: var(--font-display); font-weight: 600; font-size: 20px; line-height: 26px; margin: var(--space-6) 0 var(--space-2); }
   .prose code { font-size: .9em; background: var(--surface-200); border: 1px solid var(--hairline); border-radius: 4px; padding: 0 4px; }
-  .prose pre { background: var(--surface-200); border: 1px solid var(--hairline); border-radius: var(--radius-sm); padding: var(--space-4); overflow-x: auto; }
+  .prose pre { white-space: pre-wrap; overflow-wrap: anywhere; background: var(--surface-200); border: 1px solid var(--hairline); border-radius: var(--radius-sm); padding: var(--space-4); overflow-x: auto; }
   .prose pre code { border: 0; padding: 0; background: none; }
   .prose table { border-collapse: collapse; width: 100%; font-size: 15px; }
   .prose th, .prose td { text-align: left; vertical-align: top; padding: var(--space-2); border-bottom: 1px solid var(--hairline); }
@@ -200,7 +200,7 @@
     return keys.map(function (k) { return { name: k, items: g[k] }; });
   }
   function flatPages() {
-    var list = [{ route: '/', label: 'Overview', section: 'Start' }, { route: '/start', label: 'Using Wattle', section: 'Start' }];
+    var list = [{ route: '/', label: 'Overview', section: 'Start' }, { route: '/start', label: 'Using Wattle', section: 'Start' }, { route: '/agents', label: 'Building with AI', section: 'Start' }];
     FOUNDATIONS.forEach(function (f) { list.push({ route: '/' + f.id, label: f.label, section: 'Foundations' }); });
     groups().forEach(function (g) { g.items.forEach(function (c) { list.push({ route: '/c/' + c.name, label: c.name, section: g.name }); }); });
     return list;
@@ -214,7 +214,7 @@
       return '<a class="nav-link' + (r === route ? ' is-active' : '') + '" href="#' + r + '"' + (r === route ? ' aria-current="page"' : '') + '>' + esc(label) + (extra || '') + '</a>';
     }
     function match(label, sub) { return !q || label.toLowerCase().indexOf(q) >= 0 || (sub || '').toLowerCase().indexOf(q) >= 0; }
-    var start = [['/', 'Overview'], ['/start', 'Using Wattle']].filter(function (x) { return match(x[1]); });
+    var start = [['/', 'Overview'], ['/start', 'Using Wattle'], ['/agents', 'Building with AI']].filter(function (x) { return match(x[1]); });
     if (start.length) html += '<div class="nav-group"><div class="nav-title">Start</div>' + start.map(function (x) { return link(x[0], x[1]); }).join('') + '</div>';
     var f = FOUNDATIONS.filter(function (x) { return match(x.label); });
     if (f.length) html += '<div class="nav-group"><div class="nav-title">Foundations</div>' + f.map(function (x) { return link('/' + x.id, x.label); }).join('') + '</div>';
@@ -259,15 +259,27 @@
     var code = function (s) { return '<pre><code>' + esc(s) + '</code></pre>'; };
     return head('Start', 'Using Wattle', 'Wattle is plain files: a stylesheet, one script and the tokens. There is no build step.') +
       '<div class="prose">' +
-      '<h2>1. Add the tokens</h2><p>Every colour, space, radius and shadow is a CSS custom property generated from <code>tokens.json</code>. Copy this into your stylesheet:</p>' +
+      '<p>The quickest start is the <a href="examples/starter.html">starter app</a>: a complete dashboard in one HTML file. Open it, then copy it.</p>' +
+      '<h2>1. Add the tokens</h2><p>Every colour, space, radius and shadow is a CSS custom property in <a href="tokens.css"><code>tokens.css</code></a>, generated from <code>tokens.json</code>. Link it, or copy it:</p>' +
       '<div class="stage"><div class="stage-bar"><span>tokens.css</span><button class="wt-btn wt-btn-ghost wt-btn-sm" type="button" id="copy-tokens">Copy</button></div><pre style="margin:0;border:0;border-radius:0;max-height:260px"><code id="tokens-code">' + esc(tokensCss()) + '</code></pre></div>' +
       '<h2>2. Load the styles and scripts</h2><p>React 18 comes first, then the Wattle bundle. The stylesheet also loads Fraunces and Manrope from Google Fonts.</p>' +
-      code('<link rel="stylesheet" href="' + base + 'components/bundle.css">\n<script src="' + REACT + '"><\/script>\n<script src="' + REACT_DOM + '"><\/script>\n<script src="' + base + 'components/bundle.js"><\/script>') +
+      code('<link rel="stylesheet" href="' + base + 'tokens.css">\n<link rel="stylesheet" href="' + base + 'components/bundle.css">\n<script src="' + REACT + '"><\/script>\n<script src="' + REACT_DOM + '"><\/script>\n<script src="' + base + 'components/bundle.js"><\/script>') +
       '<h2>3. Use the components</h2><p>Everything is on <code>window.Wattle</code>.</p>' +
       code('const { Button, Card, ActionButton } = window.Wattle;\n\n<Card eyebrow="Course" title="Organic Chemistry">\n  <ActionButton label="Book" icon="plus" doneLabel="Booked" undoable />\n</Card>') +
       '<h2>4. Pick a theme</h2><p>Put <code>data-theme="light"</code> or <code>data-theme="dark"</code> on <code>&lt;html&gt;</code>. Every component follows it.</p>' +
       '<h2>5. Follow the brand book</h2><p>The <a href="#/brand">brand book</a> sets the rules: one yellow per view, borders instead of shadows, and status shown in words. Each component page has its own guidelines.</p>' +
       '<p class="muted">Types for every component are in <a href="' + base + 'components/index.d.ts">components/index.d.ts</a>.</p></div>' + pager('/start');
+  }
+
+  function pageAgents() {
+    return '<div id="agents-page">' + head('Start', 'Building with AI', 'Wattle is written to be read by coding agents as well as people. Give an agent this repository and ask it to build your app.') +
+      '<div class="tiles" style="margin-bottom:var(--space-6)">' +
+      '<a class="wt-card" href="AGENTS.md"><span class="wt-card-eyebrow">Read first</span><h3 class="wt-card-title">AGENTS.md</h3><div class="wt-card-body">How to load Wattle, and the rules every app follows.</div></a>' +
+      '<a class="wt-card" href="components.json"><span class="wt-card-eyebrow">Machine-readable</span><h3 class="wt-card-title">components.json</h3><div class="wt-card-body">Every component, with its group, summary and props.</div></a>' +
+      '<a class="wt-card" href="llms.txt"><span class="wt-card-eyebrow">Index</span><h3 class="wt-card-title">llms.txt</h3><div class="wt-card-body">A short map of the docs for language models.</div></a>' +
+      '<a class="wt-card" href="llms-full.txt"><span class="wt-card-eyebrow">Everything</span><h3 class="wt-card-title">llms-full.txt</h3><div class="wt-card-body">The rules, brand book, tokens and every guide in one file.</div></a></div>' +
+      '<h2 class="sec">A prompt to start with</h2><div class="prose"><pre><code>' + esc('Use the Wattle design system at https://github.com/bharathwaaj/wattle.\nRead AGENTS.md first, then components.json and the guide for each component you use.\nStart from examples/starter.html and follow every rule in AGENTS.md.\n\nBuild: <describe your app>') + '</code></pre></div>' +
+      '<h2 class="sec">AGENTS.md</h2><div class="prose" id="agents-md"><p class="muted">Loading…</p></div></div>' + pager('/agents');
   }
 
   function pageBrand() {
@@ -356,11 +368,12 @@
 
   /* ---------- router ---------- */
   function currentRoute() { var h = location.hash.replace(/^#/, ''); return h || '/'; }
-  var titles = { '/': 'Overview', '/start': 'Using Wattle', '/brand': 'Brand book', '/colours': 'Colours', '/type': 'Type', '/space': 'Space, shape & elevation', '/assets': 'Logos & icons' };
+  var titles = { '/': 'Overview', '/start': 'Using Wattle', '/agents': 'Building with AI', '/brand': 'Brand book', '/colours': 'Colours', '/type': 'Type', '/space': 'Space, shape & elevation', '/assets': 'Logos & icons' };
   function route() {
     var r = currentRoute(), main = document.getElementById('main'), html;
     if (r === '/') html = pageOverview();
     else if (r === '/start') html = pageStart();
+    else if (r === '/agents') html = pageAgents();
     else if (r === '/brand') html = pageBrand();
     else if (r === '/colours') html = pageColours();
     else if (r === '/type') html = pageType();
@@ -372,6 +385,7 @@
     document.title = (titles[r] || decodeURIComponent(r.replace('/c/', ''))) + ' — Wattle';
     if (r.indexOf('/c/') === 0) fillComponent(decodeURIComponent(r.slice(3)));
     if (r === '/') loadFrame();
+    if (r === '/agents') get('AGENTS.md').then(function (md) { var el = document.getElementById('agents-md'); if (el) el.innerHTML = marked.parse(md.replace(/^# .*\n/, '')); });
     if (r === '/start') document.getElementById('copy-tokens').onclick = function (e) {
       var b = e.currentTarget;
       try { navigator.clipboard.writeText(tokensCss()).then(function () { b.textContent = 'Copied'; setTimeout(function () { b.textContent = 'Copy'; }, 1800); }); } catch (x) {}
