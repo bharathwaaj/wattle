@@ -1,6 +1,6 @@
 # Avatar
 
-A round initials badge for a person: `ink` on `taupe` (6:1), in Newsreader.
+A round initials badge for a person: `ink` on `taupe` (6:1), in Lora.
 
 ## You provide
 

@@ -27,7 +27,7 @@ Clickable cards come in two kinds:
 
 ## You provide
 
-- `title`: set in Newsreader at heading-2 size.
+- `title`: set in Lora at heading-2 size.
 - `eyebrow`: an optional uppercase overline in `ink-muted`, e.g. "Course". It can hold an icon, like the check on a selected choice card.
 - `icon`: an optional icon in a 40px circle above the eyebrow, given as a Lucide name or a React node. Use it for shortcut cards.
 - `children`: the body text, in `ink-muted`.

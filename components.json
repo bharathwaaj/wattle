@@ -205,7 +205,7 @@
       "name": "Card",
       "group": "Layout",
       "summary": "A raised `surface-200` panel with a `hairline` border and `radius-md` corners. Each card holds one thing: an event, a booking, a person, a result.",
-      "props": "export interface CardProps extends React.HTMLAttributes<HTMLElement> {\n  /** Element to render, default section. */\n  as?: keyof JSX.IntrinsicElements;\n  /** Link target when as=\"a\" (shortcut cards). */\n  href?: string;\n  /** Small uppercase overline above the title. */\n  eyebrow?: React.ReactNode;\n  /** Card title, set in Newsreader. */\n  title?: React.ReactNode;\n  /** Actions row under a hairline, usually Buttons. */\n  footer?: React.ReactNode;\n  /** Full-bleed image or illustration across the top of the card. */\n  media?: React.ReactNode;\n  /** empty: dashed border on a transparent ground, centred; for empty states. */\n  variant?: 'default' | 'empty';\n  /** Set false to drop the hairline above the footer and separate it with space instead. */\n  divider?: boolean;\n  /** Ink border for a chosen card in a selectable list. */\n  selected?: boolean;\n  /** Icon shown in a 40px circle above the eyebrow. */\n  icon?: IconName | React.ReactNode;\n}",
+      "props": "export interface CardProps extends React.HTMLAttributes<HTMLElement> {\n  /** Element to render, default section. */\n  as?: keyof JSX.IntrinsicElements;\n  /** Link target when as=\"a\" (shortcut cards). */\n  href?: string;\n  /** Small uppercase overline above the title. */\n  eyebrow?: React.ReactNode;\n  /** Card title, set in Lora. */\n  title?: React.ReactNode;\n  /** Actions row under a hairline, usually Buttons. */\n  footer?: React.ReactNode;\n  /** Full-bleed image or illustration across the top of the card. */\n  media?: React.ReactNode;\n  /** empty: dashed border on a transparent ground, centred; for empty states. */\n  variant?: 'default' | 'empty';\n  /** Set false to drop the hairline above the footer and separate it with space instead. */\n  divider?: boolean;\n  /** Ink border for a chosen card in a selectable list. */\n  selected?: boolean;\n  /** Icon shown in a 40px circle above the eyebrow. */\n  icon?: IconName | React.ReactNode;\n}",
       "guide": "components/Card/README.md",
       "preview": "components/Card/preview.html",
       "docs": "https://bharathwaaj.github.io/wattle/#/c/Card"
@@ -258,7 +258,7 @@
     {
       "name": "DateBlock",
       "group": "Building blocks",
-      "summary": "A calendar-page date: the month in small caps above the day in large Newsreader. Put it beside an event's title.",
+      "summary": "A calendar-page date: the month in small caps above the day in large Lora. Put it beside an event's title.",
       "props": "export interface DateBlockProps { date?: string | number | Date; month?: string; day?: number | string; label?: string; className?: string; }",
       "guide": "components/DateBlock/README.md",
       "preview": "components/DateBlock/preview.html",
@@ -294,7 +294,7 @@
     {
       "name": "Avatar",
       "group": "Building blocks",
-      "summary": "A round initials badge for a person: `ink` on `taupe` (6:1), in Newsreader.",
+      "summary": "A round initials badge for a person: `ink` on `taupe` (6:1), in Lora.",
       "props": "export interface AvatarProps { name: string; initials?: string; size?: number; className?: string; }",
       "guide": "components/Avatar/README.md",
       "preview": "components/Avatar/preview.html",
@@ -303,7 +303,7 @@
     {
       "name": "Stat",
       "group": "Building blocks",
-      "summary": "One big number in Newsreader, with an optional unit and a one-line trend. The number rolls in when it changes.",
+      "summary": "One big number in Lora, with an optional unit and a one-line trend. The number rolls in when it changes.",
       "props": "export interface StatProps { value: React.ReactNode; unit?: React.ReactNode; label?: React.ReactNode; trend?: React.ReactNode; trendDirection?: 'up' | 'down' | 'flat'; className?: string; }",
       "guide": "components/Stat/README.md",
       "preview": "components/Stat/preview.html",
