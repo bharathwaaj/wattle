@@ -1,0 +1,65 @@
+# Wattle
+
+**Warm earth, one sharp yellow.** Wattle is a design system based on the Yellow-wattled Lapwing (*Vanellus malabaricus*), a ground bird of dry fields in India. Its colours are mostly sandy brown and taupe, with one bright yellow patch on its face.
+
+This system does the same thing: calm, earthy neutrals almost everywhere, with yellow kept for the one thing that matters on each screen.
+
+## Content fundamentals
+
+- **Plain and warm.** Write the way you'd explain something to a colleague. Use short sentences and everyday words.
+- **One idea at a time.** Keep paragraphs to 1–3 sentences. Use headings and bullets to make pages easy to scan.
+- **Sentence case** for every title, button and label: "Create course", not "Create Course".
+- **Verbs on buttons.** "Save changes", "Add student". Avoid "OK" and "Submit".
+- **Tags and overlines** use the `label` style in uppercase, and nothing else does.
+
+## Visual foundations
+
+### Colour
+
+The palette comes from the bird's plumage.
+
+| Token | Comes from | Role |
+| --- | --- | --- |
+| `ink` | Cap black | Text and icons |
+| `wattle` | Face wattle and eye ring | The one accent: primary action, selection, highlight |
+| `earth` | Upperparts brown | Large fills, illustration, first chart series |
+| `taupe` | Neck and breast | Quiet fills, tags, second chart series |
+| `surface-100` | Pale underparts | Page background |
+| `wing` | Wing-tip brown | Deep bands, footers, tooltips |
+
+**Rules**
+
+- **One yellow per view.** `wattle` marks the primary action or the current selection. If two things are yellow, neither one stands out.
+- **Wattle is a fill, not a line.** On light surfaces it reaches only 1.4:1 contrast, so never use it for text, thin borders or focus rings. Text on wattle is always `on-wattle`. In the dark theme, wattle *can* be used as text (11.8:1).
+- **Neutrals carry the page.** Use `surface-100`, `surface-200`, `ink` and `ink-muted` for most of the interface. Keep `earth` and `taupe` for fills and illustration. Use `earth` as text only at 24px and above.
+- **Borders, not shadows.** Separate raised `surface-200` from the page with a `hairline` border. Controls use `border-strong` (3:1 or better).
+- **Focus rings** are 2px `ink` with a 2px offset.
+- **`danger`** is only for errors and destructive actions. Keep it small.
+
+### Themes
+
+- **Light**: the bird by day, with cream ground and black ink.
+- **Dark**: the field at dusk, with a near-black warm ground and cream ink. Wattle, earth, taupe and wing look the same in both themes.
+
+### Type
+
+- **Fraunces** (display): a warm, soft serif for `display`, `heading-1` and `heading-2`.
+- **Manrope** (sans): a clean, friendly sans for all UI and body text.
+- Both are free on Google Fonts. Load them with weights 400–700.
+
+### Space and shape
+
+- **Spacing** follows `space-1` (4px), `space-2` (8px), `space-4` (16px), `space-6` (24px) and `space-10` (40px). Cards use `space-4` padding, the gap between cards is `space-6`, and sections are separated by `space-10`.
+- **Radius**: `radius-sm` for inputs and tags, `radius-md` for cards, and `radius-pill` for buttons and chips. The pill shape echoes the round eye ring.
+
+## Iconography
+
+No icon set has been chosen yet. Until one is, use a 1.5px outline set drawn on a 24px grid, in `ink` or `ink-muted`. Don't use filled or multi-colour icons, and never put yellow in an icon.
+
+## Logo
+
+There is no logo yet. Set the word **Wattle** in Fraunces 600, in `ink`.
+
+## Origin of the palette
+
+The colours are a refined blend of two hand-estimated palettes taken from photographs of the Yellow-wattled Lapwing. One was an illustrative palette card. The other was based on a Cornell Lab *Birds of the World* photograph. Neither palette was pixel-sampled, so the yellow was adjusted (`#ECD43E`) to sit between the vivid wattle and the softer tone seen in natural light. No photographs are included in this system.
