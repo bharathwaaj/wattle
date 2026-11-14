@@ -65,11 +65,19 @@ Every focus state is the same: a 2px `ink` ring with a 2px offset.
 
 ## Iconography
 
-No icon set has been chosen yet. Until one is, use a 1.5px outline set drawn on a 24px grid, in `ink` or `ink-muted`. Don't use filled or multi-colour icons, and never put yellow in an icon.
+Icons come from **Lucide** (v0.460.0, ISC licence). They're adjusted to a 1.5px stroke and sit on a 24px grid. The starter set is in the Icons asset group.
+
+- Draw icons in `ink` or `ink-muted`, using `danger` only for error states. Never colour an icon `wattle`.
+- Size an icon to the text next to it: 24px by default, 20px in dense UI.
+- Outline icons only, with no filled or multi-colour icons. The full rules are in the Icons group README.
 
 ## Logo
 
-There is no logo yet. Set the word **Wattle** in Fraunces 600, in `ink`.
+The mark is the lapwing's **eye ring**: a `wattle` ring and dot on a cap-black disc. The wordmark is "Wattle" in Fraunces 600, converted to outlines.
+
+- On light backgrounds, use `wattle-lockup.svg` or `wattle-mark.svg`. On dark backgrounds, use the `-dark` versions.
+- Use the mark alone where space is tight, such as favicons, avatars and app icons.
+- Never put the yellow ring on a light background without its disc. Never recolour or stretch the mark.
 
 ## Origin of the palette
 
