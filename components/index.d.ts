@@ -1,7 +1,7 @@
 import type * as React from 'react';
 
-/** The 24 starter icons (Lucide v0.460.0). */
-export type IconName = 'search' | 'plus' | 'x' | 'check' | 'chevron-down' | 'chevron-right' | 'arrow-left' | 'arrow-right' | 'menu' | 'settings' | 'user' | 'bell' | 'house' | 'book-open' | 'calendar' | 'trash-2' | 'pencil' | 'upload' | 'download' | 'info' | 'triangle-alert' | 'eye' | 'log-out' | 'filter';
+/** The 25 starter icons (Lucide v0.460.0). */
+export type IconName = 'search' | 'plus' | 'x' | 'check' | 'chevron-down' | 'chevron-right' | 'arrow-left' | 'arrow-right' | 'menu' | 'settings' | 'user' | 'bell' | 'house' | 'book-open' | 'calendar' | 'trash-2' | 'pencil' | 'upload' | 'download' | 'info' | 'triangle-alert' | 'eye' | 'log-out' | 'filter' | 'clock';
 
 export interface IconProps extends React.SVGAttributes<SVGSVGElement> {
   /** Which icon to draw. */
@@ -62,4 +62,12 @@ export interface CardProps extends React.HTMLAttributes<HTMLElement> {
 }
 export declare function Card(props: CardProps): React.ReactElement;
 
-declare global { interface Window { Wattle: { Button: typeof Button; Input: typeof Input; Card: typeof Card; Icon: typeof Icon } } }
+export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
+  /** neutral (default) for categories, strong for the one important thing, danger for problems. */
+  tone?: 'neutral' | 'strong' | 'danger';
+  /** Optional 12px icon before the text. */
+  icon?: IconName | React.ReactNode;
+}
+export declare function Badge(props: BadgeProps): React.ReactElement;
+
+declare global { interface Window { Wattle: { Button: typeof Button; Input: typeof Input; Card: typeof Card; Icon: typeof Icon; Badge: typeof Badge } } }

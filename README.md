@@ -60,6 +60,7 @@ Components are React 18 components, published as `window.Wattle` from `component
 - **Button**: the primary variant is the wattle action, one per view. Use secondary, ghost and danger for everything else.
 - **Input**: always give it a visible label. Errors show as text, not just colour.
 - **Card**: a `surface-200` panel with a hairline border. One frame, many patterns, from events and deadlines to media, metrics and empty states. The Card guide lists them.
+- **Badge**: a small pill for status or category, in neutral, strong or danger. Never wattle.
 - **Icon**: draws any of the starter icons inline in `currentColor`. Button, Input and Card accept an `icon` prop that takes an icon name, like `icon="search"`.
 
 Every focus state is the same: a 2px `ink` ring with a 2px offset.
