@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Batch dashboard — a Wattle starter app</title>
+<!--
+  A complete Wattle app in one file, with no build step. Copy it to start a new app.
+  Outside this repo, swap the three relative paths for the hosted ones:
+    https://bharathwaaj.github.io/wattle/tokens.css
+    https://bharathwaaj.github.io/wattle/components/bundle.css
+    https://bharathwaaj.github.io/wattle/components/bundle.js
+-->
+<link rel="icon" href="../assets/Logos/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../components/bundle.css">
+<script src="https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="../components/bundle.js"></script>
+<style>
+  /* App layout only. Every colour, size and radius comes from a token. */
+  body { margin: 0; background: var(--surface-100); color: var(--ink); font-family: var(--font-sans); }
+  .bar { display: flex; align-items: center; gap: var(--space-4); height: 64px; padding: 0 var(--space-6); border-bottom: 1px solid var(--hairline); }
+  .bar img { height: 26px; }
+  .bar .grow { flex: 1; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: var(--space-6); }
+  .hello { margin: 0 0 var(--space-6); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--space-4); align-items: start; }
+  .stats { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: var(--space-4); margin-bottom: var(--space-6); }
+  .row { display: flex; gap: var(--space-4); align-items: flex-start; }
+  .grow { flex: 1; min-width: 0; }
+  .h4 { margin: 0 0 6px; font-family: var(--font-display); font-size: 20px; line-height: 26px; font-weight: 600; }
+  .form { display: flex; flex-direction: column; gap: var(--space-6); max-width: 520px; }
+  .between { display: flex; justify-content: space-between; align-items: center; gap: var(--space-4); }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+  var W = window.Wattle, h = React.createElement, F = React.Fragment;
+  function wait(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+
+  function TopBar(props) {
+    return h('header', { className: 'bar' },
+      h('img', { src: props.theme === 'dark' ? '../assets/Logos/wattle-lockup-dark.svg' : '../assets/Logos/wattle-lockup.svg', alt: 'Wattle' }),
+      h('span', { className: 'grow' }),
+      h(W.Tooltip, { label: 'Notifications' }, h(W.Button, { variant: 'ghost', icon: 'bell', 'aria-label': 'Notifications' })),
+      h(W.Switch, { label: 'Dark', checked: props.theme === 'dark', onChange: function (on) { props.setTheme(on ? 'dark' : 'light'); } }),
+      h(W.Avatar, { name: 'Anitha Rao', size: 36 }));
+  }
+
+  function Today() {
+    var s = React.useState(8), places = s[0], setPlaces = s[1];
+    return h(F, null,
+      h('div', { className: 'stats' },
+        h(W.Card, null, h(W.Stat, { label: 'Average score', value: '86%', trend: 'Up 4 points on last week' })),
+        h(W.Card, null, h(W.Stat, { label: 'Classes this week', value: 5 })),
+        h(W.Card, null, h(W.Stat, { label: 'Late submissions', value: 3, trend: 'Down 2 on last week', trendDirection: 'down' }))),
+      h('div', { className: 'grid' },
+        h(W.Card, { footer: h(W.ActionButton, { animation: 'flip', variant: 'secondary', size: 'sm', icon: 'calendar', label: 'Add to calendar', doneLabel: 'Added to calendar', onAction: function () { return wait(300); } }) },
+          h('div', { className: 'row' },
+            h(W.DateBlock, { month: 'NOV', day: 18 }),
+            h('div', { className: 'grow' }, h('h4', { className: 'h4' }, 'Live class: Wave optics'),
+              h(W.MetaList, { items: [{ icon: 'clock', text: 'Tue · 6:00–7:30 pm' }, { icon: 'user', text: 'Ms. Anitha · Online' }] })))),
+        h(W.Card, { eyebrow: h(F, null, h(W.Badge, { tone: 'strong' }, 'New'), h(W.Badge, null, 'Beginner')), title: 'Saturday doubt-clearing hour',
+          footer: h(F, null,
+            h(W.ActionButton, { size: 'sm', icon: 'plus', label: 'Book', doneLabel: 'Booked', undoable: true,
+              onAction: function () { return wait(800).then(function () { setPlaces(7); }); }, onUndo: function () { setPlaces(8); } }),
+            h(W.Button, { variant: 'ghost', size: 'sm' }, 'Details')) },
+          h('p', null, 'A relaxed hour for Class 11 students, with time for any question at the end.'),
+          h(W.MetaList, { items: [{ icon: 'calendar', text: 'Every Saturday' }, { icon: 'clock', text: '9:30 to 10:30 am' }, { icon: 'user', text: places + ' places left' }] })),
+        h(W.Card, { eyebrow: 'Average test score · 8 weeks' },
+          h(W.Stat, { value: '86%' }),
+          h(W.Sparkline, { data: [62, 70, 66, 74, 71, 79, 82, 86], label: 'Average score over 8 weeks, from 62 to 86' }))));
+  }
+
+  function Courses() {
+    var courses = [
+      { name: 'Organic Chemistry', done: 12, total: 24, next: 'Alkenes' },
+      { name: 'Wave Optics', done: 5, total: 10, next: 'Interference' },
+      { name: 'Calculus I', done: 0, total: 18, next: 'Limits' }];
+    return h('div', { className: 'grid' }, courses.map(function (c) {
+      return h(W.Card, { key: c.name, eyebrow: c.done ? 'Continue learning' : 'Not started', title: c.name, divider: false,
+        footer: h('div', { className: 'between', style: { width: '100%' } },
+          h(W.Button, { size: 'sm', iconEnd: 'arrow-right', effect: 'nudge' }, c.done ? 'Resume' : 'Start'),
+          h(W.DropdownMenu, { ariaLabel: c.name + ' actions', align: 'end', size: 'sm', items: [
+            { label: 'Copy link', icon: 'link', onSelect: function () { W.toast('Link copied', { tone: 'success' }); } },
+            { label: 'Download notes', icon: 'download' }, { divider: true },
+            { label: 'Leave course', icon: 'log-out', danger: true, onSelect: function () { W.toast('You left ' + c.name, { actionLabel: 'Undo', onAction: function () { W.toast('Welcome back'); } }); } }] })) },
+        h(W.Progress, { value: c.done, max: c.total, label: c.name + ' progress' }),
+        h('p', null, c.done + ' of ' + c.total + ' lessons · Next: ' + c.next));
+    }));
+  }
+
+  function Settings() {
+    return h('div', { className: 'form' },
+      h(W.Input, { label: 'Display name', defaultValue: 'Anitha Rao' }),
+      h(W.Select, { label: 'Class', defaultValue: 'Class 12', options: ['Class 9', 'Class 10', 'Class 11', 'Class 12'] }),
+      h(W.RadioGroup, { legend: 'Batch timing', defaultValue: 'evening', options: [
+        { value: 'morning', label: 'Mornings', hint: '7:00 to 8:30 am' }, { value: 'evening', label: 'Evenings', hint: '6:00 to 7:30 pm' }] }),
+      h(W.Switch, { label: 'Class reminders', hint: 'A notification 15 minutes before each live class.', defaultChecked: true }),
+      h(W.Textarea, { label: 'About you', maxLength: 200, placeholder: 'What are you preparing for?' }),
+      h('div', null, h(W.ActionButton, { label: 'Save changes', doneLabel: 'Saved', resetAfter: 2000, onAction: function () { return wait(700); } })));
+  }
+
+  function App() {
+    var t = React.useState('light'), theme = t[0], setTheme = t[1];
+    React.useEffect(function () { document.documentElement.setAttribute('data-theme', theme); }, [theme]);
+    return h(F, null,
+      h(TopBar, { theme: theme, setTheme: setTheme }),
+      h('main', { className: 'wrap' },
+        h(W.Card, { className: 'hello' },
+          h('div', { className: 'row' },
+            h(W.IconDisc, { icon: 'bell', tone: 'strong' }),
+            h('div', { className: 'grow' }, h('strong', null, 'No classes on Monday, 24 November'), h('p', { style: { margin: '4px 0 0' } }, 'The campus is closed for the state holiday. Recorded lessons stay open.')))),
+        h(W.Tabs, { label: 'Dashboard', tabs: [
+          { id: 'today', label: 'Today', content: h(Today) },
+          { id: 'courses', label: 'Courses', count: 3, content: h(Courses) },
+          { id: 'settings', label: 'Settings', icon: 'settings', content: h(Settings) }] })),
+      h(W.Toaster));
+  }
+
+  ReactDOM.createRoot(document.getElementById('root')).render(h(App));
+</script>
+</body>
+</html>
