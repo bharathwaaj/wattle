@@ -51,6 +51,10 @@ export interface CardProps extends React.HTMLAttributes<HTMLElement> {
   title?: React.ReactNode;
   /** Actions row under a hairline, usually Buttons. */
   footer?: React.ReactNode;
+  /** Full-bleed image or illustration across the top of the card. */
+  media?: React.ReactNode;
+  /** empty: dashed border on a transparent ground, centred; for empty states. */
+  variant?: 'default' | 'empty';
   /** Ink border for a chosen card in a selectable list. */
   selected?: boolean;
   /** Icon shown in a 40px circle above the eyebrow. */
