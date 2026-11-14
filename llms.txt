@@ -59,12 +59,12 @@ Wattle is a design system for web apps: CSS tokens, one React 18 bundle exposed 
 ## Building blocks
 
 - [IconDisc](https://bharathwaaj.github.io/wattle/components/IconDisc/README.md): A single icon in a round disc. It anchors an announcement, an empty state or a shortcut card.
-- [DateBlock](https://bharathwaaj.github.io/wattle/components/DateBlock/README.md): A calendar-page date: the month in small caps above the day in large Fraunces. Put it beside an event's title.
+- [DateBlock](https://bharathwaaj.github.io/wattle/components/DateBlock/README.md): A calendar-page date: the month in small caps above the day in large Newsreader. Put it beside an event's title.
 - [MetaList](https://bharathwaaj.github.io/wattle/components/MetaList/README.md): Rows of small details (dates, times, places, people), each with a 16px icon, in `ink-muted`.
 - [Progress](https://bharathwaaj.github.io/wattle/components/Progress/README.md): A thin `earth` bar that shows how far along something is. It animates when the value changes.
 - [Checklist](https://bharathwaaj.github.io/wattle/components/Checklist/README.md): A short list of tick boxes. They're real checkboxes under the styling, so keyboards and screen readers work as usual. Done items are struck through in `ink-muted`.
-- [Avatar](https://bharathwaaj.github.io/wattle/components/Avatar/README.md): A round initials badge for a person: `ink` on `taupe` (6:1), in Fraunces.
-- [Stat](https://bharathwaaj.github.io/wattle/components/Stat/README.md): One big number in Fraunces, with an optional unit and a one-line trend. The number rolls in when it changes.
+- [Avatar](https://bharathwaaj.github.io/wattle/components/Avatar/README.md): A round initials badge for a person: `ink` on `taupe` (6:1), in Newsreader.
+- [Stat](https://bharathwaaj.github.io/wattle/components/Stat/README.md): One big number in Newsreader, with an optional unit and a one-line trend. The number rolls in when it changes.
 - [Sparkline](https://bharathwaaj.github.io/wattle/components/Sparkline/README.md): A small `earth` line chart with an `ink` dot on the latest value. It shows the shape, not exact values.
 - [SeatMap](https://bharathwaaj.github.io/wattle/components/SeatMap/README.md): A grid of dots that shows how many places are taken and how many are left. Taken places are filled `earth`, free ones are `border-strong` rings, and the person's own place pops in `wattle` with an `ink` ring.
 

@@ -6,7 +6,7 @@ The Wattle mark is the lapwing's eye ring: a yellow ring and dot on a cap-black 
 | --- | --- | --- |
 | `wattle-mark.svg` | Light backgrounds (`surface-100`, `surface-200`) | `ink` disc, `wattle` ring and dot |
 | `wattle-mark-dark.svg` | Dark backgrounds | `wattle` disc, `ink` ring and dot |
-| `wattle-wordmark.svg` | Light backgrounds | `ink`. "Wattle" in Fraunces 600, converted to outlines |
+| `wattle-wordmark.svg` | Light backgrounds | `ink`. "Wattle" in Newsreader 600 (display optical size), converted to outlines |
 | `wattle-wordmark-dark.svg` | Dark backgrounds | `ink` from the dark theme (`#F3EFE6`) |
 | `wattle-lockup.svg` | Light backgrounds: headers, documents | Mark and wordmark side by side |
 | `wattle-lockup-dark.svg` | Dark backgrounds | Mark and wordmark side by side |

@@ -44,7 +44,7 @@ The palette comes from the bird's plumage.
 
 ### Type
 
-- **Fraunces** (display): a warm, soft serif for `display`, `heading-1` and `heading-2`.
+- **Newsreader** (display): a calm, slightly condensed editorial serif for `display`, `heading-1` and `heading-2`. It has optical sizes, so large headings tighten up and small ones stay open, and long titles fit on fewer lines.
 - **Manrope** (sans): a clean, friendly sans for all UI and body text.
 - Both are free on Google Fonts. Load them with weights 400–700.
 
@@ -93,7 +93,7 @@ Icons come from **Lucide** (v0.460.0, ISC licence). They're adjusted to a 1.5px 
 
 ## Logo
 
-The mark is the lapwing's **eye ring**: a `wattle` ring and dot on a cap-black disc. The wordmark is "Wattle" in Fraunces 600, converted to outlines.
+The mark is the lapwing's **eye ring**: a `wattle` ring and dot on a cap-black disc. The wordmark is "Wattle" in Newsreader 600, converted to outlines.
 
 - On light backgrounds, use `wattle-lockup.svg` or `wattle-mark.svg`. On dark backgrounds, use the `-dark` versions.
 - Use the mark alone where space is tight, such as favicons, avatars and app icons.

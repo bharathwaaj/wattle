@@ -40,7 +40,7 @@
   --radius-sm: 6px;
   --radius-md: 14px;
   --radius-pill: 999px;
-  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-display: "Newsreader", Georgia, "Times New Roman", serif;
   --font-sans: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 .display { font-family: var(--font-display); font-size: 56px; line-height: 60px; font-weight: 600; letter-spacing: -0.02em; }

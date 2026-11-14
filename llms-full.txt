@@ -193,7 +193,7 @@ The palette comes from the bird's plumage.
 
 ### Type
 
-- **Fraunces** (display): a warm, soft serif for `display`, `heading-1` and `heading-2`.
+- **Newsreader** (display): a calm, slightly condensed editorial serif for `display`, `heading-1` and `heading-2`. It has optical sizes, so large headings tighten up and small ones stay open, and long titles fit on fewer lines.
 - **Manrope** (sans): a clean, friendly sans for all UI and body text.
 - Both are free on Google Fonts. Load them with weights 400–700.
 
@@ -242,7 +242,7 @@ Icons come from **Lucide** (v0.460.0, ISC licence). They're adjusted to a 1.5px 
 
 ## Logo
 
-The mark is the lapwing's **eye ring**: a `wattle` ring and dot on a cap-black disc. The wordmark is "Wattle" in Fraunces 600, converted to outlines.
+The mark is the lapwing's **eye ring**: a `wattle` ring and dot on a cap-black disc. The wordmark is "Wattle" in Newsreader 600, converted to outlines.
 
 - On light backgrounds, use `wattle-lockup.svg` or `wattle-mark.svg`. On dark backgrounds, use the `-dark` versions.
 - Use the mark alone where space is tight, such as favicons, avatars and app icons.
@@ -300,7 +300,7 @@ The colours are a refined blend of two hand-estimated palettes taken from photog
   --radius-sm: 6px;
   --radius-md: 14px;
   --radius-pill: 999px;
-  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-display: "Newsreader", Georgia, "Times New Roman", serif;
   --font-sans: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 .display { font-family: var(--font-display); font-size: 56px; line-height: 60px; font-weight: 600; letter-spacing: -0.02em; }
@@ -852,7 +852,7 @@ export interface CardProps extends React.HTMLAttributes<HTMLElement> {
   href?: string;
   /** Small uppercase overline above the title. */
   eyebrow?: React.ReactNode;
-  /** Card title, set in Fraunces. */
+  /** Card title, set in Newsreader. */
   title?: React.ReactNode;
   /** Actions row under a hairline, usually Buttons. */
   footer?: React.ReactNode;
@@ -896,7 +896,7 @@ Clickable cards come in two kinds:
 
 ## You provide
 
-- `title`: set in Fraunces at heading-2 size.
+- `title`: set in Newsreader at heading-2 size.
 - `eyebrow`: an optional uppercase overline in `ink-muted`, e.g. "Course". It can hold an icon, like the check on a selected choice card.
 - `icon`: an optional icon in a 40px circle above the eyebrow, given as a Lucide name or a React node. Use it for shortcut cards.
 - `children`: the body text, in `ink-muted`.
@@ -1058,7 +1058,7 @@ A single icon in a round disc. It anchors an announcement, an empty state or a s
 export interface DateBlockProps { date?: string | number | Date; month?: string; day?: number | string; label?: string; className?: string; }
 ```
 
-A calendar-page date: the month in small caps above the day in large Fraunces. Put it beside an event's title.
+A calendar-page date: the month in small caps above the day in large Newsreader. Put it beside an event's title.
 
 ## You provide
 
@@ -1143,7 +1143,7 @@ A short list of tick boxes. They're real checkboxes under the styling, so keyboa
 export interface AvatarProps { name: string; initials?: string; size?: number; className?: string; }
 ```
 
-A round initials badge for a person: `ink` on `taupe` (6:1), in Fraunces.
+A round initials badge for a person: `ink` on `taupe` (6:1), in Newsreader.
 
 ## You provide
 
@@ -1165,7 +1165,7 @@ A round initials badge for a person: `ink` on `taupe` (6:1), in Fraunces.
 export interface StatProps { value: React.ReactNode; unit?: React.ReactNode; label?: React.ReactNode; trend?: React.ReactNode; trendDirection?: 'up' | 'down' | 'flat'; className?: string; }
 ```
 
-One big number in Fraunces, with an optional unit and a one-line trend. The number rolls in when it changes.
+One big number in Newsreader, with an optional unit and a one-line trend. The number rolls in when it changes.
 
 ## You provide
 

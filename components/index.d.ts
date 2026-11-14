@@ -49,7 +49,7 @@ export interface CardProps extends React.HTMLAttributes<HTMLElement> {
   href?: string;
   /** Small uppercase overline above the title. */
   eyebrow?: React.ReactNode;
-  /** Card title, set in Fraunces. */
+  /** Card title, set in Newsreader. */
   title?: React.ReactNode;
   /** Actions row under a hairline, usually Buttons. */
   footer?: React.ReactNode;

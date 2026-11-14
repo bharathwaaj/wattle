@@ -1,6 +1,6 @@
 # Stat
 
-One big number in Fraunces, with an optional unit and a one-line trend. The number rolls in when it changes.
+One big number in Newsreader, with an optional unit and a one-line trend. The number rolls in when it changes.
 
 ## You provide
 

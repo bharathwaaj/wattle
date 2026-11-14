@@ -1,6 +1,6 @@
 # DateBlock
 
-A calendar-page date: the month in small caps above the day in large Fraunces. Put it beside an event's title.
+A calendar-page date: the month in small caps above the day in large Newsreader. Put it beside an event's title.
 
 ## You provide
 
