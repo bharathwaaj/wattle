@@ -1,22 +1,22 @@
 # Card
 
-A raised `surface-200` panel with a `hairline` border and `radius-md` corners. Each card holds one thing, and there are three kinds, each with its own job.
+A raised `surface-200` panel with a `hairline` border and `radius-md` corners. Each card holds one thing: an event, a booking, a person, a result.
 
 ## Patterns
 
-Card is one frame. What changes from card to card is what goes inside it. The preview shows eleven patterns, and each one answers a different question.
+Card is one frame. What changes from card to card is what goes inside it. The preview shows eleven patterns, and each one answers a different question. Every piece inside is a Wattle component, so build them from these parts and not from one-off CSS.
 
 | Pattern | Answers | Built from |
 | --- | --- | --- |
-| **Announcement** | What do I need to know? | A `wing` icon disc, a bold line, a sentence, a timestamp and an icon-only dismiss button. Use it full width. |
-| **Event** | When and where? | A date block (month in `label`, day in Fraunces) beside the title, plus time and host rows with 16px icons. Its action is an `ActionButton` (flip): "Add to calendar" → "Added to calendar". |
-| **Booking** | Can I join, and when? | `strong` and neutral Badges in the eyebrow, a one-line pitch, a meta list (day, time, places left) with icons, then Book (primary) and Details (ghost). Book is an `ActionButton` (morph) that becomes "Booked", and its `onAction` lowers the places-left count, so the card updates with the button. |
-| **Media** | What does it look like? | The `media` prop: a full-bleed image or illustration across the top, then the title. Read, plus a bookmark `ReactionButton` to save it. |
-| **Availability** | How much is left? | A big number with its unit, and a seat map of filled `earth` dots and empty `border-strong` rings. "Reserve a seat" is an `ActionButton` (morph, secondary). When it's done, the count drops and your seat pops in `wattle` with an `ink` ring. |
-| **Progress** | How far along am I? | An `earth` progress bar, "12 of 24", and a secondary button with `iconEnd` and `effect="nudge"` to resume, separated by space with `divider={false}`. |
-| **Metric** | How are we doing? | One Fraunces number, a one-line trend in words, and a sparkline in `earth`. |
-| **Checklist** | What's left to do? | Tick boxes that fill with `ink` when done. The eyebrow counts what's done. |
-| **Person** | Who is this? | An initials avatar on `taupe`, the name in Fraunces, the role, and a row of neutral Badges. Uses `divider={false}`. |
+| **Announcement** | What do I need to know? | `IconDisc` (strong), a bold line, a sentence, a timestamp and an icon-only dismiss `Button`. Use it full width. |
+| **Event** | When and where? | `DateBlock` and `MetaList` (time, host), with an `ActionButton` (flip): "Add to calendar" → "Added to calendar". |
+| **Booking** | Can I join, and when? | `Badge`s in the eyebrow, a one-line pitch, a `MetaList` (day, time, places left), then Book (`ActionButton`, morph, `undoable`) and Details (ghost). Booking lowers the places-left count, and clicking Booked again cancels it. |
+| **Media** | What does it look like? | The `media` prop: a full-bleed image or illustration across the top, then the title. Read, plus a bookmark `ReactionButton`. |
+| **Availability** | How much is left? | `Stat` ("4 seats left") and `SeatMap`, with Reserve a seat (`ActionButton`, morph, `undoable`). The count drops and your seat pops in. |
+| **Progress** | How far along am I? | `Progress`, "12 of 24", and a secondary `Button` with `effect="nudge"`, using `divider={false}`. |
+| **Metric** | How are we doing? | `Stat` with a trend in words, and a `Sparkline`. |
+| **Checklist** | What's left to do? | `Checklist`, with a count in the eyebrow that updates. |
+| **Person** | Who is this? | `Avatar`, the name, a `Status` ("Teaching now"), and a row of `Badge`s, using `divider={false}`. |
 | **Link** | Where can I see more? | `as="a"`: a title, one sentence, then an `ink` "Open …" line with an arrow, set `space-4` below the text so it doesn't read as part of the sentence. The whole card is the link. |
 | **Empty state** | What do I do first? | `variant="empty"`: a dashed border, an icon, one sentence, and one action. |
 

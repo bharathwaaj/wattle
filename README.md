@@ -61,6 +61,8 @@ Components are React 18 components, published as `window.Wattle` from `component
 - **Input**: always give it a visible label. Errors show as text, not just colour.
 - **Card**: a `surface-200` panel with a hairline border. One frame, many patterns, from events and deadlines to media, metrics and empty states. The Card guide lists them.
 - **Badge**: a small pill for status or category, in neutral, strong or danger. Never wattle.
+- **Status, CountBadge, Tag**: a dot and a word for state, a number pill for counts, and chips for filters and choices.
+- **Building blocks**: IconDisc, DateBlock, MetaList, Progress, Checklist, Avatar, Stat, Sparkline and SeatMap. These are the parts the card patterns are made from, so reuse them and don't restyle by hand.
 - **Icon**: draws any of the starter icons inline in `currentColor`. Button, Input and Card accept an `icon` prop that takes an icon name, like `icon="search"`.
 
 ### Motion

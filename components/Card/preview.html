@@ -1,4 +1,4 @@
-<!-- @dsCard group="Layout" height=1400 width=960 subtitle="Eleven card patterns, with live buttons: try Book, Reserve, Save" -->
+<!-- @dsCard group="Layout" height=1400 width=960 subtitle="Eleven card patterns built from Wattle parts: try Book, Reserve, Save" -->
 <!doctype html>
 <html>
 <head><meta charset="utf-8"><title>Card</title>
@@ -8,62 +8,32 @@
   .cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-4); align-items: start; }
   .col { display: flex; flex-direction: column; gap: var(--space-6); }
   figure { margin: 0; display: flex; flex-direction: column; gap: var(--space-2); }
-  .wide .wt-card-empty { padding: var(--space-6); }
   figcaption { font-size: 12px; line-height: 16px; color: var(--ink-muted); }
   figcaption b { color: var(--ink); font-weight: 700; }
-
-  /* pattern pieces, all from tokens */
-  .meta { display: flex; flex-direction: column; gap: 6px; font-size: 14px; line-height: 20px; color: var(--ink-muted); }
-  .meta span { display: flex; align-items: center; gap: var(--space-2); }
-  .event { display: flex; gap: var(--space-4); align-items: flex-start; }
-  .date { flex: none; width: 64px; padding: var(--space-2) 0; text-align: center; border: 1px solid var(--hairline); border-radius: var(--radius-sm); background: var(--surface-100); }
-  .date .m { font-size: 12px; line-height: 16px; font-weight: 700; letter-spacing: .06em; color: var(--ink-muted); }
-  .date .d { font-family: var(--font-display); font-size: 30px; line-height: 34px; font-weight: 600; color: var(--ink); }
-  .event-title { margin: 0 0 6px; font-family: var(--font-display); font-size: 20px; line-height: 26px; font-weight: 600; color: var(--ink); }
-  .big { font-family: var(--font-display); font-size: 40px; line-height: 44px; font-weight: 600; color: var(--ink); }
-  .big small { font-family: var(--font-sans); font-size: 15px; font-weight: 600; color: var(--ink-muted); margin-left: 6px; }
-  .meter { height: 8px; border-radius: var(--radius-pill); background: var(--surface-100); border: 1px solid var(--hairline); overflow: hidden; }
-  .meter > i { display: block; height: 100%; background: var(--earth); }
-  .seats { display: grid; grid-template-columns: repeat(10, 1fr); gap: 4px; }
-  .seats i { aspect-ratio: 1; border-radius: var(--radius-pill); background: var(--earth); }
-  .seats i.mine { background: var(--wattle); box-shadow: 0 0 0 1.5px var(--ink); animation: wt-pop 420ms cubic-bezier(.3,1.6,.5,1) both; }
-  .num { display: inline-block; animation: wt-roll-up 260ms ease both; }
-  .seats i.free { background: transparent; border: 1.5px solid var(--border-strong); }
-  .trend { display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 600; color: var(--ink); }
-  .spark { width: 100%; height: 56px; display: block; }
-  .meta-list { list-style: none; margin: 0; padding: 0; }
-  .person { display: flex; gap: var(--space-4); align-items: center; }
-  .avatar { flex: none; width: 56px; height: 56px; border-radius: var(--radius-pill); background: var(--taupe); color: #1F1D1B; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 22px; font-weight: 600; }
-  .person h4 { margin: 0; font-family: var(--font-display); font-size: 20px; line-height: 26px; color: var(--ink); }
+  .wide .wt-card-empty { padding: var(--space-6); }
+  /* layout glue only: every visual piece below is a Wattle component */
+  .row { display: flex; gap: var(--space-4); align-items: flex-start; }
+  .row-center { display: flex; gap: var(--space-4); align-items: center; }
+  .grow { flex: 1; min-width: 0; }
+  .h4 { margin: 0 0 6px; font-family: var(--font-display); font-size: 20px; line-height: 26px; font-weight: 600; color: var(--ink); }
+  .notice-title { margin: 0 0 4px; font-size: 16px; line-height: 22px; font-weight: 700; color: var(--ink); }
+  .muted { font-size: 12px; color: var(--ink-muted); }
   .badges { display: flex; gap: 6px; flex-wrap: wrap; }
-  .checklist { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--space-2); font-size: 14px; line-height: 20px; color: var(--ink); }
-  .checklist li { display: flex; gap: var(--space-2); align-items: center; }
-  .box { flex: none; width: 20px; height: 20px; border-radius: 6px; border: 1.5px solid var(--border-strong); display: flex; align-items: center; justify-content: center; }
-  .done .box { background: var(--ink); border-color: var(--ink); color: var(--surface-200); }
-  .done .txt { color: var(--ink-muted); text-decoration: line-through; }
-  .notice { display: flex; gap: var(--space-4); align-items: flex-start; }
-  .notice .ic { flex: none; width: 40px; height: 40px; border-radius: var(--radius-pill); background: var(--wing); color: #F3EFE6; display: flex; align-items: center; justify-content: center; }
-  .notice h4 { margin: 0 0 4px; font-size: 16px; line-height: 22px; font-weight: 700; color: var(--ink); }
-  .notice p { margin: 0 0 6px; color: var(--ink-muted); font-size: 14px; line-height: 20px; }
-  .notice .when { font-size: 12px; color: var(--ink-muted); }
-  .notice .x { margin-left: auto; }
   .cta { margin-top: var(--space-2); display: inline-flex; align-items: center; gap: var(--space-1); font-weight: 700; color: var(--ink); }
   a.wt-card:hover .cta { text-decoration: underline; text-underline-offset: 3px; }
   a.wt-card:hover .cta .wt-icon, a.wt-card:focus-visible .cta .wt-icon { animation: wt-nudge 520ms ease; }
-  @media (prefers-reduced-motion: reduce) { .num, .seats i.mine, .cta .wt-icon { animation: none !important; } }
-  .rating { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--ink-muted); }
+  @media (prefers-reduced-motion: reduce) { .cta .wt-icon { animation: none !important; } }
 </style>
 </head>
 <body>
 <div id="root"></div>
 <script>
   var W = window.Wattle, h = React.createElement, F = React.Fragment;
-
+  function later(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
   function Fig(props) {
     return h('figure', { className: props.className }, props.children,
       h('figcaption', null, h('b', null, props.kind), ' · ', props.why));
   }
-  function M(icon, text) { return h('span', null, h(W.Icon, { name: icon, size: 16 }), text); }
 
   function cover() {
     return h('svg', { viewBox: '0 0 300 160', role: 'img', 'aria-label': 'Cover: a lapwing eye ring over a dry field' },
@@ -75,103 +45,90 @@
       h('circle', { cx: 210, cy: 60, r: 6, style: { fill: 'var(--wattle)' } }));
   }
 
-  function spark() {
-    var pts = [62, 70, 66, 74, 71, 79, 82, 86];
-    var d = pts.map(function (v, i) { return (i * 40 + 4) + ',' + (60 - (v - 55) * 1.6); }).join(' ');
-    return h('svg', { className: 'spark', viewBox: '0 0 290 60', preserveAspectRatio: 'none', 'aria-hidden': 'true' },
-      h('polyline', { points: d, style: { fill: 'none', stroke: 'var(--earth)', strokeWidth: 2.5, strokeLinejoin: 'round', strokeLinecap: 'round' } }),
-      h('circle', { cx: 284, cy: 60 - (86 - 55) * 1.6, r: 4, style: { fill: 'var(--ink)' } }));
-  }
-
-  function Seats(props) {
-    var taken = props.taken, cells = [];
-    for (var i = 0; i < 40; i++) cells.push(h('i', { key: i, className: i >= taken ? 'free' : (i === taken - 1 && taken > 36 ? 'mine' : '') }));
-    return h('div', { className: 'seats', role: 'img', 'aria-label': taken + ' of 40 seats taken' }, cells);
-  }
-  function later(ms) { return function () { return new Promise(function (r) { setTimeout(r, ms); }); }; }
-
-  function Checklist() {
-    var s = React.useState([true, true, true, false, false]), done = s[0], set = s[1];
-    var items = ['Revise chapters 1–4', 'Finish mock test 3', 'Pack admit card', 'Sleep by 10 pm', 'Reach the centre by 8:30'];
-    var count = done.filter(Boolean).length;
-    return h(W.Card, { eyebrow: count + ' of ' + items.length + ' done', title: 'Before the exam' },
-      h('ul', { className: 'checklist' }, items.map(function (t, i) {
-        return h('li', { key: i, className: done[i] ? 'done' : '', onClick: function () { var n = done.slice(); n[i] = !n[i]; set(n); }, style: { cursor: 'pointer' } },
-          h('span', { className: 'box', role: 'checkbox', 'aria-checked': done[i] }, done[i] ? h(W.Icon, { name: 'check', size: 14 }) : null),
-          h('span', { className: 'txt' }, t));
-      })));
-  }
-
-  var announcement = h(Fig, { kind: 'Announcement', why: 'icon, message and time; dismissible', className: 'wide' },
+  /* Announcement = IconDisc + text + icon-only Button */
+  var announcement = h(Fig, { kind: 'Announcement', why: 'IconDisc (strong), message, time; dismissible', className: 'wide' },
     h(W.Card, null,
-      h('div', { className: 'notice' },
-        h('span', { className: 'ic' }, h(W.Icon, { name: 'bell', size: 20 })),
-        h('div', null,
-          h('h4', null, 'No classes on Monday, 24 November'),
-          h('p', null, 'The campus is closed for the state holiday. Recorded lessons stay open, and Tuesday’s live classes run as usual.'),
-          h('span', { className: 'when' }, '2 hours ago · Admin office')),
-        h(W.Button, { variant: 'ghost', size: 'sm', icon: 'x', 'aria-label': 'Dismiss', className: 'x' }))));
+      h('div', { className: 'row' },
+        h(W.IconDisc, { icon: 'bell', tone: 'strong' }),
+        h('div', { className: 'grow' },
+          h('h4', { className: 'notice-title' }, 'No classes on Monday, 24 November'),
+          h('p', { style: { margin: '0 0 6px' } }, 'The campus is closed for the state holiday. Recorded lessons stay open, and Tuesday’s live classes run as usual.'),
+          h('span', { className: 'muted' }, '2 hours ago · Admin office')),
+        h(W.Button, { variant: 'ghost', size: 'sm', icon: 'x', 'aria-label': 'Dismiss' }))));
 
-  var event = h(Fig, { kind: 'Event', why: 'date block, time and host; Add to calendar flips to Added' },
-    h(W.Card, { footer: h(W.ActionButton, { animation: 'flip', variant: 'secondary', size: 'sm', icon: 'calendar', label: 'Add to calendar', doneLabel: 'Added to calendar', onAction: later(300) }) },
-      h('div', { className: 'event' },
-        h('div', { className: 'date' }, h('div', { className: 'm' }, 'NOV'), h('div', { className: 'd' }, '18')),
-        h('div', null, h('h4', { className: 'event-title' }, 'Live class: Wave optics'),
-          h('div', { className: 'meta' }, M('clock', 'Tue · 6:00–7:30 pm'), M('user', 'Ms. Anitha · Online'))))));
+  /* Event = DateBlock + MetaList + ActionButton (flip) */
+  var event = h(Fig, { kind: 'Event', why: 'DateBlock + MetaList; Add to calendar flips' },
+    h(W.Card, { footer: h(W.ActionButton, { animation: 'flip', variant: 'secondary', size: 'sm', icon: 'calendar', label: 'Add to calendar', doneLabel: 'Added to calendar', onAction: function () { return later(300); } }) },
+      h('div', { className: 'row' },
+        h(W.DateBlock, { month: 'NOV', day: 18, label: 'Tuesday 18 November' }),
+        h('div', { className: 'grow' }, h('h4', { className: 'h4' }, 'Live class: Wave optics'),
+          h(W.MetaList, { items: [{ icon: 'clock', text: 'Tue · 6:00–7:30 pm' }, { icon: 'user', text: 'Ms. Anitha · Online' }] })))));
 
-  var progress = h(Fig, { kind: 'Progress', why: 'how far along; hover Resume and the arrow nudges' },
-    h(W.Card, { eyebrow: 'Continue learning', title: 'Organic Chemistry', divider: false, footer: h(W.Button, { size: 'sm', iconEnd: 'arrow-right', effect: 'nudge' }, 'Resume lesson 13') },
-      h('div', { className: 'meter', role: 'progressbar', 'aria-valuenow': 50, 'aria-valuemin': 0, 'aria-valuemax': 100, 'aria-label': 'Course progress' }, h('i', { style: { width: '50%' } })),
-      h('p', null, '12 of 24 lessons · Next: Alkenes')));
-
-  var media = h(Fig, { kind: 'Media', why: 'a full-bleed cover; the bookmark drops in when saved' },
-    h(W.Card, { media: cover(), eyebrow: 'Field guide', title: 'Birds of the Deccan',
-      footer: h(F, null, h(W.Button, { size: 'sm', icon: 'book-open' }, 'Read'), h(W.ReactionButton, { kind: 'bookmark', label: 'Save to my library' })) },
-      h('p', null, 'A plain guide to the ground birds of dry fields, from lapwings to larks.'),
-      h('div', { className: 'rating' }, '214 pages · 12 chapters')));
-
+  /* Booking = Badge + MetaList + ActionButton (morph, undoable) */
   function Booking() {
     var st = React.useState(8), places = st[0], setPlaces = st[1];
     return h(W.Card, { eyebrow: h(F, null, h(W.Badge, { tone: 'strong' }, 'New'), h(W.Badge, null, 'Beginner')), title: 'Saturday doubt-clearing hour',
       footer: h(F, null,
-        h(W.ActionButton, { size: 'sm', icon: 'plus', label: 'Book', doneLabel: 'Booked', onAction: function () { return later(900)().then(function () { setPlaces(7); }); } }),
+        h(W.ActionButton, { size: 'sm', icon: 'plus', label: 'Book', doneLabel: 'Booked', undoable: true, undoHint: 'Click to cancel your booking',
+          onAction: function () { return later(900).then(function () { setPlaces(7); }); }, onUndo: function () { setPlaces(8); } }),
         h(W.Button, { variant: 'ghost', size: 'sm' }, 'Details')) },
       h('p', null, 'A relaxed hour for Class 11 students, with time for any question at the end.'),
-      h('ul', { className: 'meta meta-list' },
-        h('li', null, M('calendar', 'Every Saturday')),
-        h('li', null, M('clock', '9:30 to 10:30 am')),
-        h('li', null, M('user', h('span', { className: 'num', key: places }, places + ' places left')))));
+      h(W.MetaList, { items: [{ icon: 'calendar', text: 'Every Saturday' }, { icon: 'clock', text: '9:30 to 10:30 am' },
+        { icon: 'user', text: h('span', { key: places, className: 'wt-stat-num' }, places + ' places left') }] }));
   }
-  var booking = h(Fig, { kind: 'Booking', why: 'Book morphs to Booked, and the places left count drops' }, h(Booking));
+  var booking = h(Fig, { kind: 'Booking', why: 'Badge + MetaList; Book latches to Booked, click again to cancel' }, h(Booking));
 
-  function Availability() {
-    var st = React.useState(36), taken = st[0], setTaken = st[1];
-    return h(W.Card, { eyebrow: 'Weekend batch · starts 1 Dec', title: 'JEE crash course',
-      footer: h(W.ActionButton, { variant: 'secondary', size: 'sm', label: 'Reserve a seat', doneLabel: 'Seat reserved', onAction: function () { return later(800)().then(function () { setTaken(37); }); } }) },
-      h('div', { className: 'big' }, h('span', { className: 'num', key: taken }, 40 - taken), h('small', null, 'seats left')),
-      h(Seats, { taken: taken }));
+  /* Progress = Progress + Button (nudge) */
+  var progress = h(Fig, { kind: 'Progress', why: 'Progress bar; hover Resume and the arrow nudges' },
+    h(W.Card, { eyebrow: 'Continue learning', title: 'Organic Chemistry', divider: false, footer: h(W.Button, { size: 'sm', iconEnd: 'arrow-right', effect: 'nudge' }, 'Resume lesson 13') },
+      h(W.Progress, { value: 12, max: 24, label: 'Organic Chemistry progress' }),
+      h('p', null, '12 of 24 lessons · Next: Alkenes')));
+
+  /* Media = media prop + ReactionButton (bookmark) */
+  var media = h(Fig, { kind: 'Media', why: 'a full-bleed cover; the bookmark drops in when saved' },
+    h(W.Card, { media: cover(), eyebrow: 'Field guide', title: 'Birds of the Deccan',
+      footer: h(F, null, h(W.Button, { size: 'sm', icon: 'book-open' }, 'Read'), h(W.ReactionButton, { kind: 'bookmark', label: 'Save to my library' })) },
+      h('p', null, 'A plain guide to the ground birds of dry fields, from lapwings to larks.'),
+      h('span', { className: 'muted', style: { fontSize: 13 } }, '214 pages · 12 chapters')));
+
+  /* Checklist = Checklist with a live count in the eyebrow */
+  function Todo() {
+    var st = React.useState([true, true, true, false, false]), done = st[0], set = st[1];
+    return h(W.Card, { eyebrow: done.filter(Boolean).length + ' of 5 done', title: 'Before the exam' },
+      h(W.Checklist, { label: 'Before the exam', done: done, onChange: set, items: [
+        { label: 'Revise chapters 1–4' }, { label: 'Finish mock test 3' }, { label: 'Pack admit card' }, { label: 'Sleep by 10 pm' }, { label: 'Reach the centre by 8:30' }] }));
   }
-  var availability = h(Fig, { kind: 'Availability', why: 'reserve, and your seat fills in on the map' }, h(Availability));
-
-  var metric = h(Fig, { kind: 'Metric', why: 'one number, its trend, and the shape over time' },
-    h(W.Card, { eyebrow: 'Average test score · 8 weeks' },
-      h('div', { className: 'big' }, '86%'),
-      h('span', { className: 'trend' }, h(W.Icon, { name: 'arrow-right', size: 14, style: { transform: 'rotate(-45deg)' } }), 'Up 4 points on last week'),
-      spark()));
-
-  var person = h(Fig, { kind: 'Person', why: 'initials avatar, role, and what they cover' },
-    h(W.Card, { divider: false, footer: h(F, null, h(W.Button, { size: 'sm' }, 'Message'), h(W.Button, { variant: 'ghost', size: 'sm', icon: 'calendar' }, 'Book a slot')) },
-      h('div', { className: 'person' },
-        h('span', { className: 'avatar', 'aria-hidden': 'true' }, 'AR'),
-        h('div', null, h('h4', null, 'Anitha Rao'), 'Physics teacher')),
-      h('div', { className: 'badges' }, h(W.Badge, null, 'Batch A'), h(W.Badge, null, 'Batch C'), h(W.Badge, null, 'Doubt clearing'))));
-
-  var checklist = h(Fig, { kind: 'Checklist', why: 'tick items off; the count updates' }, h(Checklist));
+  var checklist = h(Fig, { kind: 'Checklist', why: 'Checklist; the count updates as you tick' }, h(Todo));
 
   var link = h(Fig, { kind: 'Link', why: 'the whole card is the link; no buttons inside' },
     h(W.Card, { as: 'a', href: '#', title: 'See the full timetable' },
       h('p', null, 'Every class for the next four weeks, with the places still open.'),
       h('span', { className: 'cta' }, 'Open timetable', h(W.Icon, { name: 'arrow-right', size: 16 }))));
+
+  /* Availability = Stat + SeatMap + ActionButton (morph, undoable) */
+  function Availability() {
+    var st = React.useState(36), taken = st[0], setTaken = st[1];
+    return h(W.Card, { eyebrow: 'Weekend batch · starts 1 Dec', title: 'JEE crash course',
+      footer: h(W.ActionButton, { variant: 'secondary', size: 'sm', label: 'Reserve a seat', doneLabel: 'Seat reserved', undoable: true, undoHint: 'Click to give your seat back',
+        onAction: function () { return later(800).then(function () { setTaken(37); }); }, onUndo: function () { setTaken(36); } }) },
+      h(W.Stat, { value: 40 - taken, unit: 'seats left' }),
+      h(W.SeatMap, { total: 40, taken: taken, mine: taken > 36 }));
+  }
+  var availability = h(Fig, { kind: 'Availability', why: 'Stat + SeatMap; reserve and your seat fills in' }, h(Availability));
+
+  /* Metric = Stat + Sparkline */
+  var metric = h(Fig, { kind: 'Metric', why: 'Stat with a trend, and a Sparkline' },
+    h(W.Card, { eyebrow: 'Average test score · 8 weeks' },
+      h(W.Stat, { value: '86%', trend: 'Up 4 points on last week' }),
+      h(W.Sparkline, { data: [62, 70, 66, 74, 71, 79, 82, 86], label: 'Average score over 8 weeks, from 62 to 86' })));
+
+  /* Person = Avatar + Status + Badge */
+  var person = h(Fig, { kind: 'Person', why: 'Avatar, Status, and a row of Badges' },
+    h(W.Card, { divider: false, footer: h(F, null, h(W.Button, { size: 'sm' }, 'Message'), h(W.Button, { variant: 'ghost', size: 'sm', icon: 'calendar' }, 'Book a slot')) },
+      h('div', { className: 'row-center' },
+        h(W.Avatar, { name: 'Anitha Rao', size: 56 }),
+        h('div', null, h('h4', { className: 'h4', style: { margin: 0 } }, 'Anitha Rao'), h(W.Status, { tone: 'live' }, 'Teaching now'))),
+      h('div', { className: 'badges' }, h(W.Badge, null, 'Physics'), h(W.Badge, null, 'Batch A'), h(W.Badge, null, 'Batch C'))));
 
   var empty = h(Fig, { kind: 'Empty state', why: 'the dashed empty variant invites the first step', className: 'wide' },
     h(W.Card, { variant: 'empty', icon: 'plus', title: 'No tests yet', footer: h(W.Button, { size: 'sm', icon: 'plus' }, 'Create a test') },
