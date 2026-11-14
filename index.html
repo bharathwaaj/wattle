@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Wattle — design system</title>
 <meta name="description" content="Wattle is a warm, earthy design system based on the Yellow-wattled Lapwing: colour tokens, type, spacing, a brand book and React components.">
+<link rel="icon" href="assets/Logos/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/Logos/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/Logos/apple-touch-icon.png">
 <link rel="stylesheet" href="components/bundle.css">
 <style id="tokens-css"></style>
 <style>
@@ -52,6 +55,19 @@
   .shadow { width: 220px; }
   .shadow .layer { height: 96px; background: var(--surface-200); border: 1px solid var(--hairline); border-radius: var(--radius-md); margin-bottom: var(--space-4); }
   .shadow .use { font-size: 13px; line-height: 18px; color: var(--ink-muted); }
+  .brand img { display: block; height: 28px; width: auto; }
+  .agroup { margin-bottom: var(--space-10); }
+  .agroup h3 { font-family: var(--font-display); font-size: 24px; line-height: 30px; margin: 0 0 var(--space-4); }
+  .tiles { display: grid; gap: var(--space-4); }
+  .tiles.l { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+  .tiles.xs { grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); }
+  .tile { border: 1px solid var(--hairline); border-radius: var(--radius-md); background: var(--surface-200); overflow: hidden; text-decoration: none; color: var(--ink); }
+  .tile .pic { display: flex; align-items: center; justify-content: center; height: 120px; padding: var(--space-4); background: #F7F4EC; }
+  .tile.dark .pic { background: #1A1816; }
+  .tiles.xs .pic { height: 72px; }
+  .tile .pic img { max-width: 100%; max-height: 100%; }
+  .tiles.xs .pic img { width: 24px; height: 24px; }
+  .tile .cap { font-size: 12px; line-height: 16px; padding: var(--space-2); color: var(--ink-muted); word-break: break-all; }
   .comp { border: 1px solid var(--hairline); border-radius: var(--radius-md); overflow: hidden; margin-bottom: var(--space-6); background: var(--surface-200); }
   .comp-head { padding: var(--space-4); border-bottom: 1px solid var(--hairline); }
   .comp-head h3 { margin: 0; font-family: var(--font-display); font-size: 24px; line-height: 30px; }
@@ -64,13 +80,14 @@
 <body>
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="#">Wattle</a>
+    <a class="brand" href="#" aria-label="Wattle"><img id="brand-logo" src="assets/Logos/wattle-lockup.svg" alt="Wattle" height="28"></a>
     <nav aria-label="Sections">
       <a href="#brand-book">Brand book</a>
       <a href="#colours">Colours</a>
       <a href="#type">Type</a>
       <a href="#space">Space &amp; shape</a>
       <a href="#components">Components</a>
+      <a href="#assets">Assets</a>
     </nav>
     <button id="theme" class="wt-btn wt-btn-secondary wt-btn-sm" type="button" aria-pressed="false">Dark theme</button>
   </div>
@@ -87,6 +104,7 @@
     <h3 class="muted" style="margin-top:var(--space-10)">Elevation</h3><p class="muted" id="shadow-note"></p><div class="shadows" id="shadows"></div>
   </section>
   <section class="block" id="components"><h2 class="sec">Components</h2><div id="comps"></div></section>
+  <section class="block" id="assets"><h2 class="sec">Assets</h2><div id="asset-groups"></div></section>
   <footer>Generated live from <code>tokens.json</code>, <code>README.md</code> and <code>components/</code> in this repository.</footer>
 </main>
 
@@ -178,8 +196,20 @@
     }).join('');
   }
 
+  function renderAssets(ix) {
+    var groups = ix.groups || Object.keys(ix.assetGroups || {});
+    document.getElementById('asset-groups').innerHTML = groups.map(function (g) {
+      var G = ix.assetGroups[g]; if (!G) return '';
+      return '<div class="agroup"><h3>' + esc(G.name) + '</h3><div class="tiles ' + esc(G.tile || 'l') + '">' + (G.order || []).map(function (n) {
+        var url = 'assets/' + encodeURIComponent(g) + '/' + n.split('/').map(encodeURIComponent).join('/');
+        return '<a class="tile' + (/-dark\./.test(n) ? ' dark' : '') + '" href="' + url + '" download><div class="pic"><img src="' + url + '" alt="' + esc(n) + '" loading="lazy"></div><div class="cap">' + esc(n) + '</div></a>';
+      }).join('') + '</div></div>';
+    }).join('');
+  }
+
   function get(p) { return fetch(p, { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw new Error(p + ' ' + r.status); return r.text(); }); }
 
+  get('design-system.json').then(function (t) { renderAssets(JSON.parse(t)); }).catch(function () {});
   Promise.all([get('tokens.json'), get('README.md'), get('components/Cover/preview.html')]
     .concat(COMPONENTS.map(function (c) { return get('components/' + c + '/preview.html'); }))
     .concat(COMPONENTS.map(function (c) { return get('components/' + c + '/README.md'); })))
@@ -202,6 +232,7 @@
     document.documentElement.setAttribute('data-theme', theme);
     e.currentTarget.setAttribute('aria-pressed', String(theme === 'dark'));
     e.currentTarget.textContent = theme === 'light' ? 'Dark theme' : 'Light theme';
+    document.getElementById('brand-logo').src = theme === 'dark' ? 'assets/Logos/wattle-lockup-dark.svg' : 'assets/Logos/wattle-lockup.svg';
     renderFrames();
   });
 })();
